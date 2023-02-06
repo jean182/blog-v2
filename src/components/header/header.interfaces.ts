@@ -1,6 +1,6 @@
-import { IndexData } from "../../shared";
+import { HomeDataProps } from "../../shared";
 
 export interface IHeaderProps {
   title: string;
-  contact: IndexData["site"]["siteMetadata"]["contact"];
+  contact: HomeDataProps["site"]["siteMetadata"]["contact"];
 }

@@ -81,9 +81,6 @@ const sharedAnchorStyles = css`
 
     outline: transparent;
     position: relative;
-    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI",
-      -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
     font-size: 14px;
     font-weight: 400;
     border: 0px;

@@ -5,7 +5,24 @@ type ContactUrl = {
   stackOverflow: string;
 };
 
-export type IndexData = {
+type HomeFrontmatter = {
+  author: string;
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+};
+
+type HomePostNode = {
+  id: string;
+  frontmatter: HomeFrontmatter;
+};
+
+type AllMdx = {
+  nodes: HomePostNode[];
+};
+
+export type HomeDataProps = {
   site: {
     siteMetadata: {
       title: string;
@@ -14,4 +31,5 @@ export type IndexData = {
       contact: ContactUrl;
     };
   };
+  allMdx: AllMdx;
 };

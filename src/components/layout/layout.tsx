@@ -1,19 +1,22 @@
-import { graphql } from "gatsby";
 import type { PageProps } from "gatsby";
+import { graphql } from "gatsby";
 import * as React from "react";
+import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../../assets/styles/global";
+import theme from "../../assets/theming";
+import { HomeDataProps } from "../../shared";
 import { Header } from "../header";
-import { IndexData } from "../../shared";
+import { StyledLayout } from "./layout.styled";
 
-export default function Layout({ children, data }: PageProps<IndexData>) {
+export default function Layout({ children, data }: PageProps<HomeDataProps>) {
   const { title, contact } = data.site.siteMetadata;
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Header contact={contact} title={title} />
-      <main>{children}</main>
-    </>
+      <StyledLayout>{children}</StyledLayout>
+    </ThemeProvider>
   );
 }
 
