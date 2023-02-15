@@ -5,17 +5,18 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../../assets/styles/global";
 import theme from "../../assets/theming";
 import { HomeDataProps } from "../../shared";
+import { Footer } from "../footer";
 import { Header } from "../header";
-import { StyledLayout } from "./layout.styled";
 
 export default function Layout({ children, data }: PageProps<HomeDataProps>) {
-  const { title, contact } = data.site.siteMetadata;
+  const { contact } = data.site.siteMetadata;
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header contact={contact} title={title} />
-      <StyledLayout>{children}</StyledLayout>
+      <Header contact={contact} />
+      <main role="main">{children}</main>
+      <Footer contact={contact} />
     </ThemeProvider>
   );
 }

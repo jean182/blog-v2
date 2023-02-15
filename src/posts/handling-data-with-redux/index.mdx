@@ -33,11 +33,13 @@ const initialState = {
     {
       id: "2",
       text: "Finish Homework",
-    }
-  ]
+    },
+  ],
 };
 
-export default function reducer(state = initialState, action = {}) { return state }
+export default function reducer(state = initialState, action = {}) {
+  return state;
+}
 ```
 
 After that lets create the rootReducer, the store and add the Provider in the App.js file
@@ -61,7 +63,6 @@ import { createLogger } from "redux-logger";
 
 import rootReducer from "./rootReducer";
 
-
 export default function configureStore(initialState = {}) {
   const middlewares = [];
 
@@ -70,18 +71,16 @@ export default function configureStore(initialState = {}) {
     middlewares.push(logger);
   }
 
-  return createStore(
-    rootReducer,
-    initialState,
-  );
+  return createStore(rootReducer, initialState);
 }
 ```
+
 ```jsx
 // App.js
-import React from 'react';
+import React from "react";
 import { Provider } from "react-redux";
 import setupStore from "./redux/setupStore";
-import './App.css';
+import "./App.css";
 
 const store = setupStore();
 
@@ -104,26 +103,38 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  NavLink
+  NavLink,
 } from "react-router-dom";
-import TodoList from "../components/TodoList"
-import NewTodo from "../components/NewTodo"
-import EditTodo from "../components/EditTodo"
+import TodoList from "../components/TodoList";
+import NewTodo from "../components/NewTodo";
+import EditTodo from "../components/EditTodo";
 
 export default function AppRouter() {
   return (
     <Router>
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <NavLink className="navbar-brand" to="/">Todo List</NavLink>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <NavLink className="navbar-brand" to="/">
+            Todo List
+          </NavLink>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span className="navbar-toggler-icon"></span>
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
-                <NavLink className="nav-link" to="/new">New Todo</NavLink>
+                <NavLink className="nav-link" to="/new">
+                  New Todo
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -144,7 +155,6 @@ export default function AppRouter() {
     </Router>
   );
 }
-
 ```
 
 I won't dig to much deeper here but this is mostly taken from the react training <Link target="_blank" to="https://reacttraining.com/react-router/web/example/basic">example</Link>. We're going to create the todo list component first.
@@ -200,30 +210,27 @@ This component is connected to the store and we are grabbing the todos from redu
 
 ```jsx
 // components/TodoForm.js
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
 
 function TodoForm(props) {
   const { todo, action } = props;
-  const [text, setText] = useState( todo.text ?  todo.text : "");
+  const [text, setText] = useState(todo.text ? todo.text : "");
 
   const onSubmit = (event) => {
     event.preventDefault();
-    action(todo.id ? { id: todo.id, text } : { text })
-  }
+    action(todo.id ? { id: todo.id, text } : { text });
+  };
   return (
     <form onSubmit={onSubmit}>
       <div className="form-group">
-        <input className="form-control"
+        <input
+          className="form-control"
           type="text"
           value={text}
           onChange={(event) => setText(event.target.value)}
         />
       </div>
-      <input
-        type="submit"
-        className="btn btn-success"
-      />
+      <input type="submit" className="btn btn-success" />
     </form>
   );
 }
@@ -236,11 +243,11 @@ This dummy component receives a todo if applicable (edit action) and an action c
 Lets add the new todo component.
 
 ```jsx
-import React from 'react';
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import TodoForm from './TodoForm';
-import { newTodo } from '../redux/modules/todos';
+import TodoForm from "./TodoForm";
+import { newTodo } from "../redux/modules/todos";
 
 function NewTodo({ newAction }) {
   return (
@@ -251,12 +258,12 @@ function NewTodo({ newAction }) {
   );
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       newAction: newTodo,
     },
-    dispatch,
+    dispatch
   );
 };
 
@@ -269,19 +276,24 @@ Let's edit our todos duck to add the new action.
 
 ```js
 // New required import to generate unique ids
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 // rest of the code untouched
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case NEW_TODO:
-      const newTodo = { id: uuidv4(), text: action.text, createdAt: new Date(), updatedAt: new Date() }
+      const newTodo = {
+        id: uuidv4(),
+        text: action.text,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
       return {
         ...state,
-        todos: [...state.todos, newTodo]
-      }
+        todos: [...state.todos, newTodo],
+      };
     default:
-      return state
+      return state;
   }
 }
 
@@ -382,7 +394,7 @@ The edit should be working correctly, now let's add a component for the edit for
 
 ```jsx
 // components/ShowTodo.js
-import React from 'react';
+import React from "react";
 
 function ShowTodo({ todo }) {
   const { id, text, createdAt, updatedAt } = todo;

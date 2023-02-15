@@ -1,3 +1,5 @@
+import { ImageDataLike } from "gatsby-plugin-image";
+
 type ContactUrl = {
   github: string;
   instagram: string;
@@ -5,12 +7,19 @@ type ContactUrl = {
   stackOverflow: string;
 };
 
+export type IContactKeys = keyof ContactUrl;
+
 type HomeFrontmatter = {
   author: string;
   slug: string;
   title: string;
   date: string;
   description: string;
+  featuredImage?: {
+    childImageSharp: {
+      gatsbyImageData: ImageDataLike;
+    };
+  };
 };
 
 type HomePostNode = {
@@ -18,7 +27,7 @@ type HomePostNode = {
   frontmatter: HomeFrontmatter;
 };
 
-type AllMdx = {
+export type AllMdx = {
   nodes: HomePostNode[];
 };
 

@@ -1,18 +1,19 @@
-import React from "react";
-import { graphql, PageProps } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
-import { Link } from "gatsby";
-import { Container } from "../components/container";
+import { graphql, PageProps } from "gatsby";
+import React from "react";
+import { pre } from "../components/code";
+import { Link } from "../components/link";
 import { VideoPlayer } from "../components/video-player";
+import { StyledPost } from "./post.styled";
 
-const shortcodes = { Link, VideoPlayer }; // Provide common components here
+const shortcodes = { pre, Link, VideoPlayer }; // Provide common components here
 
 export default function PostTemplate({ data, children }: PageProps<any>) {
   return (
-    <Container>
+    <StyledPost className="container">
       <h1>{data.mdx.frontmatter.title}</h1>
       <MDXProvider components={shortcodes}>{children}</MDXProvider>
-    </Container>
+    </StyledPost>
   );
 }
 

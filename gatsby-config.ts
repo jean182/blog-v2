@@ -8,8 +8,8 @@ const config: GatsbyConfig = {
       github: "https://github.com/jean182",
       instagram: "https://www.instagram.com/jeanm182/",
       stackOverflow: "https://stackoverflow.com/users/6064073/jean182",
-      linkedIn: "https://www.linkedin.com/in/jean182"
-    }
+      linkedIn: "https://www.linkedin.com/in/jean182",
+    },
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -63,15 +63,18 @@ const config: GatsbyConfig = {
       resolve: `gatsby-omni-font-loader`,
       options: {
         enableListener: true,
-        preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+        preconnect: [
+          `https://fonts.googleapis.com`,
+          `https://fonts.gstatic.com`,
+        ],
         web: [
           {
-            name: `Open Sans`,
-            file: `https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap`,
+            name: `Roboto`,
+            file: `https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,300;0,8..144,400;0,8..144,500;1,8..144,300;1,8..144,400&display=swap`,
           },
           {
-            name: `Fredoka One`,
-            file: `https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap`,
+            name: `Roboto Condensed`,
+            file: `https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap`,
           },
         ],
       },

@@ -9,13 +9,14 @@ const isExternalLink = (path: string) =>
 
 export default function Link<TState>({
   children,
+  to,
   ...props
 }: React.PropsWithoutRef<GatsbyLinkProps<TState>>) {
   if (props.target === "_blank") {
     return (
       <StyledAnchor
         {...props}
-        href={props.to}
+        href={to}
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -24,13 +25,17 @@ export default function Link<TState>({
     );
   }
 
-  if (isExternalLink(props.to)) {
+  if (isExternalLink(to)) {
     return (
-      <StyledAnchor {...props} href={props.to}>
+      <StyledAnchor {...props} href={to}>
         {children}
       </StyledAnchor>
     );
   }
 
-  return <StyledLink {...props} activeClassName="active">{children}</StyledLink>;
+  return (
+    <StyledLink {...props} to={to} activeClassName="active">
+      {children}
+    </StyledLink>
+  );
 }

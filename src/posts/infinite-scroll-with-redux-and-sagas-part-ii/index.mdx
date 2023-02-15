@@ -3,10 +3,12 @@ title: Infinite scrolling using redux and sagas, Part II.
 slug: infinite-scrolling-redux-sagas-part-ii
 date: 2019-10-16T11:22:25.427Z
 description: Part II Setting up the frontend.
+featuredImage: react-content-loader.png
 author: Jean Aguilar
 ---
 
 More on this series:
+
 <Link to="/post/infinite-scrolling-redux-sagas-part-i">Part I</Link>
 <Link to="/post/infinite-scrolling-redux-sagas-part-iii">Part III</Link>
 
@@ -14,9 +16,9 @@ For this part we'll be focusing on the component setup, and the srolling part an
 
 Our component structure will be the following:
 
-* Provider (React-redux wrapper.)
-  * PokemonList (Component with scrolling logic and api calls)
-      * PokemonListItem (Stateless component just for displaying the pokemon)
+- Provider (React-redux wrapper.)
+  - PokemonList (Component with scrolling logic and api calls)
+    - PokemonListItem (Stateless component just for displaying the pokemon)
 
 We will add the following dependencies as well, one is for having a content loader for the first time load, second it bootstrap for its awesome grid system, lodash is for the ease of validating if the redux array is empty and node sass to have the bootstrap core import in our scss file.
 
@@ -54,27 +56,23 @@ class PokemonList extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: state.pokemonListReducer.isLoading,
   error: state.pokemonListReducer.error,
   pokemonList: state.pokemonListReducer.pokemonList,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchActionCreator: loadPokemonList,
       loadMoreActionCreator: loadMorePokemon,
     },
-    dispatch,
+    dispatch
   );
 };
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PokemonList);
+export default connect(mapStateToProps, mapDispatchToProps)(PokemonList);
 ```
 
 Notice how we are adding the redux state, to handle all the use cases of our API, for example the loading and error attributes. Also we use bindActionCreators function to define the name of our action creators in the component, those will be available in the component props.
@@ -164,11 +162,11 @@ Here we're using the props from redux, notice that we are going to show the List
 Now we'll modify the `App.js` component to add the Provider wrapper and our newly created component.
 
 ```jsx
-import React from 'react';
-import { Provider } from "react-redux"
+import React from "react";
+import { Provider } from "react-redux";
 import configureStore from "./redux/configureStore";
-import './App.scss';
-import PokemonList from './components/PokemonList';
+import "./App.scss";
+import PokemonList from "./components/PokemonList";
 
 const store = configureStore();
 
@@ -194,18 +192,19 @@ Now we should see something like this on the initial load and our count afterwar
 Pretty cool right, now let's do the logic for our scrolling, this was taken from an example from this [post](https://www.kempsterrrr.xyz/handling-scroll-events-in-react/) a condition that checks if our scroll has reach the end of the container where it belongs.
 
 ```jsx
-  handleScroll = event => {
-    const { loadMoreActionCreator } = this.props;
-    const { currentCount } = this.state;
-    const element = event.target;
-    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-      loadMoreActionCreator(currentCount);
-      this.setState({
-        currentCount: currentCount + 20,
-      });
-    }
-  };
+handleScroll = (event) => {
+  const { loadMoreActionCreator } = this.props;
+  const { currentCount } = this.state;
+  const element = event.target;
+  if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+    loadMoreActionCreator(currentCount);
+    this.setState({
+      currentCount: currentCount + 20,
+    });
+  }
+};
 ```
+
 If we are at the end the condition is met and we will trigger the `loadMoreActionCreator` that will request for more pokemon and we will increment the currenCount by 20, so if we go to the bottom of the container again we will fetch for more pokemon. now that we have everything, our render method should look like this.
 
 ```jsx
@@ -250,10 +249,10 @@ If we are at the end the condition is met and we will trigger the `loadMoreActio
 There are a few thing happening, we created a main `div` that has two `div` one is the one that contains the `<PokemonListItem>`which we will add later and the other one is to display a loading icon if the loading changes, which is the expected behavior if we scroll to the bottom of the `div` since a new request will be triggered. get id is a helper that we will add as well. Lets do that `touch src/helpers/pokemonUtils.js`
 
 ```js
-export const getId = url => {
+export const getId = (url) => {
   return url
     .split("/")
-    .filter(el => !!el)
+    .filter((el) => !!el)
     .pop();
 };
 ```
@@ -284,7 +283,7 @@ const PokemonListItem = ({ id, name }) => {
 export default PokemonListItem;
 ```
 
-That's why the getId  method comes in handy is important because we will show the pokemon image which is available in github.
+That's why the getId method comes in handy is important because we will show the pokemon image which is available in github.
 
 If you follow everything step by step you should see something like this:
 

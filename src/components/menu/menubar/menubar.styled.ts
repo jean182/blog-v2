@@ -1,27 +1,36 @@
 import styled from "styled-components";
 
 export const StyledMenuBar = styled.div`
-  font-size: 14px;
-  font-weight: 400;
-  display: flex;
-  padding: 0px 14px 0px 2px;
-  height: 44px;
-  list-style-type: none;
+  flex-basis: 100%;
+  flex-grow: 1;
+  -webkit-box-align: center;
+  align-items: center;
+
+  &.collapse {
+    display: none;
+    ${(p) => p.theme.breakpoints.up("md")} {
+      display: flex;
+      flex-basis: auto;
+    }
+  }
 
   .nav-group {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
-    display: inherit;
-    position: relative;
     display: flex;
-    flex-grow: 1;
-    flex-wrap: nowrap;
-    align-items: stretch;
 
-    &:last-of-type {
-      flex-grow: 0;
+    margin-right: auto;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    ${(p) => p.theme.breakpoints.up("md")} {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      flex-direction: row;
+
+      &:last-of-type {
+        margin-left: auto;
+        margin-right: 0;
+      }
     }
   }
 `;

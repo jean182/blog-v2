@@ -11,6 +11,7 @@ import MoveUtils from "./menubar.utils";
 function Menubar({
   ariaLabel,
   children,
+  className,
   direction,
   onKeyDown,
   ...props
@@ -20,6 +21,9 @@ function Menubar({
   const menuRef = React.useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const previousIndex = usePrevious(currentIndex) ?? 0;
+  const classes = className
+    ? `menubar ${direction} ${className}`
+    : `menubar ${direction}`;
 
   const first = () => setCurrentIndex(MoveUtils.first);
 
@@ -131,11 +135,7 @@ function Menubar({
 
   return (
     <MenubarContext.Provider value={value}>
-      <StyledMenuBar
-        ref={menuRef}
-        className={`menubar ${direction}`}
-        {...listProps}
-      >
+      <StyledMenuBar ref={menuRef} className={classes} {...listProps}>
         {children}
       </StyledMenuBar>
     </MenubarContext.Provider>

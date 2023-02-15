@@ -1,0 +1,44 @@
+import styled from "styled-components";
+
+export const StyledFooter = styled.footer`
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 0.5rem 0;
+
+  ${(p) => p.theme.breakpoints.down("md")} {
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+  }
+
+  p,
+  a {
+    padding: 0.5rem;
+  }
+
+  a {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+    display: inherit;
+    flex-shrink: 0;
+    align-items: center;
+    margin-right: auto;
+  }
+
+  p {
+    margin: auto 0 0 0;
+  }
+  .contact-url {
+    span {
+      margin-left: 0.2rem;
+    }
+  }
+
+  .basic,
+  .about-url,
+  .contact-url {
+    display: flex;
+    flex-direction: column;
+  }
+`;

@@ -3,10 +3,12 @@ title: Infinite scrolling using redux and sagas, Part I.
 slug: infinite-scrolling-redux-sagas-part-i
 date: 2019-10-14T11:19:41.427Z
 description: Part I Setting up redux.
+featuredImage: poke-api-result.png
 author: Jean Aguilar
 ---
 
 More on this series:
+
 <Link to="/post/infinite-scrolling-redux-sagas-part-ii">Part II</Link>
 <Link to="/post/infinite-scrolling-redux-sagas-part-iii">Part III</Link>
 
@@ -26,6 +28,7 @@ Then we'll go through all the redux setup, as usual, we'll create a reducer for 
 mkdir src/redux & mkdir src/redux/modules
 touch src/redux/modules/pokemonList.js
 ```
+
 We'll start writing the actions and the default state:
 
 ```js
@@ -181,9 +184,7 @@ import { all } from "redux-saga/effects";
 import { pokemonListWatcherSaga } from "./modules/pokemonList";
 
 export default function* rootSaga() {
-  yield all([
-    pokemonListWatcherSaga(),
-  ]);
+  yield all([pokemonListWatcherSaga()]);
 }
 ```
 
@@ -231,7 +232,7 @@ export default function configureStore(initialState = {}) {
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(...middlewares),
+    applyMiddleware(...middlewares)
   );
 
   sagaMiddleware.run(rootSaga);
@@ -260,10 +261,10 @@ const axiosInstance = axios.create({
   baseURL: "https://pokeapi.co/api/v2/",
   transformResponse: [
     ...axios.defaults.transformResponse,
-    data => humps.camelizeKeys(data),
+    (data) => humps.camelizeKeys(data),
   ],
   transformRequest: [
-    data => humps.decamelizeKeys(data),
+    (data) => humps.decamelizeKeys(data),
     ...axios.defaults.transformRequest,
   ],
 });
@@ -291,7 +292,7 @@ export const getPokemonList = () => {
   return API("get", `/pokemon/?offset=0&limit=20`);
 };
 
-export const loadMorePokemonList = limit => {
+export const loadMorePokemonList = (limit) => {
   return API("get", `/pokemon/?offset=${limit}&limit=20`);
 };
 ```

@@ -3,6 +3,7 @@ title: Render React components dynamically based on a JSON payload.
 slug: react-dynamic-rendering
 date: 2021-06-24T04:04:44.427Z
 description: A basic example on how to achieve dynamic rendering using react.
+featuredImage: final-result.png
 author: Jean Aguilar
 ---
 
@@ -12,78 +13,78 @@ The JSON has a structure similar to this one:
 
 ```json
 {
-    "type": "Container",
-    "data": {
-        "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
-        "items": [
+  "type": "Container",
+  "data": {
+    "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
+    "items": [
+      {
+        "type": "Card",
+        "data": {
+          "id": "26b3f355-2f65-4aae-b9fd-609779f24fdd",
+          "title": "A card example",
+          "subtitle": "A subtitle",
+          "items": [
             {
-                "type": "Card",
-                "data": {
-                    "id": "26b3f355-2f65-4aae-b9fd-609779f24fdd",
-                    "title": "A card example",
-                    "subtitle": "A subtitle",
-                    "items": [
-                        {
-                            "type": "Button",
-                            "data": {
-                                "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
-                                "title": "Button text",
-                                "className": "btn-primary",
-                                "action": {
-                                    "type": "call",
-                                    "url": "https://pokeapi.co/api/v2/"
-                                },
-                            }
-                        },
-                    ]
+              "type": "Button",
+              "data": {
+                "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
+                "title": "Button text",
+                "className": "btn-primary",
+                "action": {
+                  "type": "call",
+                  "url": "https://pokeapi.co/api/v2/"
                 }
-            },
-            {
-                "type": "Divider",
-                "data": {
-                    "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
-                    "marginX": 3,
-                }
-            },
-            {
-                "type": "Card",
-                "data": {
-                    "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
-                    "title" : "Title",
-                    "headline" : "Month ## - Month ##, ####",
-                    "copy": "A really long text....",
-                    "image" : {
-                        "url" : "https://i.stack.imgur.com/y9DpT.jpg"
-                    },
-                }
-            },
-            {
-                "type": "Container",
-                "data": {
-                    "id": "d76e3a5f-01ad-46f6-a45d-3ad9699ecf99",
-                    "fluid": true,
-                    "embeddedView": {
-                        "type": "Input",
-                        "data": {
-                            "id": "26b3f355-2f65-4aae-b9fd-609779f24fdd",
-                            "label": "Input",
-                            "type": "password",
-                            "placeholder": "Password",
-                            "isRequired": false,
-                            "minCharactersAllowed": 1,
-                            "maxCharactersAllowed": 100,
-                            "validations": [
-                                {
-                                    "regexType": "eightOrMoreCharacters",
-                                    "regexErrorCopy": "Use 8 or more characters"
-                                },
-                            ]
-                        }
-                    }
-                }
+              }
             }
-        ]
-    }
+          ]
+        }
+      },
+      {
+        "type": "Divider",
+        "data": {
+          "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
+          "marginX": 3
+        }
+      },
+      {
+        "type": "Card",
+        "data": {
+          "id": "4400936b-6158-4943-9dc8-a04c57e1af46",
+          "title": "Title",
+          "headline": "Month ## - Month ##, ####",
+          "copy": "A really long text....",
+          "image": {
+            "url": "https://i.stack.imgur.com/y9DpT.jpg"
+          }
+        }
+      },
+      {
+        "type": "Container",
+        "data": {
+          "id": "d76e3a5f-01ad-46f6-a45d-3ad9699ecf99",
+          "fluid": true,
+          "embeddedView": {
+            "type": "Input",
+            "data": {
+              "id": "26b3f355-2f65-4aae-b9fd-609779f24fdd",
+              "label": "Input",
+              "type": "password",
+              "placeholder": "Password",
+              "isRequired": false,
+              "minCharactersAllowed": 1,
+              "maxCharactersAllowed": 100,
+              "validations": [
+                {
+                  "regexType": "eightOrMoreCharacters",
+                  "regexErrorCopy": "Use 8 or more characters"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -92,11 +93,7 @@ Now let’s look closely at the object, we have to create a custom function that
 With that being said, how we can achieve a dynamic rendering in our react application, The simplest way is to take advantage of the React top-level API method `createElement`. If you know JSX, and how it transpile to regular JS you might heard about this method, basically the function returns a new React element, it works this way:
 
 ```js
-React.createElement(
-  type,
-  [props],
-  [...children]
-)
+React.createElement(type, [props], [...children]);
 ```
 
 - As you can see the first argument is the element type which can be a regular html tag like a div or even a react component or a react fragment.
@@ -107,9 +104,7 @@ I recommend this <Link target="_blank" to="https://reactjs.org/docs/react-withou
 
 Now we need to read that JSON and call the `React.createElement` every time we encounter a component that is valid, while this can be done with multiple approaches, we decided to use recursion to achieve it. This was written in typescript and the first step to make things work is to define some custom types/interfaces.
 
-```ts
-// dynamic-rendering.interfaces.ts
-
+```ts:title=dynamic-rendering.interfaces.ts
 // Here is a type to map all the components names.
 type ComponentList =
     | 'Button'
@@ -137,18 +132,17 @@ Now that we have the interfaces, we can create a constants file to map the compo
 // All the component imports
 
 export const Components = {
-    Button,
-    Card,
-    Container,
-    Divider,
-    Input,
+  Button,
+  Card,
+  Container,
+  Divider,
+  Input,
 };
 ```
 
 After that we can create the service that will take the json payload and return the React components in our application.
 
-```tsx
-// dynamic-rendering.service.ts
+```ts:title=dynamic-rendering.ts
 import React from 'react';
 import { IComponent } from './dynamic-rendering.interfaces';
 import { Components } from './dynamic-rendering.constants';
@@ -190,7 +184,7 @@ export function createPage(data?: IComponent): React.ReactNode {
 }
 ```
 
-This function creates all the components that we receive in the payload and recursively calls the renderer function to create all the children if available. 
+This function creates all the components that we receive in the payload and recursively calls the renderer function to create all the children if available.
 
 ## Final Thoughts
 

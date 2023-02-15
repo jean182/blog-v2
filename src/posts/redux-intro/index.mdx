@@ -3,6 +3,7 @@ title: Introduction to Redux.
 slug: redux-101
 date: 2019-09-15T21:30:37.046Z
 description: Basic concepts to start using redux
+featuredImage: redux-structure.png
 author: Jean Aguilar
 ---
 
@@ -68,10 +69,10 @@ So now that we know how to structure them, let's write a basic module, we're goi
 
 ```js
 // Actions types
-const FETCH_POKEMON_DATA = "pokemon-frontend/pokemon/FETCH_POKEMON_DATA"
-const FETCH_POKEMON_SUCCESS = "pokemon-frontend/pokemon/FETCH_POKEMON_SUCCESS"
-const FETCH_POKEMON_FAILURE = "pokemon-frontend/pokemon/FETCH_POKEMON_FAILURE"
-const RESET_POKEMON_DATA = "pokemon-frontend/pokemon/RESET_POKEMON_DATA"
+const FETCH_POKEMON_DATA = "pokemon-frontend/pokemon/FETCH_POKEMON_DATA";
+const FETCH_POKEMON_SUCCESS = "pokemon-frontend/pokemon/FETCH_POKEMON_SUCCESS";
+const FETCH_POKEMON_FAILURE = "pokemon-frontend/pokemon/FETCH_POKEMON_FAILURE";
+const RESET_POKEMON_DATA = "pokemon-frontend/pokemon/RESET_POKEMON_DATA";
 ```
 
 In this case I have four action types that are named using the convention, in this case the app name is called `pokemon-frontend`, the module name is called `pokemon` and the action type is written in `UPPER_SNAKE_CASE`.
@@ -80,7 +81,7 @@ After that I like to add the default state for my module, which in this case wil
 
 ```js
 // Initial State
-const initialState = { pokemonList: [], isLoading: false, error: {} }
+const initialState = { pokemonList: [], isLoading: false, error: {} };
 ```
 
 Now we should write a reducer for our state, remember that the reducer is in charge of changing the state by returning a new object based on the action received:
@@ -117,9 +118,9 @@ export default function reducer(state = initialState, action = {}) {
 Keep in mind that the reducer should be the deafult import, and notice that the function receives the state and the action, the reducer is going to check for the `action.type` attribute and according to that it will return a new state. We use the spread operator to return a new object containing the initial state object which the respective changes. For example if we dispatch the action `FETCH_POKEMON_DATA` the returned state should be:
 
 ```js
-store.dispatch({ type: FETCH_POKEMON_DATA })
+store.dispatch({ type: FETCH_POKEMON_DATA });
 
-console.log(store.getState())
+console.log(store.getState());
 /*
 Output:
  {
@@ -139,19 +140,19 @@ Pretty cool right, now we have to create the action creators, as I mentioned bef
 ```js
 // Action Creators
 export function loadPokemon() {
-  return { type: FETCH_POKEMON_DATA }
+  return { type: FETCH_POKEMON_DATA };
 }
 
 export function loadPokemonSucceed(payload) {
-  return { type: FETCH_POKEMON_SUCCESS, payload }
+  return { type: FETCH_POKEMON_SUCCESS, payload };
 }
 
 export function loadPokemonFailed(payload) {
-  return { type: FETCH_POKEMON_FAILURE, payload }
+  return { type: FETCH_POKEMON_FAILURE, payload };
 }
 
 export function resetPokemon() {
-  return { type: RESET_POKEMON_DATA }
+  return { type: RESET_POKEMON_DATA };
 }
 ```
 
@@ -164,10 +165,10 @@ So why, should we use them?, since we can call the action itself in the dispatch
 A basic example on how can we use them(very similar to the one above, using the action):
 
 ```js
-const payload = { data: ["Bulbasaur", "Squirtle", "Charmander"] }
-store.dispatch(loadPokemonSucceed(payload))
+const payload = { data: ["Bulbasaur", "Squirtle", "Charmander"] };
+store.dispatch(loadPokemonSucceed(payload));
 
-console.log(store.getState())
+console.log(store.getState());
 /*
 Output:
  {
@@ -184,12 +185,12 @@ Now if you want, you can add selectors, or side effects handling, after that, bu
 
 ```js
 // Actions types
-const FETCH_POKEMON_DATA = "pokemon-frontend/pokemon/FETCH_POKEMON_DATA"
-const FETCH_POKEMON_SUCCESS = "pokemon-frontend/pokemon/FETCH_POKEMON_SUCCESS"
-const FETCH_POKEMON_FAILURE = "pokemon-frontend/pokemon/FETCH_POKEMON_FAILURE"
-const RESET_POKEMON_DATA = "pokemon-frontend/pokemon/RESET_POKEMON_DATA"
+const FETCH_POKEMON_DATA = "pokemon-frontend/pokemon/FETCH_POKEMON_DATA";
+const FETCH_POKEMON_SUCCESS = "pokemon-frontend/pokemon/FETCH_POKEMON_SUCCESS";
+const FETCH_POKEMON_FAILURE = "pokemon-frontend/pokemon/FETCH_POKEMON_FAILURE";
+const RESET_POKEMON_DATA = "pokemon-frontend/pokemon/RESET_POKEMON_DATA";
 
-const initialState = { pokemonList: [], isLoading: false, error: {} }
+const initialState = { pokemonList: [], isLoading: false, error: {} };
 
 // Reducer
 export default function reducer(state = initialState, action = {}) {
@@ -198,41 +199,41 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         isLoading: true,
-      }
+      };
     case FETCH_POKEMON_SUCCESS:
       return {
         ...state,
         pokemonList: action.payload.data,
         isLoading: false,
-      }
+      };
     case FETCH_POKEMON_FAILURE:
       return {
         ...state,
         error: action.payload.response.data,
         isLoading: false,
-      }
+      };
     case RESET_POKEMON_DATA:
-      return { ...state, ...initialState }
+      return { ...state, ...initialState };
     default:
-      return state
+      return state;
   }
 }
 
 // Action Creators
 export function loadPokemon() {
-  return { type: FETCH_POKEMON_DATA }
+  return { type: FETCH_POKEMON_DATA };
 }
 
 export function loadPokemonSucceed(payload) {
-  return { type: FETCH_POKEMON_SUCCESS, payload }
+  return { type: FETCH_POKEMON_SUCCESS, payload };
 }
 
 export function loadPokemonFailed(payload) {
-  return { type: FETCH_POKEMON_FAILURE, payload }
+  return { type: FETCH_POKEMON_FAILURE, payload };
 }
 
 export function resetPokemon() {
-  return { type: RESET_POKEMON_DATA }
+  return { type: RESET_POKEMON_DATA };
 }
 ```
 

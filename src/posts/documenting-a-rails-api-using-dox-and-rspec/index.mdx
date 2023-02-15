@@ -3,6 +3,7 @@ title: Documenting a rails API using Dox and RSpec
 slug: documenting-rails-api-dox-and-rspec
 date: "2019-02-28T20:05:00.169Z"
 description: Generating documentation in a rails API
+featuredImage: index-page.png
 author: Jean Aguilar
 ---
 
@@ -14,8 +15,8 @@ Dox was the one that I chose out of the others, because it generates all the doc
 
 First of all we need to set the project:
 
-```bash
-$ rails new book-app --api -T --database=postgresql
+```language-shell
+rails new book-app --api -T --database=postgresql
 ```
 
 After that we will need to integrate RSpec and dox in our Gemfile:
@@ -130,7 +131,7 @@ This is a simple file structure, you can create your own if you want to, these a
 
 In order to use dox we need to add it to our controller which is the one in charge of testing the actions above. We must add this file to the controller spec file, like this:
 
-```ruby{3,7}
+```ruby
 # spec/controllers/books_controller_spec.rb
 RSpec.describe BooksController, type: :controller do
   include Docs::Books::Api # This referencing the document :api in the books.rb file in our docs folder
