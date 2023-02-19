@@ -1,4 +1,8 @@
+import { CgEditContrast } from "@react-icons/all-files/cg/CgEditContrast";
+import { CgMoon } from "@react-icons/all-files/cg/CgMoon";
+import { CgSun } from "@react-icons/all-files/cg/CgSun";
 import * as React from "react";
+import { ThemeValue } from "../../context/theme-context/theme-context.interfaces";
 import { useTheme } from "../../hooks";
 import { formatContactKey, IContactKeys, KeyboardUtils } from "../../shared";
 import Hamburger from "../hamburger/hamburger";
@@ -25,6 +29,10 @@ export default function Navbar({ contact }: INavbarProps) {
 
   const onToggleClick = () => {
     setOpen(!open);
+  };
+
+  const onThemeChange = (theme: ThemeValue) => () => {
+    setTheme(theme);
   };
 
   const onKeyPress: React.KeyboardEventHandler<HTMLAnchorElement> = (ev) => {
@@ -97,32 +105,23 @@ export default function Navbar({ contact }: INavbarProps) {
                 </MenuBar.Submenu.Trigger>
                 <MenuBar.Submenu.List>
                   <MenuBar.MenuItem>
-                    <button
-                      onClick={() => {
-                        setTheme("light");
-                      }}
-                    >
-                      Light
+                    <button aria-label="Light" onClick={onThemeChange("light")}>
+                      <CgSun />
+                    </button>
+                  </MenuBar.MenuItem>
+
+                  <MenuBar.MenuItem>
+                    <button aria-label="Dark" onClick={onThemeChange("dark")}>
+                      <CgMoon />
                     </button>
                   </MenuBar.MenuItem>
 
                   <MenuBar.MenuItem>
                     <button
-                      onClick={() => {
-                        setTheme("dark");
-                      }}
+                      aria-label="Contrast"
+                      onClick={onThemeChange("contrast")}
                     >
-                      Dark
-                    </button>
-                  </MenuBar.MenuItem>
-
-                  <MenuBar.MenuItem>
-                    <button
-                      onClick={() => {
-                        setTheme("contrast");
-                      }}
-                    >
-                      Contrast
+                      <CgEditContrast />
                     </button>
                   </MenuBar.MenuItem>
                 </MenuBar.Submenu.List>

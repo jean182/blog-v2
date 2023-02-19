@@ -19,7 +19,7 @@ const hoverStyles = css`
   }
 `;
 
-const activeStyles = css`
+const activeLinkStyles = css`
   &.active {
     font-weight: 600;
     border: 0px;
@@ -40,13 +40,47 @@ const activeStyles = css`
   }
 `;
 
+const sharedActionStyles = css`
+  ${focusedStyles}
+
+  ${hoverStyles}
+
+  color: ${(p) => p.theme.semanticColors.actionLink};
+  padding: 0 8px;
+  position: relative;
+  background-color: transparent;
+  border: 0px;
+  border-radius: 0px;
+  cursor: pointer;
+
+  display: inline-block;
+  line-height: 44px;
+  height: 44px;
+  margin-right: 8px;
+  text-align: center;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  user-select: none;
+
+  span {
+    display: flex;
+    height: 100%;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
 const sharedAnchorStyles = css`
+  a, button {
+    ${sharedActionStyles}
+  }
+
   a {
-    ${focusedStyles}
-
-    ${activeStyles}
-
-    ${hoverStyles}
+    ${activeLinkStyles}
 
     &:before {
       background-color: transparent;
@@ -68,34 +102,6 @@ const sharedAnchorStyles = css`
       height: 1px;
       overflow: hidden;
       visibility: hidden;
-    }
-
-    color: ${(p) => p.theme.semanticColors.actionLink};
-    padding: 0 8px;
-    position: relative;
-    background-color: transparent;
-    border: 0px;
-    border-radius: 0px;
-    cursor: pointer;
-
-    display: inline-block;
-    line-height: 44px;
-    height: 44px;
-    margin-right: 8px;
-    text-align: center;
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 300;
-    cursor: pointer;
-    user-select: none;
-
-    span {
-      display: flex;
-      height: 100%;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: center;
     }
   }
 `;
