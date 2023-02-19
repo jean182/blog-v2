@@ -4,6 +4,7 @@ import * as React from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../../assets/styles/global";
 import theme from "../../assets/theming";
+import { AppThemeProvider } from "../../context";
 import { HomeDataProps } from "../../shared";
 import { Footer } from "../footer";
 import { Header } from "../header";
@@ -13,10 +14,12 @@ export default function Layout({ children, data }: PageProps<HomeDataProps>) {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Header contact={contact} />
-      <main role="main">{children}</main>
-      <Footer contact={contact} />
+      <AppThemeProvider>
+        <GlobalStyle />
+        <Header contact={contact} />
+        <main role="main">{children}</main>
+        <Footer contact={contact} />
+      </AppThemeProvider>
     </ThemeProvider>
   );
 }

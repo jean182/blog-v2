@@ -5,7 +5,7 @@ import { RiStackOverflowFill } from "@react-icons/all-files/ri/RiStackOverflowFi
 import * as React from "react";
 import { formatContactKey, IContactKeys } from "../../shared";
 import { Link } from "../link";
-import { ContactToIcon, IFooterProps } from "./footer.interfaces";
+import { IFooterProps } from "./footer.interfaces";
 import { StyledFooter } from "./footer.styled";
 
 const contactToIcon = (key: IContactKeys) => {
@@ -41,6 +41,7 @@ export default function Footer({ contact }: IFooterProps) {
           const Icon = contactToIcon(contactKey);
           return (
             <Link
+              key={contactKey}
               aria-label={formatContactKey(contactKey)}
               to={value}
               target="_blank"

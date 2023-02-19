@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTheme } from "../../hooks";
 import { formatContactKey, IContactKeys, KeyboardUtils } from "../../shared";
 import Hamburger from "../hamburger/hamburger";
 import { Link } from "../link";
@@ -15,6 +16,8 @@ const labels = {
 };
 
 export default function Navbar({ contact }: INavbarProps) {
+  const { theme, setTheme } = useTheme();
+  console.log(theme);
   const [open, setOpen] = React.useState(false);
   const toggleRef = React.useRef<HTMLButtonElement>(null);
   const link = React.useRef<HTMLDivElement>(null);
@@ -86,6 +89,46 @@ export default function Navbar({ contact }: INavbarProps) {
               </Link>
             </MenuBar.MenuItem>
           ))}
+          <MenuBar.MenuItem>
+            {(menuItemProps) => (
+              <MenuBar.Submenu>
+                <MenuBar.Submenu.Trigger {...menuItemProps}>
+                  Select theme
+                </MenuBar.Submenu.Trigger>
+                <MenuBar.Submenu.List>
+                  <MenuBar.MenuItem>
+                    <button
+                      onClick={() => {
+                        setTheme("light");
+                      }}
+                    >
+                      Light
+                    </button>
+                  </MenuBar.MenuItem>
+
+                  <MenuBar.MenuItem>
+                    <button
+                      onClick={() => {
+                        setTheme("dark");
+                      }}
+                    >
+                      Dark
+                    </button>
+                  </MenuBar.MenuItem>
+
+                  <MenuBar.MenuItem>
+                    <button
+                      onClick={() => {
+                        setTheme("contrast");
+                      }}
+                    >
+                      Contrast
+                    </button>
+                  </MenuBar.MenuItem>
+                </MenuBar.Submenu.List>
+              </MenuBar.Submenu>
+            )}
+          </MenuBar.MenuItem>
         </div>
       </MenuBar>
     </StyledNavbar>

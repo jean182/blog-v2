@@ -7,7 +7,6 @@ import { calculateLinesToHighlight, preToCodeBlock } from "./code.utils";
 
 const Code = (props: PreCodeProps) => {
   const { codeString, filename, language, metastring } = props;
-  console.log(codeString);
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
 
   return (

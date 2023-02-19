@@ -60,18 +60,6 @@ const Submenu = ({ children }: ISubMenuProps) => {
     }
   }, [menuItems, currentIndex, previousIndex]);
 
-  React.useEffect(() => {
-    const menuNode = listRef.current?.parentNode;
-
-    menuNode?.addEventListener("mouseenter", () => open(), false);
-    menuNode?.addEventListener("mouseleave", () => close(), false);
-
-    return () => {
-      menuNode?.removeEventListener("mouseenter", () => open(), false);
-      menuNode?.removeEventListener("mouseleave", () => close(), false);
-    };
-  }, [isExpanded, close, open]);
-
   const value = React.useMemo(
     () => ({
       buttonId,

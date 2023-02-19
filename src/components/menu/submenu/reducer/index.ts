@@ -30,9 +30,9 @@ export type ISubMenuActions = ICollapseAction | IExpandAction | IMoveAction;
 export function submenuReducer(state: ISubMenuReducer, action: ISubMenuActions): ISubMenuReducer {
   switch (action.type) {
     case SubMenuActionType.Collapse:
-      return { ...state, isExpanded: true };
-    case SubMenuActionType.Expand:
       return SUBMENU_INITIAL_STATE;
+    case SubMenuActionType.Expand:
+      return { ...state, isExpanded: true };
     case SubMenuActionType.Move:
       return {
         ...state,

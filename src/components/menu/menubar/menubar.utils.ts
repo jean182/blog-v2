@@ -30,8 +30,6 @@ export default class MoveUtils {
     const matches = reorderedItems.filter((menuItem) => {
       const { textContent } = menuItem?.firstChild as HTMLDivElement;
       const firstLetter = textContent?.toLowerCase().charAt(0);
-      console.log(firstLetter);
-      console.log(key);
       return key === firstLetter;
     });
 

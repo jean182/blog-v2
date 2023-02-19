@@ -8,14 +8,14 @@ const MenuItem = React.forwardRef<HTMLDivElement, IMenuItemProps>(
     const menubarContext = React.useContext(MenubarContext);
     const submenuContext = React.useContext(SubmenuContext);
 
-    if (!menubarContext) {
+    if (!menubarContext && !submenuContext) {
       throw new Error("MenuItem must be used within a Menubar Context");
     }
 
     const [isFirstChild, setIsFirstChild] = React.useState(false);
     const menuItemRef = (ref ??
       React.useRef(null)) as React.RefObject<HTMLDivElement>;
-    const { menuItems } = menubarContext;
+    const { menuItems } = (submenuContext || menubarContext)!;
 
     const listItemProps = {
       ...props,
@@ -45,7 +45,7 @@ const MenuItem = React.forwardRef<HTMLDivElement, IMenuItemProps>(
       }
 
       return () => {
-        menuItems.delete(menuItemNode);
+        menuItems.delete(menuItemNode!);
       };
     }, [menuItems]);
 

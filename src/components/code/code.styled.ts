@@ -1,4 +1,3 @@
-import { Language } from "prism-react-renderer";
 import styled from "styled-components";
 
 export const Pre = styled.pre`
