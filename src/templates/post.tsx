@@ -4,9 +4,10 @@ import React from "react";
 import { pre } from "../components/code";
 import { Link } from "../components/link";
 import { VideoPlayer } from "../components/video-player";
-import { StyledPost } from "./post.styled";
+import { PostWrapper as wrapper } from "../components/post-wrapper";
+import { StyledPost } from "../assets/styles";
 
-const shortcodes = { pre, Link, VideoPlayer }; // Provide common components here
+const shortcodes = { pre, Link, VideoPlayer, wrapper }; // Provide common components here
 
 export default function PostTemplate({ data, children }: PageProps<any>) {
   return (

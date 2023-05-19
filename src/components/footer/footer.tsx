@@ -1,5 +1,4 @@
 import { FiGithub } from "@react-icons/all-files/fi/FiGithub";
-import { FiInstagram } from "@react-icons/all-files/fi/FiInstagram";
 import { FiLinkedin } from "@react-icons/all-files/fi/FiLinkedin";
 import { RiStackOverflowFill } from "@react-icons/all-files/ri/RiStackOverflowFill";
 import * as React from "react";
@@ -12,8 +11,6 @@ const contactToIcon = (key: IContactKeys) => {
   switch (key) {
     case "github":
       return FiGithub;
-    case "instagram":
-      return FiInstagram;
     case "linkedIn":
       return FiLinkedin;
     default:

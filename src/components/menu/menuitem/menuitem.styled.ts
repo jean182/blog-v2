@@ -1,49 +1,46 @@
 import styled, { css } from "styled-components";
+import {
+  navActiveLinkStyles,
+  navFocusedStyles,
+  navHoverStyles,
+} from "../../../assets/styles";
 
-const focusedStyles = css`
-  :focus {
-    outline: 1px solid ${(p) => p.theme.semanticColors.focusBorder};
+const submenuStyles = css`
+  .submenu {
+    background-color: ${(p) => p.theme.semanticColors.menuBackground};
+    z-index: ${(p) => p.theme.stack.values.dropdown};
+    color: ${(p) => p.theme.semanticColors.actionLink};
+    text-align: left;
+    list-style: none;
+    background-clip: padding-box;
+    border: 1px solid white;
 
-    ::after {
-      content: attr(data-content);
-      position: relative;
+    &[aria-hidden="false"] {
+      margin-top: 0.125em;
+    }
+
+    ${(p) => p.theme.breakpoints.up("md")} {
+      position: absolute;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      clear: both;
+      font-weight: 400;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
+      background-color: transparent;
       border: 0;
     }
   }
 `;
 
-const hoverStyles = css`
-  :hover {
-    color: ${(p) => p.theme.semanticColors.buttonTextHovered};
-    background-color: ${(p) => p.theme.semanticColors.buttonBackgroundHovered};
-  }
-`;
-
-const activeLinkStyles = css`
-  &.active {
-    font-weight: 600;
-    border: 0px;
-    border-radius: 0px;
-    box-sizing: border-box;
-    cursor: pointer;
-    padding: 0px 8px;
-    color: ${(p) => p.theme.semanticColors.buttonTextHovered};
-
-    &:before {
-      background-color: ${(p) => p.theme.semanticColors.inputBackgroundChecked};
-    }
-
-    &:hover::before {
-      left: 0;
-      right: 0;
-    }
-  }
-`;
-
 const sharedActionStyles = css`
-  ${focusedStyles}
+  ${navFocusedStyles}
 
-  ${hoverStyles}
+  ${navHoverStyles}
 
   color: ${(p) => p.theme.semanticColors.actionLink};
   padding: 0 8px;
@@ -53,10 +50,10 @@ const sharedActionStyles = css`
   border-radius: 0px;
   cursor: pointer;
 
-  display: inline-block;
+  display: block;
   line-height: 44px;
   height: 44px;
-  margin-right: 8px;
+  overflow: hidden;
   text-align: center;
   text-decoration: none;
 
@@ -71,16 +68,21 @@ const sharedActionStyles = css`
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+
+    ${(p) => p.theme.breakpoints.down("md")} {
+      justify-content: start;
+    }
   }
 `;
 
 const sharedAnchorStyles = css`
-  a, button {
+  a,
+  button {
     ${sharedActionStyles}
   }
 
   a {
-    ${activeLinkStyles}
+    ${navActiveLinkStyles}
 
     &:before {
       background-color: transparent;
@@ -107,8 +109,11 @@ const sharedAnchorStyles = css`
 `;
 
 export const StyledMenuItem = styled.div`
-  display: inherit;
-  flex-shrink: 0;
+  :has(.submenu) {
+    position: relative;
+  }
+
+  ${submenuStyles}
 
   ${sharedAnchorStyles}
 `;

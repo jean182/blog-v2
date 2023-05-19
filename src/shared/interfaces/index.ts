@@ -2,7 +2,6 @@ import { ImageDataLike } from "gatsby-plugin-image";
 
 type ContactUrl = {
   github: string;
-  instagram: string;
   linkedIn: string;
   stackOverflow: string;
 };
@@ -42,3 +41,9 @@ export type HomeDataProps = {
   };
   allMdx: AllMdx;
 };
+
+export type CustomizedMouseEvent<T = HTMLElement> =
+  | MouseEvent
+  | React.MouseEvent<T, MouseEvent>
+  | TouchEvent
+  | React.TouchEvent<T>;

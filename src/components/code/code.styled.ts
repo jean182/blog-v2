@@ -30,7 +30,7 @@ export const Filename = styled.div`
   margin: 1em 0px -1.6em 1em;
   border-radius: 0.3em;
   position: relative;
-  z-index: 1;
+  z-index: ${(p) => p.theme.stack.values.codeblock};
   font-size: 0.8em;
   line-height: initial;
   top: 15px;

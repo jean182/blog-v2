@@ -22,15 +22,17 @@ const PostsPage: React.FC<PageProps<HomeDataProps>> = ({ data }) => {
             title,
           },
         }) => (
-          <PostItem
-            key={id}
-            author={author}
-            date={date}
-            description={description}
-            slug={slug}
-            title={title}
-            featuredImage={featuredImage}
-          />
+          <React.Fragment key={id}>
+            <hr />
+            <PostItem
+              author={author}
+              date={date}
+              description={description}
+              slug={slug}
+              title={title}
+              featuredImage={featuredImage}
+            />
+          </React.Fragment>
         )
       )}
     </div>
@@ -60,8 +62,8 @@ export const query = graphql`
               gatsbyImageData(
                 placeholder: BLURRED
                 layout: CONSTRAINED
-                width: 300
-                height: 200
+                width: 112
+                height: 112
               )
             }
           }

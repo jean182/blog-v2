@@ -1,7 +1,8 @@
 import { css } from "styled-components";
 
-export const colorVariables = css`
+export const cssVars = css`
   :root {
+    // Colors
     --bg: #ffffff;
     --checked-text: #0b0b0b;
     --primary-bg: #6a5acd;
@@ -32,9 +33,12 @@ export const colorVariables = css`
     --info-bg: #f3f2f1;
     --warning-bg: #fff4ce;
     --severe-warning-bg: #fed9cc;
-    --card-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
+    --card-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132),
+      0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
     --success-bg: #dff6dd;
     --warning-highlight: #ffb900;
+    // Stack
+    ${(p) => p.theme.stack.generateVars()}
   }
 
   body.dark {
@@ -51,7 +55,8 @@ export const colorVariables = css`
     --disabled-body-text: #c8c8c8;
     --text: #ffffff;
     --button-hover-text: #f4f4f4;
-    --card-shadow: 0 1.6px 3.6px 0 rgba(255, 255, 255, 0.132), 0 0.3px 0.9px 0 rgba(255, 255, 255, 0.108);
+    --card-shadow: 0 1.6px 3.6px 0 rgba(255, 255, 255, 0.132),
+      0 0.3px 0.9px 0 rgba(255, 255, 255, 0.108);
     --subtext: #d0d0d0;
     --disabled-subtext: #0e0e0e;
     --transparent: transparent;

@@ -6,9 +6,6 @@ export function formatContactKey(key: IContactKeys) {
     case "github":
       name = "Github";
       break;
-    case "instagram":
-      name = "Instagram";
-      break;
     case "linkedIn":
       name = "LinkedIn";
       break;

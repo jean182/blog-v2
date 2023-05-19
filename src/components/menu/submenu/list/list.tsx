@@ -3,6 +3,8 @@ import { MenubarContext, SubmenuContext } from "../../context";
 import { SubMenuActionType } from "../reducer";
 import { IList, IListProps } from "./list.interfaces";
 
+const isLink = (node: HTMLElement) => node.tagName.toLowerCase() === "a";
+
 export default function List({
   children,
   onClick,
@@ -115,7 +117,9 @@ export default function List({
         break;
       case "Enter":
       case "Space":
-        close();
+        if (isLink(ev.target as HTMLElement)) {
+          close();
+        }
         break;
       case "Escape":
         ev.stopPropagation();
@@ -146,12 +150,14 @@ export default function List({
     },
     onClick: (ev) => {
       onClick?.(ev);
-      close();
+      if (isLink(ev.target as HTMLElement)) {
+        close();
+      }
     },
   };
 
   return (
-    <div hidden={!isExpanded} ref={listRef} className="submenu" {...listProps}>
+    <div hidden={!isExpanded} ref={listRef} style={{ opacity: !isExpanded ? "0" : "1", transition: "all 1s", visibility: !isExpanded ? "hidden" : "visible" }} className="submenu" {...listProps}>
       {children}
     </div>
   );

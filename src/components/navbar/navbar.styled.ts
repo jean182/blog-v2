@@ -8,24 +8,20 @@ export const StyledNavbar = styled.nav`
   align-items: center;
   -webkit-box-pack: justify;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
   background-color: ${(p) => p.theme.semanticColors.bodyBackground};
 
   &.fixed {
     position: fixed;
-    overflow: hidden;
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1030;
+    z-index: ${(p) => p.theme.stack.values.nav};
   }
 
   ${(p) => p.theme.breakpoints.up("md")} {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    flex-flow: row nowrap;
-    -webkit-box-pack: start;
+    flex-wrap: nowrap;
     justify-content: flex-start;
+    padding: 0.5rem 1rem;
   }
 
   ${(p) => p.theme.breakpoints.down("md")} {
@@ -54,5 +50,14 @@ export const StyledNavbar = styled.nav`
     ${(p) => p.theme.breakpoints.up("md")} {
       display: none;
     }
+  }
+
+  .dropdown-toggle {
+    display: block;
+    white-space: nowrap;
+    text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
   }
 `;

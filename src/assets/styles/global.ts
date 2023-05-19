@@ -1,16 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 import { codeBlock } from "./code-block";
 import { container } from "./container";
-import { colorVariables } from "./mapped-colors";
+import { cssVars } from "./mapped-variables";
 
 const GlobalStyle = createGlobalStyle`
-  ${colorVariables}
+  ${cssVars}
   *, ::after, ::before {
     box-sizing: border-box;
-  }
-
-  html {
-    height: 100%;
   }
 
   body {
@@ -31,11 +27,6 @@ const GlobalStyle = createGlobalStyle`
 
   main {
     flex-shrink: 0;
-  }
-
-  /* Needed to enforce a fixed nav behavior */
-  main > * {
-    padding: 60px 0;
   }
 
   a {

@@ -3,8 +3,8 @@ import { CgMoon } from "@react-icons/all-files/cg/CgMoon";
 import { CgSun } from "@react-icons/all-files/cg/CgSun";
 import * as React from "react";
 import { ThemeValue } from "../../context/theme-context/theme-context.interfaces";
-import { useTheme } from "../../hooks";
-import { formatContactKey, IContactKeys, KeyboardUtils } from "../../shared";
+import { useOutsideClick, useTheme } from "../../shared";
+import { IContactKeys, KeyboardUtils, formatContactKey } from "../../shared";
 import Hamburger from "../hamburger/hamburger";
 import { Link } from "../link";
 import { MenuBar } from "../menu/menubar";
@@ -19,17 +19,35 @@ const labels = {
   actionGroup: "Actions",
 };
 
+const RenderThemeIcon = ({ theme }: { theme: ThemeValue }) => {
+  const ariaLabel = `Current theme is ${theme}`;
+  switch (theme) {
+    case "contrast":
+      return <CgEditContrast aria-label={ariaLabel} />;
+    case "dark":
+      return <CgMoon aria-label={ariaLabel} />;
+    default:
+      return <CgSun aria-label={ariaLabel} />;
+  }
+};
+
 export default function Navbar({ contact }: INavbarProps) {
   const { theme, setTheme } = useTheme();
-  console.log(theme);
   const [open, setOpen] = React.useState(false);
   const toggleRef = React.useRef<HTMLButtonElement>(null);
+  const navRef = React.useRef<HTMLDivElement>(null);
   const link = React.useRef<HTMLDivElement>(null);
   const collapsedClass = open ? "collapse show" : "collapse";
 
   const onToggleClick = () => {
     setOpen(!open);
   };
+
+  const close = () => {
+    setOpen(false);
+  };
+
+  useOutsideClick([navRef, toggleRef], close);
 
   const onThemeChange = (theme: ThemeValue) => () => {
     setTheme(theme);
@@ -50,18 +68,21 @@ export default function Navbar({ contact }: INavbarProps) {
     }
   };
 
+  const onLinkClick = () => {
+    if (open) setOpen(false);
+  };
+
   return (
-    <StyledNavbar className="fixed">
-      <button
+    <StyledNavbar className="fixed" ref={navRef}>
+      <Hamburger
         type="button"
         className="toggle"
         ref={toggleRef}
         aria-expanded={open}
+        open={open}
         onClick={onToggleClick}
-        aria-label={open ? "Close" : "Open"}
-      >
-        <Hamburger />
-      </button>
+        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+      />
       <MenuBar
         data-testid={MENUBAR}
         direction={open ? "vertical" : "horizontal"}
@@ -74,17 +95,17 @@ export default function Navbar({ contact }: INavbarProps) {
           aria-label={labels.internalGroup}
         >
           <MenuBar.MenuItem>
-            <Link onKeyDown={onKeyPress} to="/">
+            <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/">
               <span>Home</span>
             </Link>
           </MenuBar.MenuItem>
           <MenuBar.MenuItem>
-            <Link onKeyDown={onKeyPress} to="/posts">
+            <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/posts">
               <span>Posts</span>
             </Link>
           </MenuBar.MenuItem>
           <MenuBar.MenuItem ref={link}>
-            <Link onKeyDown={onKeyPress} to="/about">
+            <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/about">
               <span>About</span>
             </Link>
           </MenuBar.MenuItem>
@@ -101,23 +122,32 @@ export default function Navbar({ contact }: INavbarProps) {
             {(menuItemProps) => (
               <MenuBar.Submenu>
                 <MenuBar.Submenu.Trigger {...menuItemProps}>
-                  Select theme
+                  <RenderThemeIcon theme={theme} />
                 </MenuBar.Submenu.Trigger>
                 <MenuBar.Submenu.List>
                   <MenuBar.MenuItem>
-                    <button aria-label="Light" onClick={onThemeChange("light")}>
+                    <button
+                      type="button"
+                      aria-label="Light"
+                      onClick={onThemeChange("light")}
+                    >
                       <CgSun />
                     </button>
                   </MenuBar.MenuItem>
 
                   <MenuBar.MenuItem>
-                    <button aria-label="Dark" onClick={onThemeChange("dark")}>
+                    <button
+                      type="button"
+                      aria-label="Dark"
+                      onClick={onThemeChange("dark")}
+                    >
                       <CgMoon />
                     </button>
                   </MenuBar.MenuItem>
 
                   <MenuBar.MenuItem>
                     <button
+                      type="button"
                       aria-label="Contrast"
                       onClick={onThemeChange("contrast")}
                     >

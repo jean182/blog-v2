@@ -1,4 +1,4 @@
-import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as React from "react";
 import { IPostItemProps } from "./post-item.interfaces";
 import { StyledPostItem } from "./post-item.styled";
@@ -30,17 +30,7 @@ export default function PostItem({
           <p>{description}</p>
         </div>
         <div className="post-image">
-          {featuredImg ? (
-            <GatsbyImage alt={title} image={featuredImg} />
-          ) : (
-            <StaticImage
-              width={300}
-              height={200}
-              layout="constrained"
-              alt={title}
-              src="../../images/placeholder.jpg"
-            />
-          )}
+          {featuredImg && <GatsbyImage alt={title} image={featuredImg} />}
         </div>
       </StyledPostItem>
     </article>

@@ -1,6 +1,7 @@
+import { animated } from "@react-spring/web";
 import styled from "styled-components";
 
-export const StyledMenuBar = styled.div`
+export const StyledMenuBar = styled(animated.div)`
   flex-basis: 100%;
   flex-grow: 1;
   -webkit-box-align: center;

@@ -198,10 +198,15 @@ export const codeBlock = css`
   ul {
     > code {
       border-radius: 0.3em;
-      background: #ffe56433;
-      color: #1a1a1a;
+      background-color: rgb(30, 30, 30);
+      color: #fff;
       padding: 0.15em 0.2em 0.05em;
       white-space: normal;
+
+      .dark & {
+        background-color: rgb(255, 255, 255);
+        color: #000000;
+      }
     }
   }
 
@@ -212,7 +217,7 @@ export const codeBlock = css`
     margin: 1em 0px -1.6em 1em;
     border-radius: 0.3em;
     position: relative;
-    z-index: 1;
+    z-index: ${(p) => p.theme.stack.values.codeblock};
     font-size: 0.8em;
     line-height: initial;
     background-color: var(--js-background);

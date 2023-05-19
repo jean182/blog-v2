@@ -6,7 +6,6 @@ const config: GatsbyConfig = {
     siteUrl: `https://loserkid.io`,
     contact: {
       github: "https://github.com/jean182",
-      instagram: "https://www.instagram.com/jeanm182/",
       stackOverflow: "https://stackoverflow.com/users/6064073/jean182",
       linkedIn: "https://www.linkedin.com/in/jean182",
     },

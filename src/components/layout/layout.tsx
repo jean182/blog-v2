@@ -2,7 +2,7 @@ import type { PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import * as React from "react";
 import { ThemeProvider } from "styled-components";
-import GlobalStyle from "../../assets/styles/global";
+import { GlobalStyle } from "../../assets/styles";
 import theme from "../../assets/theming";
 import { AppThemeProvider } from "../../context";
 import { HomeDataProps } from "../../shared";
@@ -32,7 +32,6 @@ export const query = graphql`
       siteUrl
       contact {
         github
-        instagram
         linkedIn
         stackOverflow
       }

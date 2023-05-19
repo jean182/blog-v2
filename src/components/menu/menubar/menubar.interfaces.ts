@@ -1,9 +1,10 @@
 export interface IMenuBarProps {
-  children: React.ReactNode;
   ariaLabel?: string;
+  children: React.ReactNode;
   className?: string;
   direction?: React.AriaAttributes["aria-orientation"];
   onKeyDown?: React.KeyboardEventHandler<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement>;
 }
 
 export interface IMenuBar extends Omit<IMenuBarProps, "children"> {

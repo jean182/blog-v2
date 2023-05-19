@@ -6,6 +6,7 @@ import { SubMenuList } from "./list";
 import { SubMenuActionType, submenuReducer } from "./reducer";
 import { ISubMenuProps } from "./submenu.interfaces";
 import { SubMenuTrigger } from "./trigger";
+import { useOutsideClick } from "../../../shared";
 
 const Submenu = ({ children }: ISubMenuProps) => {
   const id = React.useRef(uniqueId("-submenu--")).current;
@@ -48,6 +49,12 @@ const Submenu = ({ children }: ISubMenuProps) => {
       }
     },
     [isExpanded]
+  );
+
+  // Closes the submenu when the user clicks any element that is not inside the list or the trigger.
+  useOutsideClick(
+    [listRef, buttonRef],
+    close
   );
 
   React.useEffect(() => {

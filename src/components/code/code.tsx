@@ -1,13 +1,28 @@
 import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/nightOwl";
+import darkTheme from "prism-react-renderer/themes/vsDark";
+import lightTheme from "prism-react-renderer/themes/vsLight";
+import contrastTheme from "prism-react-renderer/themes/duotoneDark";
 import * as React from "react";
+import { useTheme } from "../../shared";
 import { ICodeProps, PreCodeProps } from "./code.interfaces";
 import { Filename, Line, LineContent, LineNo, Pre } from "./code.styled";
 import { calculateLinesToHighlight, preToCodeBlock } from "./code.utils";
 
 const Code = (props: PreCodeProps) => {
   const { codeString, filename, language, metastring } = props;
+  const { theme: appTheme } = useTheme();
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
+  const getTheme = () => {
+    switch (appTheme) {
+      case "contrast":
+        return contrastTheme;
+      case "dark":
+        return lightTheme;
+      default:
+        return darkTheme;
+    }
+  };
+  const theme = getTheme();
 
   return (
     <>

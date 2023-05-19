@@ -24,5 +24,10 @@ export const container = css`
       padding-right: 0;
       padding-left: 0;
     }
+
+    /* Needed to enforce a fixed nav behavior */
+    main > & {
+      padding: 60px 15px 0;
+    }
   }
 `;

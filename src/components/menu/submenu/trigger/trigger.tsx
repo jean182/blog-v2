@@ -117,5 +117,5 @@ export default function Trigger({
     },
   };
 
-  return <button {...buttonProps} className="dropdown" />;
+  return <button {...buttonProps} className="dropdown-toggle" />;
 }
