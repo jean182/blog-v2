@@ -21,16 +21,19 @@ type HomeFrontmatter = {
   };
 };
 
-type HomePostNode = {
+type PostsQuery = {
   id: string;
   frontmatter: HomeFrontmatter;
+  internal: {
+    contentFilePath: string;
+  }
 };
 
 export type AllMdx = {
-  nodes: HomePostNode[];
+  nodes: PostsQuery[];
 };
 
-export type HomeDataProps = {
+export type AllPostsQuery = {
   site: {
     siteMetadata: {
       title: string;
@@ -41,6 +44,11 @@ export type HomeDataProps = {
   };
   allMdx: AllMdx;
 };
+
+export type CreatePagesResult = {
+  data: AllPostsQuery,
+  errors: any;
+}
 
 export type CustomizedMouseEvent<T = HTMLElement> =
   | MouseEvent

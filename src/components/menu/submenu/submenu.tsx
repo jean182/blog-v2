@@ -1,12 +1,11 @@
-import * as React from "react";
+import { SubmenuContext, SUBMENU_INITIAL_STATE } from "@components/menu";
+import { useOutsideClick } from "@shared/hooks";
 import { uniqueId } from "lodash";
-import { SubmenuContext } from "../context";
-import { SUBMENU_INITIAL_STATE } from "../menu";
+import * as React from "react";
 import { SubMenuList } from "./list";
 import { SubMenuActionType, submenuReducer } from "./reducer";
 import { ISubMenuProps } from "./submenu.interfaces";
 import { SubMenuTrigger } from "./trigger";
-import { useOutsideClick } from "../../../shared";
 
 const Submenu = ({ children }: ISubMenuProps) => {
   const id = React.useRef(uniqueId("-submenu--")).current;

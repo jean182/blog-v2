@@ -1,9 +1,25 @@
-const path = require("path")
-const postTemplate = path.resolve(`./src/templates/post.tsx`)
+import { CreatePagesResult } from "@shared/interfaces";
+import { CreateWebpackConfigArgs, CreatePagesArgs } from "gatsby";
+import path from "path";
 
-// TODO: Fix any
-exports.createPages = async ({ graphql, actions, reporter }: any) => {
-  const { createPage } = actions
+const postTemplate = path.resolve(`./src/templates/post.tsx`);
+
+exports.onCreateWebpackConfig = ({ actions }: CreateWebpackConfigArgs) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "@components": path.resolve(__dirname, "src/components"),
+        "@assets": path.resolve(__dirname, "src/assets"),
+        "@context": path.resolve(__dirname, "src/context"),
+        "@shared": path.resolve(__dirname, "src/shared"),
+        "@templates": path.resolve(__dirname, "src/templates"),
+      },
+    },
+  });
+};
+
+exports.createPages = async ({ graphql, actions, reporter }: CreatePagesArgs) => {
+  const { createPage } = actions;
 
   const result = await graphql(`
     query {
@@ -19,26 +35,20 @@ exports.createPages = async ({ graphql, actions, reporter }: any) => {
         }
       }
     }
-  `)
+  `) as CreatePagesResult;
 
   if (result.errors) {
-    reporter.panicOnBuild('Error loading MDX result', result.errors)
+    reporter.panicOnBuild("Error loading MDX result", result.errors);
   }
 
   // Create blog post pages.
-  const posts = result.data.allMdx.nodes
+  const posts = result.data.allMdx.nodes;
 
-  // you'll call `createPage` for each result
-  posts.forEach((node: any) => {
+  posts.forEach((node) => {
     createPage({
-      // As mentioned above you could also query something else like frontmatter.title above and use a helper function
-      // like slugify to create a slug
       path: `post/${node.frontmatter.slug}`,
-      // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
       component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
-      // You can use the values in this context in
-      // our page layout component
       context: { id: node.id },
-    })
-  })
-}
+    });
+  });
+};

@@ -1,4 +1,4 @@
-import { HomeDataProps } from "../../../shared";
+import { AllPostsQuery } from "@shared";
 
 export type ISuggestedPostProps =
-  HomeDataProps["allMdx"]["nodes"][0]["frontmatter"];
+  AllPostsQuery["allMdx"]["nodes"][0]["frontmatter"];

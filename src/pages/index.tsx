@@ -1,10 +1,10 @@
-import * as React from "react";
-import { graphql } from "gatsby";
+import { SuggestedPosts } from "@components/suggested-posts";
+import { AllPostsQuery } from "@shared";
 import type { HeadFC, PageProps } from "gatsby";
-import { HomeDataProps } from "../shared";
-import { SuggestedPosts } from "../components/suggested-posts";
+import { graphql } from "gatsby";
+import * as React from "react";
 
-const IndexPage: React.FC<PageProps<HomeDataProps>> = ({ data }) => {
+const IndexPage: React.FC<PageProps<AllPostsQuery>> = ({ data }) => {
   const { allMdx } = data;
   return (
     <div className="container">

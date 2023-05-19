@@ -1,10 +1,10 @@
-import * as React from "react";
-import { graphql } from "gatsby";
+import { PostItem } from "@components/post-item";
+import { AllPostsQuery } from "@shared";
 import type { HeadFC, PageProps } from "gatsby";
-import { PostItem } from "../../components/post-item";
-import { HomeDataProps } from "../../shared";
+import { graphql } from "gatsby";
+import * as React from "react";
 
-const PostsPage: React.FC<PageProps<HomeDataProps>> = ({ data }) => {
+const PostsPage: React.FC<PageProps<AllPostsQuery>> = ({ data }) => {
   const { allMdx } = data;
   return (
     // Remove h1 and use h2

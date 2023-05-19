@@ -1,5 +1,5 @@
+import { MenubarContext, SubmenuContext } from "@components/menu";
 import * as React from "react";
-import { MenubarContext, SubmenuContext } from "../../context";
 import { ITrigger, ITriggerProps } from "./trigger.interfaces";
 
 export default function Trigger({

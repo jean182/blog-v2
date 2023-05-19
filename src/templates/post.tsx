@@ -1,11 +1,11 @@
+import { StyledPost } from "@assets/styles";
+import { pre } from "@components/code";
+import { Link } from "@components/link";
+import { PostWrapper as wrapper } from "@components/post-wrapper";
+import { VideoPlayer } from "@components/video-player";
 import { MDXProvider } from "@mdx-js/react";
 import { graphql, PageProps } from "gatsby";
 import React from "react";
-import { pre } from "../components/code";
-import { Link } from "../components/link";
-import { VideoPlayer } from "../components/video-player";
-import { PostWrapper as wrapper } from "../components/post-wrapper";
-import { StyledPost } from "../assets/styles";
 
 const shortcodes = { pre, Link, VideoPlayer, wrapper }; // Provide common components here
 

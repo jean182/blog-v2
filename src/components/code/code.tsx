@@ -1,9 +1,9 @@
+import { useTheme } from "@shared/hooks";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import contrastTheme from "prism-react-renderer/themes/duotoneDark";
 import darkTheme from "prism-react-renderer/themes/vsDark";
 import lightTheme from "prism-react-renderer/themes/vsLight";
-import contrastTheme from "prism-react-renderer/themes/duotoneDark";
 import * as React from "react";
-import { useTheme } from "../../shared";
 import { ICodeProps, PreCodeProps } from "./code.interfaces";
 import { Filename, Line, LineContent, LineNo, Pre } from "./code.styled";
 import { calculateLinesToHighlight, preToCodeBlock } from "./code.utils";

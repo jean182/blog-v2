@@ -1,4 +1,4 @@
-import { IContactKeys } from "../interfaces";
+import { IContactKeys } from "@shared/interfaces";
 
 export function formatContactKey(key: IContactKeys) {
   let name = "";

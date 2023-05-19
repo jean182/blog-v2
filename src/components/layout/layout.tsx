@@ -1,15 +1,15 @@
+import { GlobalStyle } from "@assets/styles";
+import theme from "@assets/theming";
+import { AppThemeProvider } from "@context";
+import { AllPostsQuery } from "@shared/interfaces";
 import type { PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import * as React from "react";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "../../assets/styles";
-import theme from "../../assets/theming";
-import { AppThemeProvider } from "../../context";
-import { HomeDataProps } from "../../shared";
 import { Footer } from "../footer";
 import { Header } from "../header";
 
-export default function Layout({ children, data }: PageProps<HomeDataProps>) {
+export default function Layout({ children, data }: PageProps<AllPostsQuery>) {
   const { contact } = data.site.siteMetadata;
 
   return (

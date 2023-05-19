@@ -1,9 +1,9 @@
+import { Link } from "@components/link";
 import { FiGithub } from "@react-icons/all-files/fi/FiGithub";
 import { FiLinkedin } from "@react-icons/all-files/fi/FiLinkedin";
 import { RiStackOverflowFill } from "@react-icons/all-files/ri/RiStackOverflowFill";
+import { formatContactKey, IContactKeys } from "@shared";
 import * as React from "react";
-import { formatContactKey, IContactKeys } from "../../shared";
-import { Link } from "../link";
 import { IFooterProps } from "./footer.interfaces";
 import { StyledFooter } from "./footer.styled";
 
@@ -40,7 +40,7 @@ export default function Footer({ contact }: IFooterProps) {
             <Link
               key={contactKey}
               aria-label={formatContactKey(contactKey)}
-              to={value}
+              to={value as string}
               target="_blank"
               className="icon-link"
             >

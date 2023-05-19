@@ -1,5 +1,5 @@
+import { MAX_WIDTH_VALUES } from "@assets/theming";
 import { css } from "styled-components";
-import { MAX_WIDTH_VALUES } from "../theming";
 
 export const container = css`
   .container {

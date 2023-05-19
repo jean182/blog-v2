@@ -1,5 +1,5 @@
+import { Link } from "@components/link";
 import * as React from "react";
-import { Link } from "../link";
 import { MenuBar } from "./menubar";
 
 export const SUBMENU_INITIAL_STATE = {

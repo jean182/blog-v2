@@ -1,5 +1,5 @@
-import { HomeDataProps } from "../../shared";
+import { AllPostsQuery } from "@shared";
 
 export interface IHeaderProps {
-  contact: HomeDataProps["site"]["siteMetadata"]["contact"];
+  contact: AllPostsQuery["site"]["siteMetadata"]["contact"];
 }

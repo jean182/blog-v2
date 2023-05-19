@@ -1,5 +1,5 @@
 import React from "react";
-import { CustomizedMouseEvent } from "../../../shared";
+import { CustomizedMouseEvent } from "@shared/interfaces";
 
 /**
  * Hook that handles outside click event of the passed refs

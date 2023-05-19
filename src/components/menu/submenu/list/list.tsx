@@ -1,5 +1,5 @@
+import { MenubarContext, SubmenuContext } from "@components/menu/context";
 import * as React from "react";
-import { MenubarContext, SubmenuContext } from "../../context";
 import { SubMenuActionType } from "../reducer";
 import { IList, IListProps } from "./list.interfaces";
 

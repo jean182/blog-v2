@@ -1,13 +1,13 @@
+import { Hamburger } from "@components/hamburger";
+import { Link } from "@components/link";
+import { MenuBar } from "@components/menu/menubar";
+import { ThemeValue } from "@context";
 import { CgEditContrast } from "@react-icons/all-files/cg/CgEditContrast";
 import { CgMoon } from "@react-icons/all-files/cg/CgMoon";
 import { CgSun } from "@react-icons/all-files/cg/CgSun";
+import { IContactKeys, KeyboardUtils, formatContactKey } from "@shared";
+import { useOutsideClick, useTheme } from "@shared/hooks";
 import * as React from "react";
-import { ThemeValue } from "../../context/theme-context/theme-context.interfaces";
-import { useOutsideClick, useTheme } from "../../shared";
-import { IContactKeys, KeyboardUtils, formatContactKey } from "../../shared";
-import Hamburger from "../hamburger/hamburger";
-import { Link } from "../link";
-import { MenuBar } from "../menu/menubar";
 import { INavbarProps } from "./navbar.interfaces";
 import { StyledNavbar } from "./navbar.styled";
 

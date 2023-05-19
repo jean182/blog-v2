@@ -1,3 +1,3 @@
-import { HomeDataProps } from "../../shared";
+import { AllPostsQuery } from "@shared";
 
-export type IPostItemProps = HomeDataProps["allMdx"]["nodes"][0]["frontmatter"]
+export type IPostItemProps = AllPostsQuery["allMdx"]["nodes"][0]["frontmatter"]

@@ -5,6 +5,8 @@ import {
   ThemeValue,
 } from "./theme-context.interfaces";
 
+export { IThemeContext, IThemeContextProviderProps, ThemeValue };
+
 declare global {
   interface Window {
     __theme: ThemeValue;
@@ -41,9 +43,7 @@ export function AppThemeProvider({ children }: IThemeContextProviderProps) {
   };
 
   return (
-    <ThemeContext.Provider
-      value={{ theme, setTheme: setPreferredTheme }}
-    >
+    <ThemeContext.Provider value={{ theme, setTheme: setPreferredTheme }}>
       {children}
     </ThemeContext.Provider>
   );

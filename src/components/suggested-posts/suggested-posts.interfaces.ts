@@ -1,3 +1,3 @@
-import { AllMdx } from "../../shared";
+import { AllMdx } from "@shared";
 
 export type ISuggestedPostsProps = AllMdx;

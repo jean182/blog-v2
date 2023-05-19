@@ -1,7 +1,7 @@
-import { HomeDataProps, IContactKeys } from "../../shared";
+import { AllPostsQuery, IContactKeys } from "@shared";
 
 export interface IFooterProps {
-  contact: HomeDataProps["site"]["siteMetadata"]["contact"];
+  contact: AllPostsQuery["site"]["siteMetadata"]["contact"];
 }
 
 export interface ContactToIcon {

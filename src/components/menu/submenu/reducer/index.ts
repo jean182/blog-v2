@@ -1,4 +1,4 @@
-import { SUBMENU_INITIAL_STATE } from "../../menu";
+import { SUBMENU_INITIAL_STATE } from "@components/menu";
 
 type ISubMenuReducer = {
   isExpanded: boolean;

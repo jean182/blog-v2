@@ -1,6 +1,6 @@
+import { usePrevious } from "@shared/hooks";
 import { uniqueId } from "lodash";
 import * as React from "react";
-import { usePrevious } from "../../../shared";
 import { MenubarContext } from "../context";
 import { MenuItem } from "../menuitem";
 import { Submenu } from "../submenu";

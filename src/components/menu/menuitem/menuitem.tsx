@@ -1,5 +1,5 @@
+import { MenubarContext, SubmenuContext } from "@components/menu";
 import * as React from "react";
-import { MenubarContext, SubmenuContext } from "../context";
 import { IMenuItemChildrenProps, IMenuItemProps } from "./menuitem.interfaces";
 import { StyledMenuItem } from "./menuitem.styled";
 

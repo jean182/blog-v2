@@ -1,9 +1,9 @@
-import styled, { css } from "styled-components";
 import {
   navActiveLinkStyles,
   navFocusedStyles,
   navHoverStyles,
-} from "../../../assets/styles";
+} from "@assets/styles";
+import styled, { css } from "styled-components";
 
 const submenuStyles = css`
   .submenu {
