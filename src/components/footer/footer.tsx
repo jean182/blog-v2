@@ -33,7 +33,7 @@ export default function Footer({ contact }: IFooterProps) {
         <Link to="/about">Contact</Link>
       </div>
       <div className="contact-url">
-        {Object.entries(contact).map(([key, value]) => {
+        {contact && Object.entries(contact).map(([key, value]) => {
           const contactKey = key as IContactKeys;
           const Icon = contactToIcon(contactKey);
           return (

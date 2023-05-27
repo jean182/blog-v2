@@ -1,4 +1,7 @@
 import { AllPostsQuery } from "@shared";
 
-export type ISuggestedPostProps =
-  AllPostsQuery["allMdx"]["nodes"][0]["frontmatter"];
+type IFrotnmatter = AllPostsQuery["allMdx"]["nodes"][0]["frontmatter"];
+
+export interface ISuggestedPostProps extends IFrotnmatter {
+  langKey: string;
+}

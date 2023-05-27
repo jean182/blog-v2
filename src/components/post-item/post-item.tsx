@@ -1,3 +1,4 @@
+import { formatPostLink } from "@shared/formatting";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as React from "react";
 import { IPostItemProps } from "./post-item.interfaces";
@@ -8,15 +9,17 @@ export default function PostItem({
   date,
   description,
   featuredImage,
+  langKey,
   slug,
   title,
 }: IPostItemProps) {
+  const startUrl = langKey == "en" ? "/post" : `/${langKey}/post/`
   let featuredImg = getImage(
     featuredImage?.childImageSharp?.gatsbyImageData ?? null
   );
   return (
     <article>
-      <StyledPostItem to={`/post/${slug}`}>
+      <StyledPostItem to={formatPostLink(langKey, slug)}>
         <div className="post-meta">
           <h2>{title}</h2>
           <p>

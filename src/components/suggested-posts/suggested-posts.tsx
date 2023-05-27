@@ -8,11 +8,14 @@ export default function SuggestedPosts({ nodes }: ISuggestedPostsProps) {
     <StyledSuggestedPosts>
       {nodes.map(
         ({
+          fields: {
+            langKey,
+            slug,
+          },
           frontmatter: {
             author,
             date,
             description,
-            slug,
             title,
             featuredImage,
           },
@@ -22,6 +25,7 @@ export default function SuggestedPosts({ nodes }: ISuggestedPostsProps) {
             author={author}
             date={date}
             description={description}
+            langKey={langKey}
             slug={slug}
             title={title}
             featuredImage={featuredImage}

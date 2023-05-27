@@ -111,7 +111,7 @@ export default function Navbar({ contact }: INavbarProps) {
           </MenuBar.MenuItem>
         </div>
         <div role="group" className="nav-group" aria-label={labels.actionGroup}>
-          {Object.entries(contact).map(([key, value]) => (
+          {contact && Object.entries(contact).map(([key, value]) => (
             <MenuBar.MenuItem key={key}>
               <Link onKeyDown={onKeyPress} to={value} target="_blank">
                 <span>{formatContactKey(key as IContactKeys)}</span>

@@ -13,12 +13,15 @@ const PostsPage: React.FC<PageProps<AllPostsQuery>> = ({ data }) => {
       {allMdx.nodes.map(
         ({
           id,
+          fields: {
+            langKey,
+            slug,
+          },
           frontmatter: {
             author,
             date,
             description,
             featuredImage,
-            slug,
             title,
           },
         }) => (
@@ -28,6 +31,7 @@ const PostsPage: React.FC<PageProps<AllPostsQuery>> = ({ data }) => {
               author={author}
               date={date}
               description={description}
+              langKey={langKey}
               slug={slug}
               title={title}
               featuredImage={featuredImage}
@@ -44,13 +48,23 @@ export default PostsPage;
 export const Head: HeadFC = () => <title>All posts page</title>;
 
 export const query = graphql`
-  query {
+  query($langKey: String!) {
     site {
       ...SiteInformation
     }
-    allMdx(sort: { frontmatter: { date: DESC } }) {
+    allMdx(
+      filter: { fields: { langKey: { eq: $langKey } } }
+      sort: { frontmatter: { date: DESC } }
+    ) {
       nodes {
         id
+        internal {
+          contentFilePath
+        }
+        fields {
+          langKey
+          slug
+        }
         frontmatter {
           slug
           title

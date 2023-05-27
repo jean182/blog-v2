@@ -18,13 +18,20 @@ export default IndexPage;
 export const Head: HeadFC = () => <title>Home Page</title>;
 
 export const query = graphql`
-  query {
+  query($langKey: String!) {
     site {
       ...SiteInformation
     }
-    allMdx(sort: { frontmatter: { date: DESC } }, limit: 5) {
+    allMdx(
+      filter: { fields: { langKey: { eq: $langKey } } }
+      sort: { frontmatter: { date: DESC } }, limit: 5
+    ) {
       nodes {
         id
+        fields {
+          langKey
+          slug
+        }
         frontmatter {
           slug
           title

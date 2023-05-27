@@ -1,3 +1,4 @@
+import { formatPostLink } from "@shared/formatting";
 import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 import { ISuggestedPostProps } from "./suggested-post.interfaces";
@@ -9,6 +10,7 @@ export default function SuggestedPost({
   author,
   date,
   featuredImage,
+  langKey,
   slug,
   title,
 }: ISuggestedPostProps) {
@@ -17,7 +19,7 @@ export default function SuggestedPost({
   );
   return (
     <article>
-      <StyledSuggestedPost to={`/post/${slug}`}>
+      <StyledSuggestedPost to={formatPostLink(langKey, slug)}>
         {featuredImg ? (
           <GatsbyImage alt={title} image={featuredImg} />
         ) : (

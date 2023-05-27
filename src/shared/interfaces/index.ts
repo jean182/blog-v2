@@ -24,6 +24,10 @@ type HomeFrontmatter = {
 type PostsQuery = {
   id: string;
   frontmatter: HomeFrontmatter;
+  fields: {
+    langKey: string;
+    slug: string;
+  }
   internal: {
     contentFilePath: string;
   }
@@ -39,16 +43,18 @@ export type AllPostsQuery = {
       title: string;
       description: string;
       siteUrl: string;
-      contact: ContactUrl;
+      contact?: ContactUrl;
     };
   };
   allMdx: AllMdx;
 };
 
 export type CreatePagesResult = {
-  data: AllPostsQuery,
-  errors: any;
-}
+  errors?: any;
+  data?: {
+    allMdx: Queries.MdxConnection;
+  };
+};
 
 export type CustomizedMouseEvent<T = HTMLElement> =
   | MouseEvent
