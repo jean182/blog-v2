@@ -6,33 +6,22 @@ import { StyledSuggestedPosts } from "./suggested-posts.styled";
 export default function SuggestedPosts({ nodes }: ISuggestedPostsProps) {
   return (
     <StyledSuggestedPosts>
-      {nodes.map(
-        ({
-          fields: {
-            langKey,
-            slug,
-          },
-          frontmatter: {
-            author,
-            date,
-            description,
-            title,
-            featuredImage,
-          },
-          id,
-        }) => (
+      {nodes.map(({ fields: { langKey, slug }, frontmatter, id }) => {
+        if (!frontmatter) return null;
+        const { author, date, description, title, featuredImage } = frontmatter;
+        return (
           <SuggestedPost
-            author={author}
-            date={date}
-            description={description}
+            author={author ?? ""}
+            date={date ?? ""}
+            description={description ?? ""}
             langKey={langKey}
             slug={slug}
-            title={title}
-            featuredImage={featuredImage}
+            title={title ?? ""}
+            featuredImage={featuredImage as Queries.File}
             key={id}
           />
-        )
-      )}
+        );
+      })}
     </StyledSuggestedPosts>
   );
 }

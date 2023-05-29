@@ -21,13 +21,13 @@ export default function SuggestedPost({
     <article>
       <StyledSuggestedPost to={formatPostLink(langKey, slug)}>
         {featuredImg ? (
-          <GatsbyImage alt={title} image={featuredImg} />
+          <GatsbyImage alt={title ?? slug} image={featuredImg} />
         ) : (
           <StaticImage
             width={300}
             height={200}
             layout="constrained"
-            alt={title}
+            alt={title ?? slug}
             src={PLACEHOLDER_URL}
           />
         )}
@@ -37,7 +37,7 @@ export default function SuggestedPost({
             <strong>{author}</strong>
           </p>
           <p>
-            <small>{new Date(date).toLocaleDateString()}</small>
+            <small>{date ? new Date(date).toLocaleDateString() : "N/A"}</small>
           </p>
         </div>
       </StyledSuggestedPost>

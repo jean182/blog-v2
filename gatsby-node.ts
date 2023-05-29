@@ -9,9 +9,137 @@ import path from "path";
 import supportedLanguages from "./i18n";
 import { createFilePath } from "gatsby-source-filesystem";
 
+type TranslationsByDirectory = { [key: string]: string };
+
 const homeTemplate = path.resolve(`./src/templates/home.tsx`);
 const postTemplate = path.resolve(`./src/templates/post.tsx`);
 const postsTemplate = path.resolve(`./src/templates/posts.tsx`);
+const successMessage = "Page created succesfully";
+const divider =
+  "----------------------------------------------------------------------------";
+const attemptColor = "\x1b[36m%s\x1b[0m";
+const successColor = "\x1b[32m%s\x1b[0m";
+const errorColor = "\x1b[31m%s\x1b[0m";
+
+/**
+ * Creates all posts pages based on the language key received.
+ *
+ *
+ * @param createPage - The createPage Fn.
+ * @param langKey - The language key.
+ * @param nodes - The MDX nodes.
+ * @returns A callback function the creates the page.
+ */
+const createPosts =
+  (
+    createPage: CreatePagesArgs["actions"]["createPage"],
+    langKey: string,
+    nodes: Queries.Mdx[],
+    translationsByDirectory: TranslationsByDirectory
+  ) =>
+  ({ fields, id, internal }: Queries.Mdx, index: number) => {
+    try {
+      const { slug } = fields;
+      const { contentFilePath } = internal;
+      const previous = index === nodes.length - 1 ? null : nodes[index + 1];
+      const next = index === 0 ? null : nodes[index - 1];
+      const startUrl = langKey === "en" ? "/posts" : `/${langKey}/posts`;
+      const translations = translationsByDirectory[slug] ?? [];
+
+      console.log(
+        attemptColor,
+        `Attempting to create post: ${slug} for ${langKey} language`
+      );
+      createPage({
+        path: `${startUrl}/${slug}`,
+        component: `${postTemplate}?__contentFilePath=${contentFilePath}`,
+        context: {
+          id,
+          langKey,
+          next,
+          previous,
+          slug,
+          translations,
+        },
+      });
+      console.log(successColor, successMessage, "\n", divider);
+    } catch (error) {
+      console.error(errorColor, error);
+    }
+  };
+
+/**
+ * Creates home and post list pages based on the language key received.
+ *
+ *
+ * @param createPage - The createPage Fn.
+ * @param langKey - The language key.
+ * @returns A callback function the creates the home and posts page.
+ */
+const createNonMdxPages =
+  (createPage: CreatePagesArgs["actions"]["createPage"]) =>
+  (langKey: string) => {
+    try {
+      const heroPath = langKey === "en" ? "/" : `/${langKey}/`;
+      const postsPath = langKey === "en" ? "/posts/" : `/${langKey}/posts/`;
+
+      console.log(
+        attemptColor,
+        `Attempting to create homepage for ${langKey} language`
+      );
+      createPage({
+        path: heroPath,
+        component: homeTemplate,
+        context: {
+          langKey,
+        },
+      });
+      console.log(successColor, successMessage, "\n", divider);
+
+      console.log(
+        attemptColor,
+        `Attempting to create posts page for ${langKey} language`
+      );
+      createPage({
+        path: postsPath,
+        component: postsTemplate,
+        context: {
+          langKey,
+        },
+      });
+      console.log(successColor, successMessage, "\n", divider);
+    } catch (error) {
+      console.error(errorColor, error);
+    }
+  };
+
+/**
+ * Creates an object containing all the slugs names and wether they have translations or not.
+ *
+ *
+ * @param translationsByDir - Initial reduce object.
+ * @param node - The mdx Node.
+ * @returns the generated translationsByDir object.
+ */
+const toTranslations = (
+  translationsByDir: TranslationsByDirectory,
+  node: Queries.Mdx
+) => {
+  const {
+    fields: { langKey, slug: directoryName },
+  } = node;
+  const hasKey = !!translationsByDir[directoryName];
+  const newDirObj = {
+    ...translationsByDir,
+    [directoryName]: hasKey
+      ? [...translationsByDir[directoryName], langKey]
+      : [langKey],
+  };
+
+  return langKey !== "en"
+    ? (newDirObj as TranslationsByDirectory)
+    : translationsByDir;
+};
 
 exports.onCreateNode = async ({
   node,
@@ -48,10 +176,14 @@ exports.createSchemaCustomization = ({
   actions.createTypes(`
     type Mdx implements Node  {
       fields: MdxFields!
+      frontmatter: Frontmatter
     }
     type MdxFields {
       langKey: String!
       slug: String!
+    }
+    type Frontmatter {
+      author: String
     }
   `);
 };
@@ -77,35 +209,48 @@ exports.createPages = async ({
 }: CreatePagesArgs) => {
   const { createPage } = actions;
 
-  // Create Hero home page.
-  Object.keys(supportedLanguages).forEach((langKey) => {
-    createPage({
-      path: langKey === "en" ? "/" : `/${langKey}/`,
-      component: homeTemplate,
-      context: {
-        langKey,
-      },
-    });
-  });
+  const getTranslationsByDirectory = async () => {
+    const result = (await graphql(`
+      query AllNodes {
+        allMdx {
+          nodes {
+            id
+            fields {
+              langKey
+              slug
+            }
+          }
+        }
+      }
+    `)) as CreatePagesResult;
 
-  // Create all posts home page.
-  Object.keys(supportedLanguages).forEach((langKey) => {
-    createPage({
-      path: langKey === "en" ? "/posts/" : `/${langKey}/posts/`,
-      component: postsTemplate,
-      context: {
-        langKey,
-      },
-    });
-  });
+    const allNodes = result.data?.allMdx.nodes ?? [];
 
-  const result = (await graphql(`
-    query {
-      allMdx {
+    const args: [
+      (
+        directories: TranslationsByDirectory,
+        node: Queries.Mdx
+      ) => TranslationsByDirectory,
+      TranslationsByDirectory
+    ] = [toTranslations, {}];
+    return allNodes.reduce<TranslationsByDirectory>(...args);
+  };
+
+  const translationsByDirectory = await getTranslationsByDirectory();
+
+  const createNodeByLangCallback =
+    (translationsByDirectory: TranslationsByDirectory) =>
+    async (langKey: string) => {
+      const result = (await graphql(`
+    query NodesByLang {
+      allMdx(
+        filter: { fields: { langKey: { eq: "${langKey}" } } }
+        sort: { frontmatter: { date: DESC } }
+      ) {
         nodes {
           id
           frontmatter {
-            slug
+            title
           }
           fields {
             langKey
@@ -119,27 +264,27 @@ exports.createPages = async ({
     }
   `)) as CreatePagesResult;
 
-  if (result.errors) {
-    reporter.panicOnBuild("Error loading MDX result", result.errors);
-  }
+      if (result.errors) {
+        reporter.panicOnBuild("Error loading MDX result", result.errors);
+      }
 
-  // Create blog posts pages.
-  const nodes = result.data?.allMdx.nodes!;
+      const nodesByLang = result.data?.allMdx.nodes ?? [];
 
-  // const defaultLangPosts = nodes.filter(({ fields }) => fields.langKey === "en");
+      const createPostsCallback = createPosts(
+        createPage,
+        langKey,
+        [...nodesByLang],
+        translationsByDirectory
+      );
+      nodesByLang.forEach(createPostsCallback);
+    };
 
-  nodes.forEach(({ fields, id, internal }) => {
-    try {
-      const { langKey, slug } = fields;
-      const { contentFilePath } = internal;
-      const startUrl = langKey === "en" ? "/post" : `/${langKey}/post`;
-      createPage({
-        path: `${startUrl}/${slug}`,
-        component: `${postTemplate}?__contentFilePath=${contentFilePath}`,
-        context: { id, slug },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  });
+  // Create home and posts pages.
+  const createNonMdxPagesCallback = createNonMdxPages(createPage);
+  Object.keys(supportedLanguages).forEach(createNonMdxPagesCallback);
+
+  // Create post pages.
+  const createNodeByLang = createNodeByLangCallback(translationsByDirectory);
+  const queries = Object.keys(supportedLanguages).map(createNodeByLang);
+  await Promise.all(queries);
 };

@@ -1,7 +1,4 @@
-import { AllPostsQuery } from "@shared";
-
-type IFrotnmatter = AllPostsQuery["allMdx"]["nodes"][0]["frontmatter"];
-
-export interface ISuggestedPostProps extends IFrotnmatter {
+export interface ISuggestedPostProps extends Omit<Queries.Frontmatter, "slug"> {
   langKey: string;
+  slug: string;
 }

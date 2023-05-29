@@ -1,7 +1,7 @@
-import { AllPostsQuery, IContactKeys } from "@shared";
+import { IContactKeys } from "@shared";
 
 export interface IFooterProps {
-  contact: AllPostsQuery["site"]["siteMetadata"]["contact"];
+  contact: Queries.Maybe<Queries.SiteSiteMetadataContact>;
 }
 
 export interface ContactToIcon {

@@ -1,3 +1,3 @@
-import { AllMdx } from "@shared";
-
-export type ISuggestedPostsProps = AllMdx;
+export interface ISuggestedPostsProps {
+  nodes: Queries.HomePageQuery["allMdx"]["nodes"];
+}

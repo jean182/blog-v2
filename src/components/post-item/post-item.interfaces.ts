@@ -1,7 +1,6 @@
-import { AllPostsQuery } from "@shared";
-
-type PostFrontmatter = AllPostsQuery["allMdx"]["nodes"][0]["frontmatter"];
-
-export interface IPostItemProps extends PostFrontmatter {
+export interface IPostItemProps
+  extends Omit<Queries.Frontmatter, "slug" | "description"> {
+  excerpt: string | null;
   langKey: string;
+  slug: string;
 }

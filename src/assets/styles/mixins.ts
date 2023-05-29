@@ -14,6 +14,12 @@ export const navFocusedStyles = css`
   }
 `;
 
+export const systemFont = css`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+`;
+
 export const navHoverStyles = css`
   :hover {
     color: ${(p) => p.theme.semanticColors.buttonTextHovered};

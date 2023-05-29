@@ -4,6 +4,7 @@ import {
   IThemeContextProviderProps,
   ThemeValue,
 } from "./theme-context.interfaces";
+import { isBrowser } from "@shared/utils";
 
 export { IThemeContext, IThemeContextProviderProps, ThemeValue };
 
@@ -16,19 +17,21 @@ declare global {
 }
 
 export const ThemeContext = React.createContext<IThemeContext>({
-  theme: window?.__theme ?? "light",
+  theme: isBrowser() ? window?.__theme : "light",
   setTheme: () => {},
 });
 
 export function AppThemeProvider({ children }: IThemeContextProviderProps) {
-  const initialValue = window?.__theme ?? "light";
+  const initialValue = isBrowser() ? window?.__theme : "light";
   const [theme, setTheme] = React.useState(initialValue);
 
   React.useEffect(() => {
     try {
-      window.__onThemeChange = () => {
-        setTheme(window.__theme);
-      };
+      if (isBrowser()) {
+        window.__onThemeChange = () => {
+          setTheme(window.__theme);
+        };
+      }
     } catch (error) {
       console.error(error);
     }
@@ -36,7 +39,9 @@ export function AppThemeProvider({ children }: IThemeContextProviderProps) {
 
   const setPreferredTheme = (receivedTheme: ThemeValue) => {
     try {
-      window.__setPreferredTheme(receivedTheme);
+      if (isBrowser()) {
+        window.__setPreferredTheme(receivedTheme);
+      }
     } catch (error) {
       console.error(error);
     }

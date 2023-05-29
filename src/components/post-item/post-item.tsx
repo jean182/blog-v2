@@ -7,13 +7,12 @@ import { StyledPostItem } from "./post-item.styled";
 export default function PostItem({
   author,
   date,
-  description,
+  excerpt,
   featuredImage,
   langKey,
   slug,
   title,
 }: IPostItemProps) {
-  const startUrl = langKey == "en" ? "/post" : `/${langKey}/post/`
   let featuredImg = getImage(
     featuredImage?.childImageSharp?.gatsbyImageData ?? null
   );
@@ -26,14 +25,18 @@ export default function PostItem({
             <strong>{author}</strong>
           </p>
           <p>
-            <small>{new Date(date).toLocaleDateString()}</small>
+            <small>
+              {date ? new Date(date).toLocaleDateString(langKey) : "N/A"}
+            </small>
           </p>
         </div>
         <div className="post-preview">
-          <p>{description}</p>
+          <p>{excerpt}</p>
         </div>
         <div className="post-image">
-          {featuredImg && <GatsbyImage alt={title} image={featuredImg} />}
+          {featuredImg && (
+            <GatsbyImage alt={title ?? slug} image={featuredImg} />
+          )}
         </div>
       </StyledPostItem>
     </article>

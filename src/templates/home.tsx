@@ -1,16 +1,12 @@
 import { SuggestedPosts } from "@components/suggested-posts";
-import { AllPostsQuery } from "@shared";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import * as React from "react";
 
-const IndexPage: React.FC<PageProps<AllPostsQuery>> = ({ data }) => {
+const IndexPage: React.FC<PageProps<Queries.HomePageQuery>> = ({ data }) => {
   const { allMdx } = data;
-  return (
-    <div className="container">
-      <SuggestedPosts nodes={allMdx.nodes} />
-    </div>
-  );
+  const { nodes } = allMdx;
+  return <SuggestedPosts nodes={nodes} />;
 };
 
 export default IndexPage;
@@ -18,13 +14,14 @@ export default IndexPage;
 export const Head: HeadFC = () => <title>Home Page</title>;
 
 export const query = graphql`
-  query($langKey: String!) {
+  query HomePage($langKey: String!) {
     site {
       ...SiteInformation
     }
     allMdx(
       filter: { fields: { langKey: { eq: $langKey } } }
-      sort: { frontmatter: { date: DESC } }, limit: 5
+      sort: { frontmatter: { date: DESC } }
+      limit: 5
     ) {
       nodes {
         id

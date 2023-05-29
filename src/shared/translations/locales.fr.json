@@ -1,0 +1,37 @@
+{
+  "locale": "en-US",
+
+  "strings": {
+    "breadcrumb": {
+      "root": "page d'accueil"
+    },
+    "common": {
+      "appName": "Loser Kid"
+    },
+    "posts": {
+      "all": "Tous les messages"
+    },
+    "bio": {
+      "main": "Créé et maintenu par",
+      "secondary": "Personne ne t'aime quand tu as vingt-trois"
+    },
+    "newsletter": {
+      "title": "Bulletin",
+      "description": "Si vous voulez recevoir mes dernières publications, n'oubliez pas de vous abonner",
+      "name": "Nom",
+      "email": "Adresse électronique",
+      "required": "Ce champ est requis",
+      "invalidEmail": "Adresse e-mail invalide",
+      "submit": "S'abonner"
+    },
+    "footer": {
+      "copyright": "Tous les droits sont réservés"
+    },
+    "translations": {
+      "translationAvailable": "Disponible en",
+      "readOriginal": "Lire l'original",
+      "improveTranslation": "Améliorer cette traduction",
+      "viewAll": "Voir toutes les publications traduites"
+    }
+  }
+}

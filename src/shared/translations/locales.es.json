@@ -1,0 +1,37 @@
+{
+  "locale": "en-US",
+
+  "strings": {
+    "breadcrumb": {
+      "root": "inicio"
+    },
+    "common": {
+      "appName": "Loser Kid"
+    },
+    "posts": {
+      "all": "Todas las publicaciones"
+    },
+    "bio": {
+      "main": "Creado y mantenido por",
+      "secondary": "Nadie te quiere cuando tienes veintitrés"
+    },
+    "newsletter": {
+      "title": "Boletín Informativo",
+      "description": "Si quieres obtener mis últimas publicaciones no olvides suscribirte",
+      "name": "Nombre",
+      "email": "Correo Electrónico",
+      "required": "Este campo es requerido",
+      "invalidEmail": "Dirección de correo electrónico inválida",
+      "submit": "Suscribirse"
+    },
+    "footer": {
+      "copyright": "Todos los derechos reservados"
+    },
+    "translations": {
+      "translationAvailable": "Disponible en",
+      "readOriginal": "Lee el original",
+      "improveTranslation": "Mejorar esta traducción",
+      "viewAll": "Ver todas las publicaciones traducidas"
+    }
+  }
+}

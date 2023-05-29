@@ -1,5 +1,3 @@
-import { AllPostsQuery } from "@shared";
-
 export interface IHeaderProps {
-  contact?: AllPostsQuery["site"]["siteMetadata"]["contact"];
+  contact: Queries.Maybe<Queries.SiteSiteMetadataContact>;
 }

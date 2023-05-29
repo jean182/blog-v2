@@ -1,0 +1,37 @@
+{
+  "locale": "en-US",
+
+  "strings": {
+    "breadcrumb": {
+      "root": "pagina iniziale"
+    },
+    "common": {
+      "appName": "Loser Kid"
+    },
+    "posts": {
+      "all": "Tutti i post"
+    },
+    "bio": {
+      "main": "Creato e mantenuto da",
+      "secondary": "A nessuno piaci quando hai ventitré"
+    },
+    "newsletter": {
+      "title": "Bollettino",
+      "description": "Se vuoi ricevere i miei ultimi post, non dimenticare di iscriverti",
+      "name": "Nome",
+      "email": "Email",
+      "required": "Questo campo è obbligatorio",
+      "invalidEmail": "Indirizzo email non valido",
+      "submit": " Abbonarsi"
+    },
+    "footer": {
+      "copyright": "Tutti i diritti riservati"
+    },
+    "translations": {
+      "translationAvailable": "Disponibile in",
+      "readOriginal": "Leggi l'originale",
+      "improveTranslation": "Migliora questa traduzione",
+      "viewAll": "Vedi tutte le pubblicazioni tradotte"
+    }
+  }
+}

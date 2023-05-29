@@ -1,5 +1,3 @@
-import { ImageDataLike } from "gatsby-plugin-image";
-
 type ContactUrl = {
   github: string;
   linkedIn: string;
@@ -8,52 +6,22 @@ type ContactUrl = {
 
 export type IContactKeys = keyof ContactUrl;
 
-type HomeFrontmatter = {
-  author: string;
-  slug: string;
-  title: string;
-  date: string;
-  description: string;
-  featuredImage?: {
-    childImageSharp: {
-      gatsbyImageData: ImageDataLike;
-    };
-  };
-};
-
-type PostsQuery = {
-  id: string;
-  frontmatter: HomeFrontmatter;
-  fields: {
-    langKey: string;
-    slug: string;
-  }
-  internal: {
-    contentFilePath: string;
-  }
-};
-
-export type AllMdx = {
-  nodes: PostsQuery[];
-};
-
-export type AllPostsQuery = {
-  site: {
-    siteMetadata: {
-      title: string;
-      description: string;
-      siteUrl: string;
-      contact?: ContactUrl;
-    };
-  };
-  allMdx: AllMdx;
-};
-
 export type CreatePagesResult = {
   errors?: any;
   data?: {
     allMdx: Queries.MdxConnection;
   };
+};
+
+export type PostsPageContext = {
+  langKey: string;
+};
+
+export type PostPageContext = {
+  langKey: string;
+  next: Queries.Mdx | null;
+  previous: Queries.Mdx | null;
+  translations: string[];
 };
 
 export type CustomizedMouseEvent<T = HTMLElement> =
