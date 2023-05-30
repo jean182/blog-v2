@@ -24,6 +24,10 @@
       "invalidEmail": "Indirizzo email non valido",
       "submit": " Abbonarsi"
     },
+    "post": {
+      "readingTime": "minuti di lettura",
+      "publishedAt": "Pubblicato il"
+    },
     "footer": {
       "copyright": "Tutti i diritti riservati"
     },

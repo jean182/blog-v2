@@ -16,17 +16,23 @@ export default function Breadcrumb({ pathname }: IBreadcrumbProps) {
   );
 
   return (
-    <BreadcrumbStyled aria-label="Breadcrumb">
-      <ol>
-        {breadcrumbLinks.length > 1 &&
-          breadcrumbLinks.map(({ current, path, textToDisplay }) => (
-            <BreadcrumbItem key={textToDisplay}>
-              <History to={path} {...(current && { ["aria-current"]: "page" })}>
-                {textToDisplay}
-              </History>
-            </BreadcrumbItem>
-          ))}
-      </ol>
-    </BreadcrumbStyled>
+    <>
+      {breadcrumbLinks.length > 1 && (
+        <BreadcrumbStyled aria-label="Breadcrumb">
+          <ol>
+            {breadcrumbLinks.map(({ current, path, textToDisplay }) => (
+              <BreadcrumbItem key={textToDisplay}>
+                <History
+                  to={path}
+                  {...(current && { ["aria-current"]: "page" })}
+                >
+                  {textToDisplay}
+                </History>
+              </BreadcrumbItem>
+            ))}
+          </ol>
+        </BreadcrumbStyled>
+      )}
+    </>
   );
 }

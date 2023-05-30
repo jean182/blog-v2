@@ -25,7 +25,7 @@ export default function TranslationsList({
     <Panel>
       {translations.length > 0 && (
         <span>
-          <span>{t("translationAvailable")}</span>
+          <span>{t("translationAvailable")}{" "}</span>
           {translations.map((key, index) => (
             <React.Fragment key={key}>
               {key === langKey ? (

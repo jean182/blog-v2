@@ -2,7 +2,7 @@ import { Link } from "@components/link";
 import styled from "styled-components";
 
 export const BreadcrumbStyled = styled.nav`
-  padding: 0.8em 0;
+  padding: 2rem 0;
 
   ol {
     margin: 0;
@@ -12,6 +12,8 @@ export const BreadcrumbStyled = styled.nav`
 `;
 
 export const History = styled(Link)`
+  color: ${(p) => p.theme.semanticColors.primaryButtonBackground};
+  font-family: 'Open Sans', sans-serif;
   box-shadow: none;
   &[aria-current="page"] {
     font-weight: 700;

@@ -4,6 +4,8 @@ export const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   margin-top: auto;
+  font-size: 14px;
+  font-weight: 300;
   padding: 0.5rem 0;
 
   ${(p) => p.theme.breakpoints.down("md")} {

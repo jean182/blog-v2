@@ -24,6 +24,10 @@
       "invalidEmail": "Endereço de email invalido",
       "submit": " Subscrever"
     },
+    "post": {
+      "readingTime": "minutos de leitura",
+      "publishedAt": "Publicado em"
+    },
     "footer": {
       "copyright": "Todos os direitos reservados"
     },

@@ -61,7 +61,7 @@ export const StyledPostItem = styled(Link)`
     font-size: 1.625rem;
     letter-spacing: -0.7px;
     margin: 0;
-    color: ${(p) => p.theme.semanticColors.bodyText};
+    color: ${(p) => p.theme.semanticColors.bodySubtext};
     ${(p) => p.theme.breakpoints.down("md")} {
       font-size: 1.2rem;
     }

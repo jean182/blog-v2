@@ -11,6 +11,7 @@ import { createFilePath } from "gatsby-source-filesystem";
 
 type TranslationsByDirectory = { [key: string]: string };
 
+const aboutTemplate = path.resolve(`./src/templates/about.tsx`);
 const homeTemplate = path.resolve(`./src/templates/home.tsx`);
 const postTemplate = path.resolve(`./src/templates/post.tsx`);
 const postsTemplate = path.resolve(`./src/templates/posts.tsx`);
@@ -68,6 +69,26 @@ const createPosts =
     }
   };
 
+const createNonMdxPage = (
+  createPage: CreatePagesArgs["actions"]["createPage"],
+  {
+    component,
+    langKey,
+    message,
+    path,
+  }: { component: string; langKey: string; message: string; path: string }
+) => {
+  console.log(attemptColor, message);
+  createPage({
+    path,
+    component,
+    context: {
+      langKey,
+    },
+  });
+  console.log(successColor, successMessage, "\n", divider);
+};
+
 /**
  * Creates home and post list pages based on the language key received.
  *
@@ -80,32 +101,32 @@ const createNonMdxPages =
   (createPage: CreatePagesArgs["actions"]["createPage"]) =>
   (langKey: string) => {
     try {
+      const aboutPath = langKey === "en" ? "/about" : `/${langKey}/about/`;
       const heroPath = langKey === "en" ? "/" : `/${langKey}/`;
       const postsPath = langKey === "en" ? "/posts/" : `/${langKey}/posts/`;
 
-      console.log(
-        attemptColor,
-        `Attempting to create homepage for ${langKey} language`
-      );
-      createPage({
-        path: heroPath,
+      // Create home pages
+      createNonMdxPage(createPage, {
         component: homeTemplate,
-        context: {
-          langKey,
-        },
+        langKey,
+        message: `Attempting to create homepage for ${langKey} language`,
+        path: heroPath,
       });
-      console.log(successColor, successMessage, "\n", divider);
 
-      console.log(
-        attemptColor,
-        `Attempting to create posts page for ${langKey} language`
-      );
-      createPage({
-        path: postsPath,
+      // Create posts pages
+      createNonMdxPage(createPage, {
         component: postsTemplate,
-        context: {
-          langKey,
-        },
+        langKey,
+        message: `Attempting to create posts page for ${langKey} language`,
+        path: postsPath,
+      });
+
+      // Create about pages
+      createNonMdxPage(createPage, {
+        component: aboutTemplate,
+        langKey,
+        message: `Attempting to create about page for ${langKey} language`,
+        path: aboutPath,
       });
       console.log(successColor, successMessage, "\n", divider);
     } catch (error) {

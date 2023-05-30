@@ -3,7 +3,7 @@
 
   "strings": {
     "breadcrumb": {
-      "root": "page d'accueil"
+      "root": "accueil"
     },
     "common": {
       "appName": "Loser Kid"
@@ -23,6 +23,10 @@
       "required": "Ce champ est requis",
       "invalidEmail": "Adresse e-mail invalide",
       "submit": "S'abonner"
+    },
+    "post": {
+      "readingTime": "minutes de lecture",
+      "publishedAt": "Publié le"
     },
     "footer": {
       "copyright": "Tous les droits sont réservés"

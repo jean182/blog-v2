@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Roboto Serif', serif;
+    font-family: 'Noto Sans', sans-serif;
     line-height: 1.5;
     letter-spacing: normal;
     font-weight: 400;
@@ -25,6 +25,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  header, footer {
+    font-family: 'Open Sans', sans-serif;
+  }
+
   main {
     flex-shrink: 0;
   }
@@ -34,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Outfit', sans-serif;
   }
 
   ${codeBlock}

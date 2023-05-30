@@ -78,12 +78,16 @@ const config: GatsbyConfig = {
         ],
         web: [
           {
-            name: `Roboto`,
-            file: `https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,300;0,8..144,400;0,8..144,500;1,8..144,300;1,8..144,400&display=swap`,
+            name: `Noto Sans`,
+            file: `https://fonts.googleapis.com/css2?family=Noto+Sans:ital@0;1&family=Roboto+Condensed:wght@400;700&display=swap`,
           },
           {
-            name: `Roboto Condensed`,
-            file: `https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap`,
+            name: `Open Sans`,
+            file: `https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap`,
+          },
+          {
+            name: `Outfit`,
+            file: `https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap`,
           },
         ],
       },

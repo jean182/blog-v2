@@ -7,7 +7,7 @@ export interface StringModule {
 
 export interface StringStoreSchema {
   currentLocale: string;
-  registeredStringModules: Map<String, StringModule>;
+  stringModules: Map<String, StringModule>;
 }
 
 export interface ILanguageContextProviderProps {

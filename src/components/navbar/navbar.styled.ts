@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
-  font-family: "Roboto Condensed", sans-serif;
   position: relative;
   display: flex;
   flex-wrap: wrap;

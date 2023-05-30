@@ -3,6 +3,7 @@ import { pre } from "@components/code";
 import { GoToPost } from "@components/go-to-post";
 import { HeadContainer } from "@components/head";
 import { Link } from "@components/link";
+import { PostMeta } from "@components/post-meta";
 import { PostWrapper as wrapper } from "@components/post-wrapper";
 import { TranslationsList } from "@components/translations-list";
 import { VideoPlayer } from "@components/video-player";
@@ -10,6 +11,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { PostPageContext } from "@shared/interfaces";
 import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
+import { getImage } from "gatsby-plugin-image";
 import React from "react";
 
 const shortcodes = { pre, Link, VideoPlayer, wrapper }; // Provide common components here
@@ -20,15 +22,23 @@ export default function PostTemplate({
   pageContext,
 }: PageProps<Queries.PostPageQuery, PostPageContext>) {
   const { next, previous, translations } = pageContext;
-  const { mdx } = data;
+  const { avatar, mdx } = data;
   const {
     frontmatter,
     fields: { langKey, slug },
   } = mdx!;
-  const { title } = frontmatter!;
+  const { author, date, title } = frontmatter!;
+  let avatarImg = getImage(avatar?.childImageSharp?.gatsbyImageData ?? null)!;
   return (
     <StyledPost>
       <h1>{title}</h1>
+      <PostMeta
+        alt={title ?? slug}
+        author={author}
+        avatar={avatarImg}
+        date={date}
+        langKey={langKey}
+      />
       {translations.length > 0 && (
         <TranslationsList
           langKey={langKey}
@@ -55,12 +65,24 @@ export const Head: HeadFC<Queries.PostPageQuery, PostPageContext> = ({
 
 export const query = graphql`
   query PostPage($id: String!) {
+    avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+      childImageSharp {
+        gatsbyImageData(
+          placeholder: BLURRED
+          layout: FIXED
+          width: 44
+          height: 44
+        )
+      }
+    }
     mdx(id: { eq: $id }) {
       fields {
         langKey
         slug
       }
       frontmatter {
+        author
+        date
         title
       }
     }

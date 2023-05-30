@@ -22,5 +22,6 @@ export const PanelWrapper = styled.div`
   word-break: keep-all;
   margin-bottom: 1rem;
   border: 1px solid var(--panelBorder);
+  margin-top: 3rem;
   ${systemFont}
 `;

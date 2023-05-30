@@ -10,9 +10,19 @@ import {
 export const LanguageContext = React.createContext<ILanguageContext>({
   store: {
     currentLocale: "en",
-    registeredStringModules: new Map<String, StringModule>(),
+    stringModules: new Map<String, StringModule>(),
   },
 });
+
+const setStrings = (
+  acc: Map<string, string>,
+  [key, entry]: [string, string]
+) => {
+  if (!key.startsWith("_")) {
+    acc.set(key, entry);
+  }
+  return acc;
+};
 
 export function AppLanguageProvider({
   langKey,
@@ -20,12 +30,8 @@ export function AppLanguageProvider({
 }: ILanguageContextProviderProps) {
   const [store, setStore] = React.useState<StringStoreSchema>({
     currentLocale: "en",
-    registeredStringModules: new Map<String, StringModule>(),
+    stringModules: new Map<String, StringModule>(),
   });
-  const [translations, setTranslations] = React.useState<{
-    name: string;
-    strings: Map<string, string>;
-  }>();
 
   const setMapInStore = ({
     name,
@@ -34,35 +40,31 @@ export function AppLanguageProvider({
     name: string;
     strings: Map<string, string>;
   }) => {
-    store.registeredStringModules.set(name, { name, strings });
+    store.stringModules.set(name, { name, strings });
   };
 
   /**
-   * Process Strings and set them as string Modules.
+   * Process json file and set them as string Modules.
    * @param stringsFile
    */
   function processStrings(stringsFile: LanguageFileStructure) {
-    for (const name of Object.keys(stringsFile)) {
+    Object.entries(stringsFile).forEach(([key, entry]) => {
       const stringModule = {
-        name,
-        strings: new Map<string, string>(),
+        name: key,
+        strings: Object.entries(entry).reduce(
+          setStrings,
+          new Map<string, string>()
+        ),
       };
-
-      const jsonStrings = stringsFile[name];
-      for (const key of Object.keys(jsonStrings)) {
-        if (!key.startsWith("_")) {
-          stringModule.strings.set(key, jsonStrings[key]);
-        }
-      }
-
       setMapInStore(stringModule);
-    }
+    });
   }
+
 
   React.useEffect(() => {
     setStore({
       currentLocale: langKey ?? "en",
-      registeredStringModules: store.registeredStringModules,
+      stringModules: store.stringModules,
     });
     const stringsFile: LanguageFileStructure =
       require(`../../shared/translations/locales.${

@@ -15,6 +15,6 @@ export default function useTranslations(place: string) {
   return {
     lang: store.currentLocale,
     t: (key: string) =>
-      store?.registeredStringModules?.get(place)?.strings.get(key),
+      store?.stringModules?.get(place)?.strings.get(key),
   };
 }
