@@ -6,4 +6,5 @@ export interface IPostMetaProps {
   avatar: IGatsbyImageData;
   date: string | null;
   langKey: string;
+  minutesToRead: number;
 }

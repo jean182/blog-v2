@@ -2,7 +2,7 @@ import { Link } from "@components/link";
 import styled from "styled-components";
 
 export const BreadcrumbStyled = styled.nav`
-  padding: 2rem 0;
+  padding: 2rem 0 0 0;
 
   ol {
     margin: 0;

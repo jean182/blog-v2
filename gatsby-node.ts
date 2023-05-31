@@ -5,9 +5,10 @@ import {
   CreateSchemaCustomizationArgs,
   CreateWebpackConfigArgs,
 } from "gatsby";
-import path from "path";
-import supportedLanguages from "./i18n";
 import { createFilePath } from "gatsby-source-filesystem";
+import path from "path";
+import readingTime from "reading-time";
+import supportedLanguages from "./i18n";
 
 type TranslationsByDirectory = { [key: string]: string };
 
@@ -187,6 +188,12 @@ exports.onCreateNode = async ({
       name: "slug",
       value,
       node,
+    });
+
+    createNodeField({
+      node,
+      name: "timeToRead",
+      value: readingTime(node.body as string),
     });
   }
 };

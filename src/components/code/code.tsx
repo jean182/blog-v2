@@ -1,8 +1,8 @@
 import { useTheme } from "@shared/hooks";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import contrastTheme from "prism-react-renderer/themes/duotoneDark";
-import darkTheme from "prism-react-renderer/themes/vsDark";
-import lightTheme from "prism-react-renderer/themes/vsLight";
+import contrastTheme from "prism-react-renderer/themes/nightOwlLight";
+import lightTheme from "prism-react-renderer/themes/shadesOfPurple";
+import darkTheme from "prism-react-renderer/themes/vsLight";
 import * as React from "react";
 import { ICodeProps, PreCodeProps } from "./code.interfaces";
 import { Filename, Line, LineContent, LineNo, Pre } from "./code.styled";
@@ -17,9 +17,9 @@ const Code = (props: PreCodeProps) => {
       case "contrast":
         return contrastTheme;
       case "dark":
-        return lightTheme;
-      default:
         return darkTheme;
+      default:
+        return lightTheme;
     }
   };
   const theme = getTheme();

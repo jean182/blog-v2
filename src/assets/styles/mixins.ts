@@ -37,6 +37,19 @@ export const navActiveLinkStyles = css`
     padding: 0px 8px;
     color: ${(p) => p.theme.semanticColors.buttonTextHovered};
 
+    .contrast & {
+      color: ${(p) => p.theme.semanticColors.bodyText};
+      &:hover {
+        color: ${(p) => p.theme.semanticColors.bodyText};
+        background-color: inherit;
+      }
+
+      &:before {
+        background-color: ${(p) =>
+          p.theme.semanticColors.buttonBackgroundPressed};
+      }
+    }
+
     &:before {
       background-color: ${(p) => p.theme.semanticColors.inputBackgroundChecked};
     }

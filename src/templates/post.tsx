@@ -25,7 +25,7 @@ export default function PostTemplate({
   const { avatar, mdx } = data;
   const {
     frontmatter,
-    fields: { langKey, slug },
+    fields: { langKey, slug, timeToRead },
   } = mdx!;
   const { author, date, title } = frontmatter!;
   let avatarImg = getImage(avatar?.childImageSharp?.gatsbyImageData ?? null)!;
@@ -38,6 +38,7 @@ export default function PostTemplate({
         avatar={avatarImg}
         date={date}
         langKey={langKey}
+        minutesToRead={Math.round(timeToRead?.minutes ?? 0)}
       />
       {translations.length > 0 && (
         <TranslationsList
@@ -79,6 +80,12 @@ export const query = graphql`
       fields {
         langKey
         slug
+        timeToRead {
+          minutes
+          text
+          time
+          words
+        }
       }
       frontmatter {
         author

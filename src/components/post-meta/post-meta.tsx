@@ -14,6 +14,7 @@ export default function PostMeta({
   avatar,
   date,
   langKey,
+  minutesToRead,
 }: IPostMetaProps) {
   const { t } = useTranslations("post");
   return (
@@ -26,6 +27,12 @@ export default function PostMeta({
           <div>{author}</div>
         </div>
         <div className="meta">
+          <div className="reading-time">
+            {minutesToRead}{" "}{t("readingTime")}
+          </div>
+          <div className="divider">
+            {"·"}
+          </div>
           <div className="date">
             {t("publishedAt")?.concat(" ")}
             {date

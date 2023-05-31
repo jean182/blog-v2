@@ -61,4 +61,25 @@ export const cssVars = css`
     --disabled-subtext: #0e0e0e;
     --transparent: transparent;
   }
+
+  body.contrast {
+    --bg: #000;
+    --checked-text: #ffffff;
+    --primary-bg: #1aebff;
+    --primary-bg-pressed: #000;
+    --hover-link: #f8c9e0;
+    --primary-bg-hovered: #ffff01;
+    --value-unique: #271a20;
+    --body-bg-checked: #1aebff;
+    --body-bg-hovered: #ffff01;
+    --disabled-button-text: #3ff23f;
+    --disabled-body-text: #ffffff;
+    --text: #ffffff;
+    --button-hover-text: #000;
+    --card-shadow: 0 1.6px 3.6px 0 rgba(255, 255, 255, 0.132),
+      0 0.3px 0.9px 0 rgba(255, 255, 255, 0.108);
+    --subtext: #ffffff;
+    --disabled-subtext: #ffffff;
+    --transparent: transparent;
+  }
 `;

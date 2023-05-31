@@ -7,7 +7,8 @@ export const StyledPostItem = styled(Link)`
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
     "header header image"
-    "content content image";
+    "content content image"
+    "time time time";
   color: inherit;
   text-decoration: none;
   padding: 1.5em 0;
@@ -16,12 +17,15 @@ export const StyledPostItem = styled(Link)`
   ${(p) => p.theme.breakpoints.down("md")} {
     grid-template-areas:
       "header header image"
-      "header header image";
+      "header header image"
+      "time time time";
   }
 
-  .post-meta,
-  .post-preview {
+  .post-meta {
     color: ${(p) => p.theme.semanticColors.bodySubtext};
+    h2 {
+      color: ${(p) => p.theme.semanticColors.bodyText};
+    }
   }
 
   .post-meta {
@@ -39,6 +43,23 @@ export const StyledPostItem = styled(Link)`
     ${(p) => p.theme.breakpoints.down("md")} {
       visibility: hidden;
       display: none;
+    }
+  }
+
+  .time {
+    grid-area: time;
+    line-height: 1.5rem;
+    font-weight: 300;
+    font-size: 0.8rem;
+    font-size: 13px;
+    color: ${(p) => p.theme.semanticColors.bodySubtext};
+    font-size: 1rem;
+    p {
+      margin: 0;
+    }
+    ${(p) => p.theme.breakpoints.down("md")} {
+      margin-top: 1rem;
+      text-align: right;
     }
   }
 

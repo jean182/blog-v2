@@ -3,6 +3,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as React from "react";
 import { IPostItemProps } from "./post-item.interfaces";
 import { StyledPostItem } from "./post-item.styled";
+import { useTranslations } from "@shared/hooks";
 
 export default function PostItem({
   author,
@@ -10,9 +11,11 @@ export default function PostItem({
   excerpt,
   featuredImage,
   langKey,
+  minutesToRead,
   slug,
   title,
 }: IPostItemProps) {
+  const { t } = useTranslations("post");
   let featuredImg = getImage(
     featuredImage?.childImageSharp?.gatsbyImageData ?? null
   );
@@ -37,6 +40,9 @@ export default function PostItem({
           {featuredImg && (
             <GatsbyImage alt={title ?? slug} image={featuredImg} />
           )}
+        </div>
+        <div className="time">
+          <p>{minutesToRead} {t("readingTime")}</p>
         </div>
       </StyledPostItem>
     </article>

@@ -8,6 +8,10 @@ export const StyledPost = styled.div`
     line-height: 2.375rem;
   }
 
+  ${(p) => p.theme.breakpoints.down("md")} {
+    margin-top: 0;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     color: ${(p) => p.theme.semanticColors.bodySubtext};
   }

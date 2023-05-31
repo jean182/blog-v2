@@ -13,7 +13,7 @@ const PostsPage: React.FC<PageProps<Queries.PostsPageQuery>> = ({ data }) => {
     // Remove h1 and use h2
     <>
       <h1>{t("all")}</h1>
-      {allMdx.nodes.map(({ excerpt, id, fields: { slug }, frontmatter }) => {
+      {allMdx.nodes.map(({ excerpt, id, fields: { slug, timeToRead }, frontmatter }) => {
         if (!frontmatter) return null;
         const { author, date, featuredImage, title } = frontmatter;
 
@@ -25,6 +25,7 @@ const PostsPage: React.FC<PageProps<Queries.PostsPageQuery>> = ({ data }) => {
               date={date}
               excerpt={excerpt}
               langKey={lang}
+              minutesToRead={Math.round(timeToRead?.minutes ?? 0)}
               slug={slug}
               title={title}
               featuredImage={featuredImage as Queries.File}
@@ -62,6 +63,12 @@ export const query = graphql`
         fields {
           langKey
           slug
+          timeToRead {
+            minutes
+            text
+            time
+            words
+          }
         }
         frontmatter {
           slug
