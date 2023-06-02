@@ -5,10 +5,10 @@ import * as React from "react";
 export default function AboutPage() {
   const { t } = useTranslations("bio");
   return (
-    <div className="container">
+    <>
       <p>{t("main")}</p>
       <p>{t("secondary")}</p>
-    </div>
+    </>
   );
 }
 

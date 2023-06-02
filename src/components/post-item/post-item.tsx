@@ -20,31 +20,34 @@ export default function PostItem({
     featuredImage?.childImageSharp?.gatsbyImageData ?? null
   );
   return (
-    <article>
-      <StyledPostItem to={formatPostLink(langKey, slug)}>
-        <div className="post-meta">
-          <h2>{title}</h2>
-          <p>
-            <strong>{author}</strong>
-          </p>
-          <p>
-            <small>
-              {date ? new Date(date).toLocaleDateString(langKey) : "N/A"}
-            </small>
-          </p>
-        </div>
-        <div className="post-preview">
-          <p>{excerpt}</p>
-        </div>
-        <div className="post-image">
-          {featuredImg && (
-            <GatsbyImage alt={title ?? slug} image={featuredImg} />
-          )}
-        </div>
-        <div className="time">
-          <p>{minutesToRead} {t("readingTime")}</p>
-        </div>
-      </StyledPostItem>
-    </article>
+    <React.Fragment>
+      <hr />
+      <article>
+        <StyledPostItem to={formatPostLink(langKey, slug)}>
+          <div className="post-meta">
+            <h2>{title}</h2>
+            <p>
+              <strong>{author}</strong>
+            </p>
+            <p>
+              <small>
+                {date ? new Date(date).toLocaleDateString(langKey) : "N/A"}
+              </small>
+            </p>
+          </div>
+          <div className="post-preview">
+            <p>{excerpt}</p>
+          </div>
+          <div className="post-image">
+            {featuredImg && (
+              <GatsbyImage alt={title ?? slug} image={featuredImg} />
+            )}
+          </div>
+          <div className="time">
+            <p>{minutesToRead ?? 0} {t("readingTime")}</p>
+          </div>
+        </StyledPostItem>
+      </article>
+    </React.Fragment>
   );
 }

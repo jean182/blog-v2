@@ -2,6 +2,6 @@ export interface IPostItemProps
   extends Omit<Queries.Frontmatter, "slug" | "description"> {
   excerpt: string | null;
   langKey: string;
-  minutesToRead: number;
+  minutesToRead?: number;
   slug: string;
 }

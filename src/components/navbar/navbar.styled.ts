@@ -55,8 +55,7 @@ export const StyledNavbar = styled.nav`
     display: block;
     white-space: nowrap;
     text-decoration: none;
-    background: 0 0;
-    border: 0;
+    width: 100%;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
   }
 `;

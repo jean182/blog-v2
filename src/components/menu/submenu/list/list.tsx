@@ -157,7 +157,7 @@ export default function List({
   };
 
   return (
-    <div hidden={!isExpanded} ref={listRef} style={{ opacity: !isExpanded ? "0" : "1", transition: "all 1s", visibility: !isExpanded ? "hidden" : "visible" }} className="submenu" {...listProps}>
+    <div hidden={!isExpanded} ref={listRef} style={{ opacity: !isExpanded ? "0" : "1", visibility: !isExpanded ? "hidden" : "visible" }} className="submenu" {...listProps}>
       {children}
     </div>
   );

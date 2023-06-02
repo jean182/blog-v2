@@ -7,6 +7,7 @@ export const StyledFooter = styled.footer`
   font-size: 14px;
   font-weight: 300;
   padding: 0.5rem 0;
+  margin-top: auto;
 
   ${(p) => p.theme.breakpoints.down("md")} {
     flex-direction: column;

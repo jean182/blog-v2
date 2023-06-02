@@ -14,10 +14,7 @@ const submenuStyles = css`
     list-style: none;
     background-clip: padding-box;
     border: 1px solid white;
-
-    &[aria-hidden="false"] {
-      margin-top: 0.125em;
-    }
+    margin-top: 0.2em;
 
     ${(p) => p.theme.breakpoints.up("md")} {
       position: absolute;
@@ -92,8 +89,6 @@ const sharedAnchorStyles = css`
       left: 8px;
       position: absolute;
       right: 8px;
-      transition: left 0.267s cubic-bezier(0.1, 0.25, 0.75, 0.9) 0s,
-        right 0.267s cubic-bezier(0.1, 0.25, 0.75, 0.9) 0s;
     }
 
     &:after {

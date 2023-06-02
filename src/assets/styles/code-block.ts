@@ -6,13 +6,16 @@ const codeColors = css`
     --code-light-text: #fff;
     --css-background: #264de4;
     --graphql-background: #e10098;
-    --highlight-background: #023751;
+    --highlight-background: #168274;
     --highlight-border: #029bce;
     --js-background: #f7df1e;
     --md-background: #f9ac00;
     --ts-background: #007acc;
     --ruby-background: #cc0000;
     --vue-background: #42b883;
+  }
+  .dark, .contrast {
+    --highlight-background: #fff9e0;
   }
 `;
 
