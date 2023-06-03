@@ -2,7 +2,8 @@ import { Link } from "@components/link";
 import styled from "styled-components";
 
 export const BreadcrumbStyled = styled.nav`
-  padding: 2rem 0 0 0;
+  padding: 1rem 0 0 0;
+  color: ${(p) => p.theme.semanticColors.link};
 
   ol {
     margin: 0;
@@ -12,7 +13,7 @@ export const BreadcrumbStyled = styled.nav`
 `;
 
 export const History = styled(Link)`
-  color: ${(p) => p.theme.semanticColors.primaryButtonBackground};
+  color: ${(p) => p.theme.semanticColors.link};
   font-family: 'Open Sans', sans-serif;
   box-shadow: none;
   &[aria-current="page"] {
@@ -23,7 +24,6 @@ export const History = styled(Link)`
 
 export const BreadcrumbItem = styled.li`
   display: inline;
-  color: ${(p) => p.theme.semanticColors.primaryButtonBackground};
 
   & + &:before {
     display: inline-block;

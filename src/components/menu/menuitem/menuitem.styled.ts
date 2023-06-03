@@ -89,6 +89,8 @@ const sharedAnchorStyles = css`
       left: 8px;
       position: absolute;
       right: 8px;
+      transition: left 0.267s cubic-bezier(0.1, 0.25, 0.75, 0.9) 0s,
+        right 0.267s cubic-bezier(0.1, 0.25, 0.75, 0.9) 0s;
     }
 
     &:after {

@@ -24,5 +24,9 @@ export const container = css`
       padding-right: 0;
       padding-left: 0;
     }
+
+    main > & {
+      padding-top: 60px;
+    }
   }
 `;
