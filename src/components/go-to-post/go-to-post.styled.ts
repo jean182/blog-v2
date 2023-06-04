@@ -3,11 +3,6 @@ import styled from "styled-components";
 export const StyledGoToPost = styled.nav`
   padding: 0.5rem 0;
 
-  p,
-  a {
-    padding: 0.5rem;
-  }
-
   .previous {
     grid-area: prev;
     justify-content: start;

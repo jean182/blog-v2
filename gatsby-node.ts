@@ -2,6 +2,7 @@ import { CreatePagesResult } from "@shared/interfaces";
 import {
   CreateNodeArgs,
   CreatePagesArgs,
+  CreatePageArgs,
   CreateSchemaCustomizationArgs,
   CreateWebpackConfigArgs,
 } from "gatsby";
@@ -315,4 +316,20 @@ exports.createPages = async ({
   const createNodeByLang = createNodeByLangCallback(translationsByDirectory);
   const queries = Object.keys(supportedLanguages).map(createNodeByLang);
   await Promise.all(queries);
+};
+
+exports.onCreatePage = async ({ page, actions }: CreatePageArgs) => {
+  const { createPage, deletePage } = actions;
+
+  if (page.path.match(/^\/404\/$/)) {
+    const oldPage = { ...page };
+
+    page.context = {
+      isNotFoundPage: true,
+    };
+
+    // Recreate the modified page
+    deletePage(oldPage);
+    createPage(page);
+  }
 };

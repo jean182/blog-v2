@@ -1,5 +1,8 @@
 import { IContactKeys } from "@shared/interfaces";
+import { DateTime } from "luxon";
 import supportedLanguages from "../../../i18n";
+
+export { DateUtils } from "./date";
 
 export const codeToLanguage = (code: string) =>
   supportedLanguages[code as keyof typeof supportedLanguages].replace(

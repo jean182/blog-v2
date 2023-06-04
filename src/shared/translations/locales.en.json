@@ -27,8 +27,9 @@
       "copyright": "All Rights Reserved"
     },
     "post": {
-      "readingTime": "min read",
-      "publishedAt": "Posted on"
+      "readingTime": "read",
+      "publishedAt": "Posted on",
+      "postedAgo": "Posted"
     },
     "translations": {
       "translationAvailable": "Available in",

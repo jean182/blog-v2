@@ -6,6 +6,7 @@ export type TransformLinkFn = (
 ) => IBreadcrumbItem[];
 
 export type IBreadcrumbProps = {
+  isNotFoundPage?: boolean;
   pathname: string;
 };
 

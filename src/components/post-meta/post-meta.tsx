@@ -1,11 +1,12 @@
+import { DateUtils } from "@shared/formatting";
 import { useTranslations } from "@shared/hooks";
 import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 import { IPostMetaProps } from "./post-meta.interfaces";
 import {
-    StyledMetaContent,
-    StyledPostMetaImageContainer,
-    StyledPostMetaWrapper,
+  StyledMetaContent,
+  StyledPostMetaImageContainer,
+  StyledPostMetaWrapper,
 } from "./post-meta.styled";
 
 export default function PostMeta({
@@ -27,23 +28,16 @@ export default function PostMeta({
           <div>{author}</div>
         </div>
         <div className="meta">
-          <div className="reading-time">
-            {minutesToRead}{" "}{t("readingTime")}
-          </div>
-          <div className="divider">
-            {"·"}
-          </div>
-          <div className="date">
-            {t("publishedAt")?.concat(" ")}
+          <small className="reading-time">
+            {DateUtils.minutesRead(minutesToRead, langKey)} {t("readingTime")}
+          </small>
+          <div className="divider">{"·"}</div>
+          <small className="date">
             {date
-              ? new Date(date).toLocaleDateString(langKey, {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })
+              ? DateUtils.formatPostDate(date, langKey, t("postedAgo"))
               : "N/A"}
             {"."}
-          </div>
+          </small>
         </div>
       </StyledMetaContent>
     </StyledPostMetaWrapper>

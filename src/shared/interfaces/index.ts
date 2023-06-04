@@ -20,6 +20,7 @@ export type PostsPageContext = {
 export type PostPageContext = {
   langKey: string;
   next: Queries.Mdx | null;
+  notFoundPage?: boolean;
   previous: Queries.Mdx | null;
   translations: string[];
 };
