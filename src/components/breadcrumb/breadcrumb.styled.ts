@@ -5,6 +5,10 @@ export const BreadcrumbStyled = styled.nav`
   padding: 1rem 0 0 0;
   color: ${(p) => p.theme.semanticColors.link};
 
+  ${(p) => p.theme.breakpoints.down("md")} {
+    padding: 2rem 0 0 0;
+  }
+
   ol {
     margin: 0;
     padding-left: 0;

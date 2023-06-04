@@ -25,8 +25,9 @@
       "submit": "Suscribirse"
     },
     "post": {
-      "readingTime": "min de lectura",
-      "publishedAt": "Publicado el"
+      "readingTime": "de lectura",
+      "publishedAt": "Publicado el",
+      "postedAgo": "Publicado hace"
     },
     "footer": {
       "copyright": "Todos los derechos reservados"

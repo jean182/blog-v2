@@ -15,10 +15,13 @@ export default function Layout({
   data,
   location,
   pageContext,
-}: PageProps<Queries.HomePageQuery, { langKey?: string }>) {
+}: PageProps<
+  Queries.HomePageQuery,
+  { langKey?: string; isNotFoundPage?: boolean }
+>) {
   const { isClient, key } = useIsClient();
   const contact = data?.site?.siteMetadata?.contact;
-  const { langKey } = pageContext;
+  const { langKey, isNotFoundPage } = pageContext;
 
   if (!isClient) return null;
 
@@ -31,7 +34,10 @@ export default function Layout({
             <Header contact={contact ?? null} />
             <main role="main">
               <div className="container">
-                <Breadcrumb pathname={location.pathname} />
+                <Breadcrumb
+                  pathname={location.pathname}
+                  isNotFoundPage={isNotFoundPage}
+                />
                 {children}
               </div>
             </main>

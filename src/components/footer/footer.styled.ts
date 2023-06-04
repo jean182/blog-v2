@@ -11,7 +11,7 @@ export const StyledFooter = styled.footer`
 
   ${(p) => p.theme.breakpoints.down("md")} {
     flex-direction: column;
-    padding: 0.5rem 1rem;
+    padding: 0rem 1rem;
   }
 
   p,

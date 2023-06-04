@@ -1,4 +1,4 @@
-import { formatPostLink } from "@shared/formatting";
+import { DateUtils, formatPostLink } from "@shared/formatting";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as React from "react";
 import { IPostItemProps } from "./post-item.interfaces";
@@ -31,7 +31,9 @@ export default function PostItem({
             </p>
             <p>
               <small>
-                {date ? new Date(date).toLocaleDateString(langKey) : "N/A"}
+                {date
+                  ? DateUtils.formatPostDate(date, langKey, t("postedAgo"))
+                  : "N/A"}
               </small>
             </p>
           </div>
@@ -43,9 +45,14 @@ export default function PostItem({
               <GatsbyImage alt={title ?? slug} image={featuredImg} />
             )}
           </div>
-          <div className="time">
-            <p>{minutesToRead ?? 0} {t("readingTime")}</p>
-          </div>
+          {typeof minutesToRead === "number" && (
+            <div className="time">
+              <small>
+                {DateUtils.minutesRead(minutesToRead, langKey)}{" "}
+                {t("readingTime")}
+              </small>
+            </div>
+          )}
         </StyledPostItem>
       </article>
     </React.Fragment>

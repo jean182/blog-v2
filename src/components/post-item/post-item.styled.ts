@@ -11,7 +11,7 @@ export const StyledPostItem = styled(Link)`
     "time time time";
   color: inherit;
   text-decoration: none;
-  padding: 1.5em 0;
+  padding: 1em 0;
   border-radius: 0.4rem;
 
   ${(p) => p.theme.breakpoints.down("md")} {
@@ -81,7 +81,7 @@ export const StyledPostItem = styled(Link)`
     line-height: 1.09;
     font-size: 1.625rem;
     letter-spacing: -0.7px;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
     color: ${(p) => p.theme.semanticColors.bodySubtext};
     ${(p) => p.theme.breakpoints.down("md")} {
       font-size: 1.2rem;
