@@ -5,6 +5,9 @@ import {
   UnitValue,
 } from "./breakpoints.interfaces";
 
+/**
+ * @description A utility class for breakpoints
+ * */
 export default class BreakpointUtils implements IBreakpoints {
   private step;
   private unit;

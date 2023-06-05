@@ -7,6 +7,10 @@ import {
   StringStoreSchema,
 } from "./language-context.interfaces";
 
+/**
+ * LanguageContext is a React Context that provides the current language
+ * and the string modules.
+ *  */
 export const LanguageContext = React.createContext<ILanguageContext>({
   store: {
     currentLocale: "en",
@@ -24,6 +28,10 @@ const setStrings = (
   return acc;
 };
 
+/**
+ * AppLanguageProvider is a React Context Provider that provides the current language
+ * and the string modules.
+ * */
 export function AppLanguageProvider({
   langKey,
   children,
@@ -59,7 +67,6 @@ export function AppLanguageProvider({
       setMapInStore(stringModule);
     });
   }
-
 
   React.useEffect(() => {
     setStore({

@@ -16,11 +16,19 @@ declare global {
   }
 }
 
+/**
+ * ThemeContext is a React Context that provides the current theme
+ * and the setTheme function to change the theme.
+ * */
 export const ThemeContext = React.createContext<IThemeContext>({
   theme: isBrowser() ? window?.__theme : "light",
   setTheme: () => {},
 });
 
+/**
+ * AppThemeProvider is a React Context Provider that provides the current theme
+ * and the setTheme function to change the theme.
+ * */
 export function AppThemeProvider({ children }: IThemeContextProviderProps) {
   const initialValue = isBrowser() ? window?.__theme : "light";
   const [theme, setTheme] = React.useState(initialValue);

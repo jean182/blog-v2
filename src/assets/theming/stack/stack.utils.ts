@@ -5,6 +5,9 @@ import {
   IStackRaw,
 } from "./stack.interfaces";
 
+/**
+ * @description A utility class for generating a stack
+ * */
 export default class Stack implements IStack {
   private base = 0;
   private above: number;
@@ -21,6 +24,9 @@ export default class Stack implements IStack {
     this.values = this.generateParsedStack();
   }
 
+  /**
+   * @description Generates a raw stack object
+   * */
   private generateRawStack(): IStackRaw {
     const { above, base, below } = this;
     const backdrop = base + below;
@@ -37,6 +43,9 @@ export default class Stack implements IStack {
     };
   }
 
+  /**
+   * @description Generates a parsed stack object
+   * */
   private generateParsedStack = (): IStackParsed =>
     this.toKeys().reduce<IStackParsed>(
       (obj, key) => ({
@@ -46,8 +55,14 @@ export default class Stack implements IStack {
       {} as IStackParsed
     );
 
+  /**
+   * @description Converts the raw stack object to an array of keys
+   * */
   private toKeys = () => Object.keys(this.rawValues) as IStackKeys[];
 
+  /**
+   * @description Converts a stack key to a css variable name
+   * */
   private toCssVarName = (name: string) =>
     "--".concat(this.varNameOverride ?? "zindex", "-", name);
 

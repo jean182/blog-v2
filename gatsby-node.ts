@@ -71,6 +71,12 @@ const createPosts =
     }
   };
 
+/**
+ * Create non MDX pages based on the props received.
+ * @param createPage - The createPage Fn.
+ * @param props - The props to use.
+ * @returns A callback function that creates the page.
+ * */
 const createNonMdxPage = (
   createPage: CreatePagesArgs["actions"]["createPage"],
   {
@@ -93,8 +99,6 @@ const createNonMdxPage = (
 
 /**
  * Creates home and post list pages based on the language key received.
- *
- *
  * @param createPage - The createPage Fn.
  * @param langKey - The language key.
  * @returns A callback function the creates the home and posts page.

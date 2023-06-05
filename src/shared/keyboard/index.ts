@@ -9,9 +9,16 @@ export enum KeyboardEventCodes {
 }
 
 /**
- * Utilities for Keyboard events
- */
+ * Utility class for keyboard events
+ * @remarks This class is used to handle keyboard events in the application.
+ * */
 export default class KeyboardUtils {
+  /**
+   * @description Checks if the key code matches the event
+   * @param key - The key to check
+   * @param event - The event to check
+   * @returns True if the key code matches the event, false otherwise
+   * */
   private static doesKeyCodeMatchEvent<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent,
     event: KeyboardEventCodes
@@ -21,9 +28,10 @@ export default class KeyboardUtils {
   }
 
   /**
-   * Return true if the given key is the enter key.
-   * @param key
-   */
+   * @description Checks if the key code is the enter key
+   * @param key - The key to check
+   * @returns True if the key code is the enter key, false otherwise
+   * */
   public static isEnterPressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
@@ -31,9 +39,10 @@ export default class KeyboardUtils {
   }
 
   /**
-   * Return true if the given key is the space key.
-   * @param key
-   */
+   * @description Checks if the key code is the space key
+   * @param key - The key to check
+   * @returns True if the key code is the space key, false otherwise
+   * */
   public static isSpacePressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
@@ -41,9 +50,10 @@ export default class KeyboardUtils {
   }
 
   /**
-   * Return true if the given key is the tab key.
-   * @param key
-   */
+   * @description Checks if the key code is the tab key
+   * @param key - The key to check
+   * @returns True if the key code is the tab key, false otherwise
+   * */
   public static isTabPressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
@@ -51,9 +61,10 @@ export default class KeyboardUtils {
   }
 
   /**
-   * Returns true if an action key (space or enter) is pressed
-   * @param key
-   */
+   * @description Checks if the key code is an action key (enter or space)
+   * @param key - The key to check
+   * @returns True if the key code is an action key, false otherwise
+   * */
   public static isActionKeyPressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
@@ -61,10 +72,12 @@ export default class KeyboardUtils {
       KeyboardUtils.isSpacePressed(key) || KeyboardUtils.isEnterPressed(key)
     );
   }
+
   /**
-   * Return true if the given key is the esacpe key.
-   * @param key
-   */
+   * @description Checks if the key code is the escape key
+   * @param key - The key to check
+   * @returns True if the key code is the escape key, false otherwise
+   * */
   public static isEscapePressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
@@ -72,9 +85,10 @@ export default class KeyboardUtils {
   }
 
   /**
-   * Return true if the given key is the up key.
-   * @param key
-   */
+   * @description Checks if the key code is the up key
+   * @param key - The key to check
+   * @returns True if the key code is the up key, false otherwise
+   * */
   public static isUpPressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
@@ -82,15 +96,21 @@ export default class KeyboardUtils {
   }
 
   /**
-   * Return true if the given key is the down key.
-   * @param key
-   */
+   * @description Checks if the key code is the down key
+   * @param key - The key to check
+   * @returns True if the key code is the down key, false otherwise
+   * */
   public static isDownPressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
     return KeyboardUtils.doesKeyCodeMatchEvent(key, KeyboardEventCodes.Down);
   }
 
+  /**
+   * @description Checks if the key code is the ctrl or command key
+   * @param key - The key to check
+   * @returns True if the key code is the ctrl or command key, false otherwise
+   * */
   public static isCtrlOrCommandPressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {
@@ -98,9 +118,10 @@ export default class KeyboardUtils {
   }
 
   /**
-   * Return true if ctrl + s or cmd + s is pressed
-   * @param key
-   */
+   * @description Checks if the key code is the ctrl + s or command + s key
+   * @param key - The key to check
+   * @returns True if the key code is the ctrl + s or command + s key, false otherwise
+   * */
   public static isCtrlSavePressed<T = HTMLElement>(
     key: React.KeyboardEvent<T> | KeyboardEvent
   ): boolean {

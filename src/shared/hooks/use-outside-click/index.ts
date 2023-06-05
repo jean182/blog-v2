@@ -2,11 +2,10 @@ import React from "react";
 import { CustomizedMouseEvent } from "@shared/interfaces";
 
 /**
- * Hook that handles outside click event of the passed refs
- *
- * @param refs array of refs
- * @param handler a handler function to be called when clicked outside
- */
+ * Hook that runs a callback when a click occurs outside of the passed references
+ * @param refs - Refs to the elements that should be ignored
+ * @param handler - Callback to run when a click occurs outside of the passed ref
+ * */
 export default function useOutsideClick(
   refs: Array<React.RefObject<unknown>>,
   handler?: () => void | ((arg: unknown) => void)
