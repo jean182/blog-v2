@@ -8,6 +8,12 @@
     "common": {
       "appName": "Loser Kid"
     },
+    "navLinks": {
+      "about": "Acerca de",
+      "contact": "Contacto",
+      "home": "Inicio",
+      "posts": "Publicaciones"
+    },
     "posts": {
       "all": "Todas las publicaciones"
     },

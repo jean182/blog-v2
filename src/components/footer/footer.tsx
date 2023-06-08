@@ -20,6 +20,7 @@ const contactToIcon = (key: IContactKeys) => {
 
 export default function Footer({ contact }: IFooterProps) {
   const { t } = useTranslations("footer");
+  const { t: tNavLinks } = useTranslations("navLinks");
   return (
     <StyledFooter aria-label="Footer" className="container">
       <div className="basic">
@@ -29,11 +30,11 @@ export default function Footer({ contact }: IFooterProps) {
       </div>
       <div className="about-url">
         <Link to="/">
-          <span>Home</span>
+          <span>{tNavLinks("home")}</span>
         </Link>
-        <Link to="/posts">Posts</Link>
-        <Link to="/about">About</Link>
-        <Link to="/about">Contact</Link>
+        <Link to="/posts">{tNavLinks("posts")}</Link>
+        <Link to="/about">{tNavLinks("about")}</Link>
+        <Link to="/about">{tNavLinks("contact")}</Link>
       </div>
       <div className="contact-url">
         {contact &&

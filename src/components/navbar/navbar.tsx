@@ -6,7 +6,7 @@ import { CgEditContrast } from "@react-icons/all-files/cg/CgEditContrast";
 import { CgMoon } from "@react-icons/all-files/cg/CgMoon";
 import { CgSun } from "@react-icons/all-files/cg/CgSun";
 import { IContactKeys, KeyboardUtils, formatContactKey } from "@shared";
-import { useOutsideClick, useTheme } from "@shared/hooks";
+import { useOutsideClick, useTheme, useTranslations } from "@shared/hooks";
 import * as React from "react";
 import { INavbarProps } from "./navbar.interfaces";
 import { StyledNavbar } from "./navbar.styled";
@@ -33,6 +33,7 @@ const RenderThemeIcon = ({ theme }: { theme: ThemeValue }) => {
 
 export default function Navbar({ contact }: INavbarProps) {
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslations("navLinks");
   const [open, setOpen] = React.useState(false);
   const toggleRef = React.useRef<HTMLButtonElement>(null);
   const navRef = React.useRef<HTMLDivElement>(null);
@@ -96,28 +97,29 @@ export default function Navbar({ contact }: INavbarProps) {
         >
           <MenuBar.MenuItem>
             <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/">
-              <span>Home</span>
+              <span>{t("home")}</span>
             </Link>
           </MenuBar.MenuItem>
           <MenuBar.MenuItem>
             <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/posts">
-              <span>Posts</span>
+              <span>{t("posts")}</span>
             </Link>
           </MenuBar.MenuItem>
           <MenuBar.MenuItem ref={link}>
             <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/about">
-              <span>About</span>
+              <span>{t("about")}</span>
             </Link>
           </MenuBar.MenuItem>
         </div>
         <div role="group" className="nav-group" aria-label={labels.actionGroup}>
-          {contact && Object.entries(contact).map(([key, value]) => (
-            <MenuBar.MenuItem key={key}>
-              <Link onKeyDown={onKeyPress} to={value ?? ""} target="_blank">
-                <span>{formatContactKey(key as IContactKeys)}</span>
-              </Link>
-            </MenuBar.MenuItem>
-          ))}
+          {contact &&
+            Object.entries(contact).map(([key, value]) => (
+              <MenuBar.MenuItem key={key}>
+                <Link onKeyDown={onKeyPress} to={value ?? ""} target="_blank">
+                  <span>{formatContactKey(key as IContactKeys)}</span>
+                </Link>
+              </MenuBar.MenuItem>
+            ))}
           <MenuBar.MenuItem>
             {(menuItemProps) => (
               <MenuBar.Submenu>

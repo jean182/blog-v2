@@ -8,7 +8,7 @@ import { useIsClient } from "@shared/hooks";
 import type { PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import * as React from "react";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
 
 export default function Layout({
   children,
@@ -28,7 +28,7 @@ export default function Layout({
   return (
     <React.Fragment key={key}>
       <AppLanguageProvider langKey={langKey}>
-        <ThemeProvider theme={theme}>
+        <StyledComponentsThemeProvider theme={theme}>
           <AppThemeProvider>
             <GlobalStyle />
             <Header contact={contact ?? null} />
@@ -43,7 +43,7 @@ export default function Layout({
             </main>
             <Footer contact={contact ?? null} />
           </AppThemeProvider>
-        </ThemeProvider>
+        </StyledComponentsThemeProvider>
       </AppLanguageProvider>
     </React.Fragment>
   );
