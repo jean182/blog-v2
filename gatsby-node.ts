@@ -107,9 +107,9 @@ const createNonMdxPages =
   (createPage: CreatePagesArgs["actions"]["createPage"]) =>
   (langKey: string) => {
     try {
-      const aboutPath = langKey === "en" ? "/about" : `/${langKey}/about/`;
-      const heroPath = langKey === "en" ? "/" : `/${langKey}/`;
-      const postsPath = langKey === "en" ? "/posts/" : `/${langKey}/posts/`;
+      const aboutPath = langKey === "en" ? "/about" : `/${langKey}/about`;
+      const heroPath = langKey === "en" ? "/" : `/${langKey}`;
+      const postsPath = langKey === "en" ? "/posts" : `/${langKey}/posts`;
 
       // Create home pages
       createNonMdxPage(createPage, {

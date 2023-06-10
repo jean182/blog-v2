@@ -1,4 +1,5 @@
 import { HeadContainer } from "@components/head";
+import { Pagination } from "@components/pagination";
 import { PostItem } from "@components/post-item";
 import { useTranslations } from "@shared/hooks";
 import { PostsPageContext } from "@shared/interfaces";
@@ -6,15 +7,26 @@ import type { HeadFC, PageProps } from "gatsby";
 import { graphql } from "gatsby";
 import * as React from "react";
 
-const PostsPage: React.FC<PageProps<Queries.PostsPageQuery>> = ({ data }) => {
+function paginate(array: Queries.PostsPageQuery["allMdx"]["nodes"], perPage: number, pageNumber: number) {
+  // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
+  return array.slice((pageNumber - 1) * perPage, pageNumber * perPage);
+}
+
+const PostsPage: React.FC<PageProps<Queries.PostsPageQuery>> = ({ data, location }) => {
   const { allMdx } = data;
+  const { nodes }= allMdx;
   const { lang, t } = useTranslations("posts");
+  const params = new URLSearchParams(location.search);
+  const page = params.get("page")
+  const currentPage = page ? Number(page) : 1;
+  const postsPerPage = 4;
+  const numPages = Math.ceil(nodes.length / postsPerPage);
 
   return (
     // Remove h1 and use h2
     <>
       <h1>{t("all")}</h1>
-      {allMdx.nodes.map((node) => {
+      {paginate(nodes, postsPerPage, currentPage).map((node) => {
         const {
           excerpt,
           id,
@@ -37,6 +49,7 @@ const PostsPage: React.FC<PageProps<Queries.PostsPageQuery>> = ({ data }) => {
           />
         );
       })}
+      {numPages > 1 && <Pagination count={numPages} defaultPage={currentPage} />}
     </>
   );
 };

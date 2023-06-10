@@ -14,7 +14,9 @@
       "posts": "Posts"
     },
     "posts": {
-      "all": "All posts"
+      "all": "All posts",
+      "next": "Next",
+      "previous": "Previous"
     },
     "bio": {
       "main": "Built and mantained by",

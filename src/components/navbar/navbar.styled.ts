@@ -17,10 +17,29 @@ export const StyledNavbar = styled.nav`
     z-index: ${(p) => p.theme.stack.values.nav};
   }
 
+  .container-fluid {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: auto;
+    margin-left: auto;
+    ${(p) => p.theme.breakpoints.down("md")} {
+      padding: 0;
+    }
+  }
+
+  & > .container-fluid {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   ${(p) => p.theme.breakpoints.up("md")} {
     flex-wrap: nowrap;
     justify-content: flex-start;
-    padding: 0.5rem 1rem;
   }
 
   ${(p) => p.theme.breakpoints.down("md")} {

@@ -37,6 +37,7 @@ export const cssVars = css`
       0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
     --success-bg: #dff6dd;
     --warning-highlight: #ffb900;
+    --scrollbar-thumb: rgba(0,0,0,0.2);
     // Stack
     ${(p) => p.theme.stack.generateVars()}
   }
@@ -60,6 +61,7 @@ export const cssVars = css`
     --subtext: #d0d0d0;
     --disabled-subtext: #0e0e0e;
     --transparent: transparent;
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
   }
 
   body.contrast {
@@ -81,5 +83,6 @@ export const cssVars = css`
     --subtext: #ffffff;
     --disabled-subtext: #ffffff;
     --transparent: transparent;
+    --scrollbar-thumb: rgba(255, 255, 255, 0.2);
   }
 `;

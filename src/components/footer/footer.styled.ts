@@ -15,11 +15,12 @@ export const StyledFooter = styled.footer`
   }
 
   p,
-  a {
+  a,
+  .footer-btn {
     padding: 0.5rem;
   }
 
-  a {
+  a, .footer-btn {
     text-decoration: inherit;
     color: inherit;
     cursor: auto;
@@ -27,6 +28,14 @@ export const StyledFooter = styled.footer`
     flex-shrink: 0;
     align-items: center;
     margin-right: auto;
+  }
+
+  .footer-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
   }
 
   p {

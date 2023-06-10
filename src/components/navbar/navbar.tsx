@@ -37,6 +37,7 @@ export default function Navbar({ contact }: INavbarProps) {
   const [open, setOpen] = React.useState(false);
   const toggleRef = React.useRef<HTMLButtonElement>(null);
   const navRef = React.useRef<HTMLDivElement>(null);
+
   const link = React.useRef<HTMLDivElement>(null);
   const collapsedClass = open ? "collapse show" : "collapse";
 
@@ -48,7 +49,7 @@ export default function Navbar({ contact }: INavbarProps) {
     setOpen(false);
   };
 
-  useOutsideClick([navRef, toggleRef], close);
+  useOutsideClick([navRef!, toggleRef], close);
 
   const onThemeChange = (theme: ThemeValue) => () => {
     setTheme(theme);
@@ -75,93 +76,99 @@ export default function Navbar({ contact }: INavbarProps) {
 
   return (
     <StyledNavbar className="fixed" ref={navRef}>
-      <Hamburger
-        type="button"
-        className="toggle"
-        ref={toggleRef}
-        aria-expanded={open}
-        open={open}
-        onClick={onToggleClick}
-        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-      />
-      <MenuBar
-        data-testid={MENUBAR}
-        direction={open ? "vertical" : "horizontal"}
-        ariaLabel={labels.menu}
-        className={collapsedClass}
-      >
-        <div
-          role="group"
-          className="nav-group"
-          aria-label={labels.internalGroup}
+      <div className="container-fluid">
+        <Hamburger
+          type="button"
+          className="toggle"
+          ref={toggleRef}
+          aria-expanded={open}
+          open={open}
+          onClick={onToggleClick}
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+        />
+        <MenuBar
+          data-testid={MENUBAR}
+          direction={open ? "vertical" : "horizontal"}
+          ariaLabel={labels.menu}
+          className={collapsedClass}
         >
-          <MenuBar.MenuItem>
-            <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/">
-              <span>{t("home")}</span>
-            </Link>
-          </MenuBar.MenuItem>
-          <MenuBar.MenuItem>
-            <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/posts">
-              <span>{t("posts")}</span>
-            </Link>
-          </MenuBar.MenuItem>
-          <MenuBar.MenuItem ref={link}>
-            <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/about">
-              <span>{t("about")}</span>
-            </Link>
-          </MenuBar.MenuItem>
-        </div>
-        <div role="group" className="nav-group" aria-label={labels.actionGroup}>
-          {contact &&
-            Object.entries(contact).map(([key, value]) => (
-              <MenuBar.MenuItem key={key}>
-                <Link onKeyDown={onKeyPress} to={value ?? ""} target="_blank">
-                  <span>{formatContactKey(key as IContactKeys)}</span>
-                </Link>
-              </MenuBar.MenuItem>
-            ))}
-          <MenuBar.MenuItem>
-            {(menuItemProps) => (
-              <MenuBar.Submenu>
-                <MenuBar.Submenu.Trigger {...menuItemProps}>
-                  <RenderThemeIcon theme={theme} />
-                </MenuBar.Submenu.Trigger>
-                <MenuBar.Submenu.List>
-                  <MenuBar.MenuItem>
-                    <button
-                      type="button"
-                      aria-label="Light"
-                      onClick={onThemeChange("light")}
-                    >
-                      <CgSun />
-                    </button>
-                  </MenuBar.MenuItem>
+          <div
+            role="group"
+            className="nav-group"
+            aria-label={labels.internalGroup}
+          >
+            <MenuBar.MenuItem>
+              <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/">
+                <span>{t("home")}</span>
+              </Link>
+            </MenuBar.MenuItem>
+            <MenuBar.MenuItem>
+              <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/posts">
+                <span>{t("posts")}</span>
+              </Link>
+            </MenuBar.MenuItem>
+            <MenuBar.MenuItem ref={link}>
+              <Link onClick={onLinkClick} onKeyDown={onKeyPress} to="/about">
+                <span>{t("about")}</span>
+              </Link>
+            </MenuBar.MenuItem>
+          </div>
+          <div
+            role="group"
+            className="nav-group"
+            aria-label={labels.actionGroup}
+          >
+            {contact &&
+              Object.entries(contact).map(([key, value]) => (
+                <MenuBar.MenuItem key={key}>
+                  <Link onKeyDown={onKeyPress} to={value ?? ""} target="_blank">
+                    <span>{formatContactKey(key as IContactKeys)}</span>
+                  </Link>
+                </MenuBar.MenuItem>
+              ))}
+            <MenuBar.MenuItem>
+              {(menuItemProps) => (
+                <MenuBar.Submenu>
+                  <MenuBar.Submenu.Trigger {...menuItemProps}>
+                    <RenderThemeIcon theme={theme} />
+                  </MenuBar.Submenu.Trigger>
+                  <MenuBar.Submenu.List>
+                    <MenuBar.MenuItem>
+                      <button
+                        type="button"
+                        aria-label="Light"
+                        onClick={onThemeChange("light")}
+                      >
+                        <CgSun />
+                      </button>
+                    </MenuBar.MenuItem>
 
-                  <MenuBar.MenuItem>
-                    <button
-                      type="button"
-                      aria-label="Dark"
-                      onClick={onThemeChange("dark")}
-                    >
-                      <CgMoon />
-                    </button>
-                  </MenuBar.MenuItem>
+                    <MenuBar.MenuItem>
+                      <button
+                        type="button"
+                        aria-label="Dark"
+                        onClick={onThemeChange("dark")}
+                      >
+                        <CgMoon />
+                      </button>
+                    </MenuBar.MenuItem>
 
-                  <MenuBar.MenuItem>
-                    <button
-                      type="button"
-                      aria-label="Contrast"
-                      onClick={onThemeChange("contrast")}
-                    >
-                      <CgEditContrast />
-                    </button>
-                  </MenuBar.MenuItem>
-                </MenuBar.Submenu.List>
-              </MenuBar.Submenu>
-            )}
-          </MenuBar.MenuItem>
-        </div>
-      </MenuBar>
+                    <MenuBar.MenuItem>
+                      <button
+                        type="button"
+                        aria-label="Contrast"
+                        onClick={onThemeChange("contrast")}
+                      >
+                        <CgEditContrast />
+                      </button>
+                    </MenuBar.MenuItem>
+                  </MenuBar.Submenu.List>
+                </MenuBar.Submenu>
+              )}
+            </MenuBar.MenuItem>
+          </div>
+        </MenuBar>
+      </div>
     </StyledNavbar>
   );
 }

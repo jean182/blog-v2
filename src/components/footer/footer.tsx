@@ -1,4 +1,5 @@
 import { Link } from "@components/link";
+import { Modal } from "@components/modal";
 import { FiGithub } from "@react-icons/all-files/fi/FiGithub";
 import { FiLinkedin } from "@react-icons/all-files/fi/FiLinkedin";
 import { RiStackOverflowFill } from "@react-icons/all-files/ri/RiStackOverflowFill";
@@ -6,6 +7,8 @@ import { formatContactKey, IContactKeys, useTranslations } from "@shared";
 import * as React from "react";
 import { IFooterProps } from "./footer.interfaces";
 import { StyledFooter } from "./footer.styled";
+import { ModalImperativeHandle } from "@components/modal/modal.interfaces";
+import { ContactForm } from "@components/contact-form";
 
 const contactToIcon = (key: IContactKeys) => {
   switch (key) {
@@ -19,6 +22,7 @@ const contactToIcon = (key: IContactKeys) => {
 };
 
 export default function Footer({ contact }: IFooterProps) {
+  const modalRef = React.useRef<ModalImperativeHandle | null>(null);
   const { t } = useTranslations("footer");
   const { t: tNavLinks } = useTranslations("navLinks");
   return (
@@ -29,12 +33,16 @@ export default function Footer({ contact }: IFooterProps) {
         </p>
       </div>
       <div className="about-url">
-        <Link to="/">
-          <span>{tNavLinks("home")}</span>
-        </Link>
+        <Link to="/">{tNavLinks("home")}</Link>
         <Link to="/posts">{tNavLinks("posts")}</Link>
         <Link to="/about">{tNavLinks("about")}</Link>
-        <Link to="/about">{tNavLinks("contact")}</Link>
+        <button
+          type="button"
+          className="footer-btn"
+          onClick={modalRef.current?.openModal}
+        >
+          {tNavLinks("contact")}
+        </button>
       </div>
       <div className="contact-url">
         {contact &&
@@ -54,6 +62,23 @@ export default function Footer({ contact }: IFooterProps) {
               </Link>
             );
           })}
+        <Modal
+          ref={modalRef}
+          id="contact-form"
+          title="Contact Form"
+          footerContent={
+            <>
+              <button type="button" onClick={modalRef.current?.closeModal}>
+                Cancel
+              </button>
+              <button type="submit" form="contact-form">
+                Submit
+              </button>
+            </>
+          }
+        >
+          <ContactForm />
+        </Modal>
       </div>
     </StyledFooter>
   );
