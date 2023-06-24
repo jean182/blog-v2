@@ -23,14 +23,6 @@ export const StyledDialog = styled.div`
   --bs-modal-footer-border-color: #495057;
   --bs-modal-footer-border-width: 1px;
 
-  &.fade:not(.show) {
-    opacity: 0;
-  }
-
-  &.fade {
-    transition: opacity 0.15s linear;
-  }
-
   &.modal {
     position: fixed;
     top: 0;

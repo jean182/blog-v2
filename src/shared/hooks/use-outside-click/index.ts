@@ -1,5 +1,6 @@
 import React from "react";
 import { CustomizedMouseEvent } from "@shared/interfaces";
+import { domUtils } from "@shared/utils";
 
 /**
  * Hook that runs a callback when a click occurs outside of the passed references
@@ -15,11 +16,8 @@ export default function useOutsideClick(
       const elements = refs
         .map((ref) => ref?.current)
         .filter(Boolean) as Node[];
-      if (
-        elements.some(
-          (element) => !element || element.contains(event.target as Node)
-        )
-      ) {
+      const isTargetCallback = domUtils.hasEventTarget(event.target as Node);
+      if (elements.some(isTargetCallback)) {
         // Do nothing if clicking ref's element or descendent elements
         return;
       }

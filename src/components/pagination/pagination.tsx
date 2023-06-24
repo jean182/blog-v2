@@ -1,6 +1,8 @@
 import { usePagination, useTranslations } from "@shared/hooks";
 import { navigate } from "gatsby";
 import * as React from "react";
+import { MdKeyboardArrowLeft } from "@react-icons/all-files/md/MdKeyboardArrowLeft";
+import { MdKeyboardArrowRight } from "@react-icons/all-files/md/MdKeyboardArrowRight";
 import { StyledPagination } from "./pagination.styled";
 
 type PaginationProps = {
@@ -9,13 +11,17 @@ type PaginationProps = {
 };
 
 export default function Pagination({ count, defaultPage }: PaginationProps) {
-  const { t } = useTranslations("posts");
+  const { lang, t } = useTranslations("posts");
 
   const onChange: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     value: number | null
   ) => void = (_event, value) => {
-    navigate(value === 1 ? "/posts" : `?page=${value}`);
+    navigate(
+      value === 1
+        ? `${lang !== "en" ? "/".concat(lang) : ""}/posts`
+        : `?page=${value}`
+    );
   };
   const { items } = usePagination({
     count,
@@ -45,8 +51,13 @@ export default function Pagination({ count, defaultPage }: PaginationProps) {
             );
           } else {
             children = (
-              <button type="button" {...item}>
-                {t(type)}
+              <button type="button" className={type} {...item}>
+                <span className="sr-only">{t(type)}</span>
+                {type === "previous" ? (
+                  <MdKeyboardArrowLeft />
+                ) : (
+                  <MdKeyboardArrowRight />
+                )}
               </button>
             );
           }

@@ -66,7 +66,7 @@ export const StyledModalContent = styled.div`
       --bs-btn-close-disabled-opacity: 0.25;
       --bs-btn-close-white-filter: invert(1) grayscale(100%) brightness(200%);
       .dark & {
-        --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+        filter: var(--bs-btn-close-white-filter);
       }
       box-sizing: content-box;
       width: 1em;
@@ -78,6 +78,15 @@ export const StyledModalContent = styled.div`
       opacity: var(--bs-btn-close-opacity);
       padding: calc(var(--bs-modal-header-padding-y) * .5) calc(var(--bs-modal-header-padding-x) * .5);
       margin: calc(-.5 * var(--bs-modal-header-padding-y)) calc(-.5 * var(--bs-modal-header-padding-x)) calc(-.5 * var(--bs-modal-header-padding-y)) auto;
+      :focus:not(:focus-visible) {
+        outline: 0;
+      }
+      :focus {
+        outline: 0;
+        box-shadow: var(--bs-btn-close-focus-shadow);
+        opacity: var(--bs-btn-close-focus-opacity);
+      }
+}
 }
   }
 

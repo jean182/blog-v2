@@ -5,7 +5,7 @@ import KeyboardUtils from "@shared/keyboard";
 import { ModalProps } from "../modal.interfaces";
 import { labelledBy } from "../modal.utils";
 
-interface BackdropProps extends ModalProps {
+interface ModalContent extends ModalProps {
   children: React.ReactNode;
   closeModal: () => void;
   open: boolean;
@@ -18,23 +18,22 @@ export default function ModalContent({
   footerContent,
   open,
   title,
-}: BackdropProps) {
-  const contentRef = useFocusTrap();
+}: ModalContent) {
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (KeyboardUtils.isEscapePressed(event)) {
       closeModal();
     }
   };
-  useOutsideClick([contentRef], closeModal);
 
   React.useEffect(() => {
-    if (open) btnRef.current?.focus();
+    if (open) {
+      btnRef.current?.focus();
+    };
   }, [open]);
 
   return (
     <StyledModalContent
-      ref={contentRef}
       className="modal-dialog modal-dialog-centered"
       onKeyDown={onKeyDown}
     >
@@ -51,7 +50,7 @@ export default function ModalContent({
             aria-label="Close"
           ></button>
         </div>
-        <div className="modal-body">{children}</div>
+        <div className="modal-body">{open && children}</div>
         {footerContent && (
           <div className="modal-footer">{footerContent}</div>
         )}

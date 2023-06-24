@@ -1,4 +1,5 @@
 import KeyboardUtils from "@shared/keyboard";
+import { domUtils } from "@shared/utils";
 import React from "react";
 
 const FOCUSABLE_ELEMENTS =
@@ -13,9 +14,7 @@ export default function useFocusTrap() {
       ref.current?.querySelectorAll(FOCUSABLE_ELEMENTS) ?? []
     );
     // Array of all the focusable elements in the array.
-    const focusableEls = els.filter(
-      (el) => !el.hasAttribute("disabled")
-    ) as HTMLElement[];
+    const focusableEls = els.filter(domUtils.notDisabled) as HTMLElement[];
     // First focusable element
     const firstFocusableEl = focusableEls[0];
     // Last focusable element

@@ -16,7 +16,8 @@
     "posts": {
       "all": "All posts",
       "next": "Next",
-      "previous": "Previous"
+      "previous": "Previous",
+      "postsCount": "Showing {0} to {1} of {2} posts"
     },
     "bio": {
       "main": "Built and mantained by",

@@ -1,5 +1,8 @@
+import { ContactForm } from "@components/contact-form";
+import { Submit } from "@components/contact-form/submit";
 import { Link } from "@components/link";
 import { Modal } from "@components/modal";
+import { ModalImperativeHandle } from "@components/modal/modal.interfaces";
 import { FiGithub } from "@react-icons/all-files/fi/FiGithub";
 import { FiLinkedin } from "@react-icons/all-files/fi/FiLinkedin";
 import { RiStackOverflowFill } from "@react-icons/all-files/ri/RiStackOverflowFill";
@@ -7,8 +10,6 @@ import { formatContactKey, IContactKeys, useTranslations } from "@shared";
 import * as React from "react";
 import { IFooterProps } from "./footer.interfaces";
 import { StyledFooter } from "./footer.styled";
-import { ModalImperativeHandle } from "@components/modal/modal.interfaces";
-import { ContactForm } from "@components/contact-form";
 
 const contactToIcon = (key: IContactKeys) => {
   switch (key) {
@@ -64,17 +65,10 @@ export default function Footer({ contact }: IFooterProps) {
           })}
         <Modal
           ref={modalRef}
-          id="contact-form"
+          id="contact-dialog"
           title="Contact Form"
           footerContent={
-            <>
-              <button type="button" onClick={modalRef.current?.closeModal}>
-                Cancel
-              </button>
-              <button type="submit" form="contact-form">
-                Submit
-              </button>
-            </>
+            <Submit onClose={() => modalRef.current?.closeModal()} />
           }
         >
           <ContactForm />

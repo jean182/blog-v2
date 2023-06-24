@@ -1,18 +1,18 @@
+import { useFocusTrap, useOutsideClick } from "@shared/hooks";
+import { domUtils } from "@shared/utils";
 import React from "react";
-import { createPortal } from "react-dom";
-import { Dialog } from "./dialog";
-import { ModalContent } from "./content";
-import { ModalImperativeHandle, ModalProps } from "./modal.interfaces";
 import { Backdrop } from "./backdrop";
-
-function scrollbarVisible(element: HTMLElement) {
-  return element.scrollHeight > element.clientHeight;
-}
+import { ModalContent } from "./content";
+import { Dialog } from "./dialog";
+import { ModalImperativeHandle, ModalProps } from "./modal.interfaces";
 
 const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
   ({ id, children, title, footerContent }, ref) => {
     const [open, setOpen] = React.useState(false);
-    const portalRef = React.useRef<HTMLDivElement | null>(null);
+    const bodyRef = React.useRef(document.body);
+    const dialogRef = useFocusTrap();
+    useOutsideClick([dialogRef], () => handleClose);
+
     React.useImperativeHandle(ref, () => ({
       closeModal: () => handleClose(),
       openModal: () => handleOpen(),
@@ -20,13 +20,13 @@ const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
 
     React.useEffect(() => {
       const classes = ["modal-open", "with-scrollbar", "without-scrollbar"];
-      portalRef.current = document.body as HTMLDivElement;
       if (open) {
-        const ifScrollable = scrollbarVisible(portalRef.current);
-        const scrollStyle = ifScrollable ? "with-scrollbar" : "without-scrollbar";
-        portalRef.current?.classList.add("modal-open", scrollStyle);
+        const [modalOpen, withScrollbar, withoutScrollbar] = classes;
+        const ifScrollable = domUtils.isScrollVisible(bodyRef.current);
+        const scrollStyle = ifScrollable ? withScrollbar : withoutScrollbar;
+        bodyRef.current?.classList.add(modalOpen, scrollStyle);
       } else {
-        portalRef.current?.classList.remove(...classes);
+        bodyRef.current?.classList.remove(...classes);
       }
     }, [open]);
 
@@ -40,13 +40,10 @@ const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
 
     return (
       <>
-        <Dialog id={id} show={open}>
+        <Dialog ref={dialogRef} id={id} open={open}>
           <ModalContent
             open={open}
-            closeModal={
-              (ref as React.MutableRefObject<ModalImperativeHandle | null>)
-                ?.current?.closeModal!
-            }
+            closeModal={handleClose}
             id={id}
             title={title}
             footerContent={footerContent}
@@ -54,9 +51,7 @@ const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
             {children}
           </ModalContent>
         </Dialog>
-        {open &&
-          portalRef.current &&
-          createPortal(<Backdrop />, portalRef.current as HTMLElement)}
+        {open && <Backdrop dialogRef={dialogRef} />}
       </>
     );
   }

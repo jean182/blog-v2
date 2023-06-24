@@ -37,8 +37,10 @@ type HandlePaginationItemClick = (
   value: number | null
 ) => void;
 
+/**
+ * This is a custom hook that I wrote to handle pagination. It is based on the Material UI Pagination hook.
+ **/
 export default function usePagination(props: PaginationProps) {
-  // keep default values in sync with @default tags in Pagination.propTypes
   const {
     boundaryCount = 1,
     count = 1,
@@ -51,7 +53,6 @@ export default function usePagination(props: PaginationProps) {
     showFirstButton = false,
     showLastButton = false,
     siblingCount = 1,
-    ...other
   } = props;
 
   const [page, setPageState] = React.useState<number | null>(defaultPage);
@@ -178,6 +179,5 @@ export default function usePagination(props: PaginationProps) {
 
   return {
     items,
-    ...other,
   };
 }

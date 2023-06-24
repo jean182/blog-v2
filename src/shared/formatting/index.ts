@@ -3,6 +3,8 @@ import supportedLanguages from "../../../i18n";
 
 export { DateUtils } from "./date";
 
+export const translationArgsRegex = /\{[0-9]+\}/;
+
 /**
  * @description Formats a language code to a language name
  * @param code - The language code to format

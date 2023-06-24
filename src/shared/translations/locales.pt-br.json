@@ -17,7 +17,8 @@
     "posts": {
       "all": "Todas as publicações",
       "next": "Próxima",
-      "previous": "Anterior"
+      "previous": "Anterior",
+      "postsCount": "Mostrando {0} a {1} de {2} posts"
     },
     "bio": {
       "main": "Criado e mantido por",
