@@ -5,6 +5,7 @@ export type ModalImperativeHandle = {
 
 export interface ModalProps {
   children: React.ReactNode;
+  triggerRef: React.RefObject<HTMLButtonElement>;
   footerContent?: React.ReactNode;
   id: string;
   title: string;

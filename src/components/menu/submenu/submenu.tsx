@@ -50,11 +50,17 @@ const Submenu = ({ children }: ISubMenuProps) => {
     [isExpanded]
   );
 
+  // TODO: Fix outside click!
+  // useOutsideClick(
+  //   listRef,
+  //   close,
+  // );
+
   // Closes the submenu when the user clicks any element that is not inside the list or the trigger.
-  useOutsideClick(
-    [listRef, buttonRef],
-    close
-  );
+  // useOutsideClick(
+  //   [listRef, buttonRef],
+  //   close
+  // );
 
   React.useEffect(() => {
     const items = Array.from(menuItems);

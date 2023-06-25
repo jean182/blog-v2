@@ -24,6 +24,7 @@ const contactToIcon = (key: IContactKeys) => {
 
 export default function Footer({ contact }: IFooterProps) {
   const modalRef = React.useRef<ModalImperativeHandle | null>(null);
+  const triggerRef = React.useRef<HTMLButtonElement | null>(null);
   const { t } = useTranslations("footer");
   const { t: tNavLinks } = useTranslations("navLinks");
   return (
@@ -40,6 +41,7 @@ export default function Footer({ contact }: IFooterProps) {
         <button
           type="button"
           className="footer-btn"
+          ref={triggerRef}
           onClick={modalRef.current?.openModal}
         >
           {tNavLinks("contact")}
@@ -65,6 +67,7 @@ export default function Footer({ contact }: IFooterProps) {
           })}
         <Modal
           ref={modalRef}
+          triggerRef={triggerRef}
           id="contact-dialog"
           title="Contact Form"
           footerContent={

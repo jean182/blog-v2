@@ -7,11 +7,11 @@ import { Dialog } from "./dialog";
 import { ModalImperativeHandle, ModalProps } from "./modal.interfaces";
 
 const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
-  ({ id, children, title, footerContent }, ref) => {
+  ({ id, children, title, footerContent, triggerRef }, ref) => {
     const [open, setOpen] = React.useState(false);
     const bodyRef = React.useRef(document.body);
     const dialogRef = useFocusTrap();
-    useOutsideClick([dialogRef], () => handleClose);
+    const contentRef = React.useRef<HTMLDivElement>(null);
 
     React.useImperativeHandle(ref, () => ({
       closeModal: () => handleClose(),
@@ -36,14 +36,26 @@ const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
 
     const handleClose = () => {
       setOpen(false);
+      triggerRef?.current?.focus();
     };
+
+    const onClickOutside = (event: Event) => {
+      if (!open) {
+        return;
+      }
+      event.preventDefault();
+      handleClose();
+    };
+
+    useOutsideClick(contentRef, onClickOutside);
 
     return (
       <>
-        <Dialog ref={dialogRef} id={id} open={open}>
+        <Dialog ref={dialogRef} handleClose={handleClose} id={id} open={open}>
           <ModalContent
             open={open}
             closeModal={handleClose}
+            ref={contentRef}
             id={id}
             title={title}
             footerContent={footerContent}
