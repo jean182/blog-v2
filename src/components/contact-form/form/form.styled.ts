@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const invalidDefaultStyles = css`
-  border-color: #ea868f;
+  border-color: var(--error-color);
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -19,9 +19,27 @@ const validDefaultStyles = css`
 `
 
 export const StyledForm = styled.form`
+  --valid-color: #198754;
+  --valid-rgb: 25, 135, 84;
+  --error-rgb: 220, 53, 69;
+  --error-color: #dc3545;
+  .dark & {
+    --valid-color: #75b798;
+    --error-color: #ea868f;
+  }
   &.was-validated {
     input:not(:focus):invalid {
       ${invalidDefaultStyles}
+    }
+
+    input:valid:focus {
+      border-color: var(--valid-color);
+      box-shadow: 0 0 0 0.25rem rgba(var(--valid-rgb), .25);
+    }
+
+    input:invalid:focus {
+      border-color: var(--error-color);
+      box-shadow: 0 0 0 0.25rem rgba(var(--error-rgb), .25);
     }
 
     textarea:not(:focus):invalid {

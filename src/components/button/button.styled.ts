@@ -1,73 +1,98 @@
 import styled, { css } from "styled-components";
 
 const sharedButtonStyles = css`
-  border: none;
-  font-family: inherit;
-  padding: 0;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25em 0.75em;
-  min-width: 10ch;
-  min-height: 44px;
-  border-radius: 2px;
-  text-align: center;
-  line-height: 1.1;
-  transition: 220ms all ease-in-out;
+  --btn-padding-x: 0.75rem;
+  --btn-padding-y: 0.375rem;
+  --btn-font-family: "Noto Sans", sans-serif;
+  --btn-font-size: 1rem;
+  --btn-font-weight: 400;
+  --btn-line-height: 1.5;
 
-  @media screen and (-ms-high-contrast: active) {
-    border: 2px solid currentcolor;
+  --btn-color: ${(p) => p.theme.semanticColors.buttonText};
+  --btn-bg: ${(p) => p.theme.semanticColors.buttonBackground};
+  --btn-border-color: ${(p) => p.theme.semanticColors.buttonBorder};
+  --btn-hover-color: ${(p) => p.theme.semanticColors.buttonTextHovered};
+  --btn-hover-bg: ${(p) => p.theme.semanticColors.buttonBackgroundHovered};
+  --btn-hover-border-color: ${(p) => p.theme.semanticColors.buttonBorder};
+  --btn-focus-shadow-rgb: 80, 68, 155;
+  --btn-active-color: #fff;
+  --btn-active-bg: #0a58ca;
+  --btn-active-border-color: #0a53be;
+  --btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --btn-disabled-color: #fff;
+  --btn-disabled-bg: #0d6efd;
+  --btn-disabled-border-color: #0d6efd;
+  --btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--btn-focus-shadow-rgb), 0.5);
+
+  display: inline-block;
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  line-height: var(--btn-line-height);
+  color: var(--btn-color);
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: 1px solid var(--btn-border-color);
+  border-radius: 0.375rem;
+  background-color: var(--btn-bg);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  :focus:not(:focus-visible) {
+    outline: 0;
+  }
+
+  :active {
+    color: var(--btn-active-color);
+    background-color: var(--btn-active-bg);
+    border-color: var(--btn-active-border-color);
+  }
+
+  :hover {
+    color: var(--btn-hover-color);
+    background-color: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border-color);
+  }
+
+  :focus-visible {
+    color: var(--btn-hover-color);
+    background-color: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border-color);
+    outline: 0;
+    box-shadow: var(--btn-focus-box-shadow);
+  }
+
+  .contrast & {
+    --btn-focus-shadow-rgb: 255, 255, 1;
   }
 `;
 
 const primaryButtonStyles = css`
-  background-color: ${(p) => p.theme.semanticColors.primaryButtonBackground};
-  color: ${(p) => p.theme.semanticColors.primaryButtonText};
-  border: 1px solid ${(p) => p.theme.semanticColors.primaryButtonBorder};
+  --btn-color: ${(p) => p.theme.semanticColors.primaryButtonText};
+  --btn-bg: ${(p) => p.theme.semanticColors.primaryButtonBackground};
+  --btn-border-color: ${(p) => p.theme.semanticColors.primaryButtonBorder};
+  --btn-hover-color: ${(p) => p.theme.semanticColors.primaryButtonTextHovered};
+  --btn-hover-bg: ${(p) =>
+    p.theme.semanticColors.primaryButtonBackgroundHovered};
+  --btn-hover-border-color: ${(p) =>
+    p.theme.semanticColors.primaryButtonBorder};
+  --btn-focus-shadow-rgb: 80, 68, 155;
+  --btn-active-color: #fff;
+  --btn-active-bg: #0a58ca;
+  --btn-active-border-color: #0a53be;
+  --btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --btn-disabled-color: #fff;
+  --btn-disabled-bg: #0d6efd;
+  --btn-disabled-border-color: #0d6efd;
 
-  &:hover, &:active {
-    background-color: ${(p) => p.theme.semanticColors.primaryButtonBackgroundHovered};
-  }
-
-  &:focus {
-    outline-style: solid;
-    outline-color: transparent;
-    box-shadow: 0 0 0 2px ${(p) => p.theme.semanticColors.primaryButtonBorder};
-  }
-
-  &:focus:after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    border: 1px solid transparent;
-    outline: rgb(96, 94, 92) solid 1px;
-    z-index: 1;
-  }
-`;
-
-const buttonStyles = css`
-  background-color: ${(p) => p.theme.semanticColors.buttonBackground};
-  color: ${(p) => p.theme.semanticColors.buttonText};
-  border: 1px solid ${(p) => p.theme.semanticColors.buttonBorder};
-
-  &:hover, &:active {
-    background-color: ${(p) => p.theme.semanticColors.buttonBackgroundHovered};
-  }
-
-  &:focus {
-    outline-style: solid;
-    outline-color: transparent;
-    box-shadow: 0 0 0 2px ${(p) => p.theme.semanticColors.buttonBorder};
-  }
-
-  &:focus:after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    border: 1px solid transparent;
-    outline: rgb(96, 94, 92) solid 1px;
-    z-index: 1;
+  .dark & {
+    --btn-focus-shadow-rgb: 245, 182, 214;
   }
 `;
 
@@ -75,5 +100,5 @@ export const StyledButton = styled.button<{
   primary?: boolean;
 }>`
   ${sharedButtonStyles}
-  ${p => p.primary ? primaryButtonStyles : buttonStyles}
+  ${(p) => p.primary && primaryButtonStyles}
 `;
