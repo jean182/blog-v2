@@ -49,7 +49,7 @@ export default function Navbar({ contact }: INavbarProps) {
     setOpen(false);
   };
 
-  useOutsideClick([navRef!, toggleRef], close);
+  useOutsideClick(navRef, close);
 
   const onThemeChange = (theme: ThemeValue) => () => {
     setTheme(theme);

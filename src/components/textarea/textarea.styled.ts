@@ -40,6 +40,6 @@ margin-bottom: 1rem;
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
-    color: var(--error-color);
+    color: ${p => p.theme.semanticColors.errorText};
   }
 `;

@@ -1,7 +1,8 @@
 import { Input } from "@components/input";
+import { TextArea } from "@components/textarea";
+import { useTranslations } from "@shared/hooks";
 import React from "react";
 import { StyledForm } from "./form.styled";
-import { TextArea } from "@components/textarea";
 
 type FormInputProps = {
   name: string;
@@ -18,6 +19,7 @@ type FormProps = FormInputProps & FormAdditionalProps;
 type FormKeysProps = keyof FormProps;
 
 export default function ContactForm() {
+  const { t } = useTranslations("contact");
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     try {
       event.preventDefault();
@@ -69,10 +71,10 @@ export default function ContactForm() {
       noValidate
     >
       <input type="hidden" name="form-name" value="contact" />
-      <Input label="Name:" id="name" name="name" required />
-      <Input label="Email" id="email" type="email" name="email" required />
+      <Input label={t("name")} id="name" name="name" required />
+      <Input label={t("email")} id="email" type="email" name="email" required />
       <TextArea
-        label="Message"
+        label={t("message")}
         className="textarea"
         id="message"
         name="message"

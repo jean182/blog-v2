@@ -45,6 +45,14 @@
       "readOriginal": "Read the original",
       "improveTranslation": "Improve this translation",
       "viewAll": "View all translated posts"
+    },
+    "contact": {
+      "title": "Contact Form",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send",
+      "cancel": "Cancel"
     }
   }
 }

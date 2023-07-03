@@ -1,3 +1,4 @@
+
 import { css } from "styled-components";
 
 export const cssVars = css`
@@ -20,22 +21,23 @@ export const cssVars = css`
     --subtext: #373737;
     --disabled-subtext: #c8c8c8;
     --transparent: transparent;
-    --error-text: #a4262c;
+    --error-text: #dc3545;
     --warning-text: #323130;
     --message-link: #005a9e;
     --message-link-hovered: #004578;
     --info-icon: #605e5c;
     --error-icon: #a80000;
+    --error-bg: 220, 53, 69;
     --blocking-icon: #fde7e9;
     --warning-icon: #797775;
     --severe-warning-icon: #d83b01;
-    --success-text: #107c10;
+    --success-text: #198754;
     --info-bg: #f3f2f1;
     --warning-bg: #fff4ce;
     --severe-warning-bg: #fed9cc;
     --card-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132),
       0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
-    --success-bg: #dff6dd;
+    --success-bg: 25, 135, 84;
     --warning-highlight: #ffb900;
     --scrollbar-thumb: rgba(0,0,0,0.2);
     // Stack
@@ -62,6 +64,8 @@ export const cssVars = css`
     --disabled-subtext: #0e0e0e;
     --transparent: transparent;
     --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+    --success-text: #75b798;
+    --error-text: #ea868f;
   }
 
   body.contrast {

@@ -31,6 +31,7 @@ export default function Trigger({
   } = context;
 
   const { direction } = menubarContext;
+  console.log(isExpanded, "isExpanded")
 
   const keyDown: React.KeyboardEventHandler<HTMLButtonElement> = (ev) => {
     switch (ev.code) {
@@ -90,9 +91,12 @@ export default function Trigger({
     "aria-controls": listId,
     "data-menubar-submenu-trigger": "",
     onClick: (ev) => {
+      console.log("ENTRO")
       if (isExpanded) {
+        console.log("isExpanded")
         close();
       } else {
+        console.log("!isExpanded")
         open();
       }
       onClick?.(ev);

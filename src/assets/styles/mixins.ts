@@ -1,10 +1,9 @@
 import { css } from "styled-components";
 
 export const navFocusedStyles = css`
-  :focus,
-  :focus-visible,
-  :focus-within {
+  :focus:not(:focus-visible) {
     outline: 1px solid ${(p) => p.theme.semanticColors.focusBorder};
+    z-index: 1;
 
     ::after {
       content: attr(data-content);

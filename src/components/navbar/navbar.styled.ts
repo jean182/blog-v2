@@ -18,11 +18,13 @@ export const StyledNavbar = styled.nav`
   }
 
   .container-fluid {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
+    --gutter-x: 1.5rem;
+    --gutter-y: 0.5rem;
     width: 100%;
-    padding-right: calc(var(--bs-gutter-x) * .5);
-    padding-left: calc(var(--bs-gutter-x) * .5);
+    padding-right: calc(var(--gutter-x) * .5);
+    padding-left: calc(var(--gutter-x) * .5);
+    padding-top: calc(var(--gutter-y) * .5);
+    padding-bottom: calc(var(--gutter-y) * .5);
     margin-right: auto;
     margin-left: auto;
     ${(p) => p.theme.breakpoints.down("md")} {

@@ -1,5 +1,6 @@
-import { SubmenuContext, SUBMENU_INITIAL_STATE } from "@components/menu";
-import { useOutsideClick } from "@shared/hooks";
+import { SUBMENU_INITIAL_STATE, SubmenuContext } from "@components/menu";
+import { CustomizedMouseEvent } from "@shared/interfaces";
+import { domUtils } from "@shared/utils";
 import { uniqueId } from "lodash";
 import * as React from "react";
 import { SubMenuList } from "./list";
@@ -42,7 +43,9 @@ const Submenu = ({ children }: ISubMenuProps) => {
 
   const close = React.useCallback(
     (focusButton = false) => {
+      console.log("close");
       if (isExpanded) {
+        console.log("close if");
         focusButton && buttonRef.current?.focus();
         dispatch({ type: SubMenuActionType.Collapse });
       }
@@ -50,17 +53,25 @@ const Submenu = ({ children }: ISubMenuProps) => {
     [isExpanded]
   );
 
-  // TODO: Fix outside click!
-  // useOutsideClick(
-  //   listRef,
-  //   close,
-  // );
+  React.useEffect(() => {
+    const listener: (event: CustomizedMouseEvent) => void = (event) => {
+      const elements = [buttonRef, listRef]
+        .map((ref) => ref?.current)
+        .filter(Boolean) as Node[];
+      const isTargetCallback = domUtils.hasEventTarget(event.target as Node);
+      if (elements.some(isTargetCallback)) {
+        return;
+      }
 
-  // Closes the submenu when the user clicks any element that is not inside the list or the trigger.
-  // useOutsideClick(
-  //   [listRef, buttonRef],
-  //   close
-  // );
+      close();
+    };
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [buttonRef, listRef, close]);
 
   React.useEffect(() => {
     const items = Array.from(menuItems);

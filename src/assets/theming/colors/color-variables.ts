@@ -97,7 +97,7 @@ const colorVariables: ISemanticColors = {
   severeWarningIcon: "var(--severe-warning-icon)",
   successIcon: "var(--success-text",
   infoBackground: "var(--info-bg)",
-  errorBackground: "var(blocking-icon)",
+  errorBackground: "var(error-bg)",
   blockingBackground: "var(blocking-icon)",
   warningBackground: "var(--warning-bg)",
   severeWarningBackground: "var(--severe-warning-bg)",

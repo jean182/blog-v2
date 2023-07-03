@@ -46,6 +46,14 @@
       "readOriginal": "Lee el original",
       "improveTranslation": "Mejorar esta traducción",
       "viewAll": "Ver todas las publicaciones traducidas"
+    },
+    "contact": {
+      "title": "Formulario de contacto",
+      "name": "Nombre",
+      "email": "Correo Electrónico",
+      "message": "Mensaje",
+      "submit": "Enviar",
+      "cancel": "Cancelar"
     }
   }
 }
