@@ -1,7 +1,7 @@
 import { animated, useSpring } from "@react-spring/web";
 import * as React from "react";
 import { StyledHamburger } from "./hamburger.styled";
-import { IHamburgerProps } from "./hamburger.interfaces";
+import type { IHamburgerProps } from "./hamburger.interfaces";
 
 const Hamburger = React.forwardRef<
   HTMLButtonElement,

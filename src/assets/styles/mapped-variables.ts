@@ -42,6 +42,30 @@ export const cssVars = css`
     --scrollbar-thumb: rgba(0,0,0,0.2);
     // Stack
     ${(p) => p.theme.stack.generateVars()}
+
+    // Modal variables
+    --modal-zindex: 1055;
+    --modal-width: 500px;
+    --modal-padding: 1rem;
+    --modal-margin: 0.5rem;
+    --modal-border-color: rgba(255, 255, 255, 0.15);
+    --modal-border-width: 1px;
+    --modal-border-radius: 0.5rem;
+    --modal-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --modal-inner-border-radius: calc(0.5rem - 1px);
+    --modal-header-padding-x: 1rem;
+    --modal-header-padding-y: 1rem;
+    --modal-header-padding: 1rem 1rem;
+    --modal-header-border-color: #495057;
+    --modal-header-border-width: 1px;
+    --modal-title-line-height: 1.5;
+    --modal-footer-gap: 0.5rem;
+    --modal-footer-bg: ;
+    --modal-footer-border-color: #495057;
+    --modal-footer-border-width: 1px;
+    --backdrop-zindex: 1050;
+    --backdrop-bg: #000;
+    --backdrop-opacity: 0.5;
   }
 
   body.dark {

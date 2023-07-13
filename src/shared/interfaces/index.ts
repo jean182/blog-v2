@@ -1,3 +1,5 @@
+import React from "react";
+
 type ContactUrl = {
   github: string;
   linkedIn: string;
@@ -23,6 +25,15 @@ export type PostPageContext = {
   notFoundPage?: boolean;
   previous: Queries.Mdx | null;
   translations: string[];
+};
+
+export interface ISuggestedPostProps extends Omit<Queries.Frontmatter, "slug"> {
+  slug: string;
+}
+
+export type INavigationProps = {
+  navRef: React.RefObject<HTMLDivElement>;
+  contact: Queries.Maybe<Queries.SiteSiteMetadataContact>;
 };
 
 export type CustomizedMouseEvent<T = HTMLElement> =

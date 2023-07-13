@@ -31,12 +31,11 @@ const RenderThemeIcon = ({ theme }: { theme: ThemeValue }) => {
   }
 };
 
-export default function Navbar({ contact }: INavbarProps) {
+export default function Navbar({ navRef, contact }: INavbarProps) {
   const { theme, setTheme } = useTheme();
   const { t } = useTranslations("navLinks");
   const [open, setOpen] = React.useState(false);
   const toggleRef = React.useRef<HTMLButtonElement>(null);
-  const navRef = React.useRef<HTMLDivElement>(null);
 
   const link = React.useRef<HTMLDivElement>(null);
   const collapsedClass = open ? "collapse show" : "collapse";

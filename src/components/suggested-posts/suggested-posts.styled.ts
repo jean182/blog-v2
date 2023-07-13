@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const StyledSuggestedPosts = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 
   & > article {
@@ -15,10 +15,5 @@ export const StyledSuggestedPosts = styled.div`
   }
   .text {
     padding: 0 20px 20px;
-  }
-
-  & > article:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 2;
   }
 `;

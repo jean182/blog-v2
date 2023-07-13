@@ -1,3 +1,3 @@
-import { IHeaderProps } from "@components/header/header.interfaces";
+import type { INavigationProps } from "@shared/interfaces";
 
-export type INavbarProps = IHeaderProps;
+export type INavbarProps = INavigationProps;

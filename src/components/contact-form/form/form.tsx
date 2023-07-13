@@ -79,7 +79,7 @@ export default function ContactForm() {
         id="message"
         name="message"
         required
-        rows={10}
+        rows={7}
       />
     </StyledForm>
   );

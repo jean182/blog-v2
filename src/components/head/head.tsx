@@ -1,7 +1,7 @@
 import { ErrorBoundary } from "@components/error";
 import React from "react";
 import { Helmet } from "react-helmet";
-import { IHeadProps } from "./head.interfaces";
+import type { IHeadProps } from "./head.interfaces";
 
 export default function HeadContainer({ lang, title }: IHeadProps) {
   return (

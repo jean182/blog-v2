@@ -24,7 +24,7 @@ margin-bottom: 1rem;
     appearance: none;
     border-radius: 0.375rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    min-height: calc(1.5em + 0.75rem + calc(var(--bs-border-width) * 2));
+    min-height: calc(1.5em + 0.75rem + calc(var(--border-width) * 2));
 
     :invalid ~ .invalid-feedback {
       display: block;

@@ -6,9 +6,8 @@ import { ModalImperativeHandle } from "@components/modal/modal.interfaces";
 import { FiGithub } from "@react-icons/all-files/fi/FiGithub";
 import { FiLinkedin } from "@react-icons/all-files/fi/FiLinkedin";
 import { RiStackOverflowFill } from "@react-icons/all-files/ri/RiStackOverflowFill";
-import { formatContactKey, IContactKeys, useTranslations } from "@shared";
+import { formatContactKey, IContactKeys, INavigationProps, useTranslations } from "@shared";
 import * as React from "react";
-import { IFooterProps } from "./footer.interfaces";
 import { StyledFooter } from "./footer.styled";
 
 const contactToIcon = (key: IContactKeys) => {
@@ -22,7 +21,7 @@ const contactToIcon = (key: IContactKeys) => {
   }
 };
 
-export default function Footer({ contact }: IFooterProps) {
+export default function Footer({ navRef, contact }: INavigationProps) {
   const modalRef = React.useRef<ModalImperativeHandle | null>(null);
   const triggerRef = React.useRef<HTMLButtonElement | null>(null);
   const [{ t: tContact }, { t }, { t: tNavLinks }] = useTranslations([
@@ -73,6 +72,7 @@ export default function Footer({ contact }: IFooterProps) {
           triggerRef={triggerRef}
           id="contact-dialog"
           title={tContact("title") ?? ""}
+          navRef={navRef}
           footerContent={
             <Submit onClose={() => modalRef.current?.closeModal()} />
           }

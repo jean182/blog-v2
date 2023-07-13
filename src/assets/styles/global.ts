@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { codeBlock } from "./code-block";
 import { container } from "./container";
 import { cssVars } from "./mapped-variables";
+import { modalStyles } from "./modal.styled";
 
 const GlobalStyle = createGlobalStyle`
   ${cssVars}
@@ -82,48 +83,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .fade {
-    transition: opacity .15s linear;
-  }
-
-  .modal-open {
-    overflow: hidden;
-    &.without-scrollbar {
-      padding-right: 0;
-      nav.fixed {
-        padding-right: 0;
-      }
-    }
-    &.with-scrollbar {
-      padding-right: 15px;
-      nav.fixed {
-        padding-right: 15px;
-      }
-    }
-  }
-
-  .modal-backdrop {
-    --bs-backdrop-zindex: 1050;
-    --bs-backdrop-bg: #000;
-    --bs-backdrop-opacity: 0.5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: var(--bs-backdrop-zindex);
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--bs-backdrop-bg);
-  }
-
-  .modal-backdrop.fade {
     opacity: 0;
+    transition: opacity 200ms linear;
   }
 
-  .modal-backdrop.show {
-    opacity: 0.5;
+  .show {
+    opacity: 1;
   }
+
 
   ${codeBlock}
   ${container}
+  ${modalStyles}
   `;
 
 export default GlobalStyle;

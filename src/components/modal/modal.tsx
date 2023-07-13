@@ -1,34 +1,20 @@
-import { useFocusTrap, useOutsideClick } from "@shared/hooks";
-import { domUtils } from "@shared/utils";
+import { Fade } from "@components/fade";
+import BaseModal from "@restart/ui/Modal";
+import { isScrollVisible } from "@shared/utils/dom.utils";
 import React from "react";
 import { Backdrop } from "./backdrop";
 import { ModalContent } from "./content";
-import { Dialog } from "./dialog";
-import { ModalImperativeHandle, ModalProps } from "./modal.interfaces";
+import type { ModalImperativeHandle, ModalProps } from "./modal.interfaces";
 
 const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
-  ({ id, children, title, footerContent, triggerRef }, ref) => {
+  ({ id, children, navRef, title, footerContent, triggerRef }, ref) => {
     const [open, setOpen] = React.useState(false);
     const bodyRef = React.useRef(document.body);
-    const dialogRef = useFocusTrap();
-    const contentRef = React.useRef<HTMLDivElement>(null);
 
     React.useImperativeHandle(ref, () => ({
       closeModal: () => handleClose(),
       openModal: () => handleOpen(),
     }));
-
-    React.useEffect(() => {
-      const classes = ["modal-open", "with-scrollbar", "without-scrollbar"];
-      if (open) {
-        const [modalOpen, withScrollbar, withoutScrollbar] = classes;
-        const ifScrollable = domUtils.isScrollVisible(bodyRef.current);
-        const scrollStyle = ifScrollable ? withScrollbar : withoutScrollbar;
-        bodyRef.current?.classList.add(modalOpen, scrollStyle);
-      } else {
-        bodyRef.current?.classList.remove(...classes);
-      }
-    }, [open]);
 
     const handleOpen = () => {
       setOpen(true);
@@ -40,31 +26,43 @@ const Modal = React.forwardRef<ModalImperativeHandle, ModalProps>(
     };
 
     const onClickOutside = (event: Event) => {
-      if (!open) {
-        return;
-      }
       event.preventDefault();
       handleClose();
     };
 
-    useOutsideClick(contentRef, onClickOutside);
-
     return (
-      <>
-        <Dialog ref={dialogRef} handleClose={handleClose} id={id} open={open}>
-          <ModalContent
-            open={open}
-            closeModal={handleClose}
-            ref={contentRef}
-            id={id}
-            title={title}
-            footerContent={footerContent}
-          >
-            {children}
-          </ModalContent>
-        </Dialog>
-        {open && <Backdrop dialogRef={dialogRef} />}
-      </>
+      <BaseModal
+        onEscapeKeyDown={handleClose}
+        className="modal"
+        style={{ display: "block" }}
+
+        renderBackdrop={(props) => <Backdrop {...props} />}
+        id={id}
+        show={open}
+        transition={Fade}
+        backdropTransition={Fade}
+        onEnter={() => {
+          navRef?.current?.setAttribute(
+            "style",
+            `padding-right: ${isScrollVisible(bodyRef.current) ? "15px" : "0"}`
+          );
+        }}
+        onExited={() => {
+          navRef?.current?.removeAttribute("style");
+        }}
+        enforceFocus={false}
+      >
+        <ModalContent
+          open={open}
+          closeModal={handleClose}
+          id={id}
+          onClickOutside={onClickOutside}
+          title={title}
+          footerContent={footerContent}
+        >
+          {children}
+        </ModalContent>
+      </BaseModal>
     );
   }
 );

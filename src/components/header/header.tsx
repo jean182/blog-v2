@@ -1,8 +1,8 @@
 import { Navbar } from "@components/navbar";
+import type { INavigationProps } from "@shared/interfaces";
 import * as React from "react";
-import { IHeaderProps } from "./header.interfaces";
 
-export default function Header(props: IHeaderProps) {
+export default function Header(props: INavigationProps) {
   return (
     <header>
       <Navbar {...props} />

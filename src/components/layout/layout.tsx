@@ -4,6 +4,7 @@ import { Breadcrumb } from "@components/breadcrumb";
 import { Footer } from "@components/footer";
 import { Header } from "@components/header";
 import { AppLanguageProvider, AppThemeProvider } from "@context";
+import { SSRProvider } from "@restart/ui/ssr";
 import { useIsClient } from "@shared/hooks";
 import type { PageProps } from "gatsby";
 import { graphql } from "gatsby";
@@ -20,6 +21,7 @@ export default function Layout({
   { langKey?: string; isNotFoundPage?: boolean }
 >) {
   const { isClient, key } = useIsClient();
+  const navRef = React.useRef<HTMLDivElement>(null);
   const contact = data?.site?.siteMetadata?.contact;
   const { langKey, isNotFoundPage } = pageContext;
 
@@ -27,24 +29,26 @@ export default function Layout({
 
   return (
     <React.Fragment key={key}>
-      <AppLanguageProvider langKey={langKey}>
-        <StyledComponentsThemeProvider theme={theme}>
-          <AppThemeProvider>
-            <GlobalStyle />
-            <Header contact={contact ?? null} />
-            <main role="main">
-              <div className="container">
-                <Breadcrumb
-                  pathname={location.pathname}
-                  isNotFoundPage={isNotFoundPage}
-                />
-                {children}
-              </div>
-            </main>
-            <Footer contact={contact ?? null} />
-          </AppThemeProvider>
-        </StyledComponentsThemeProvider>
-      </AppLanguageProvider>
+      <SSRProvider>
+        <AppLanguageProvider langKey={langKey}>
+          <StyledComponentsThemeProvider theme={theme}>
+            <AppThemeProvider>
+              <GlobalStyle />
+              <Header contact={contact ?? null} navRef={navRef} />
+              <main role="main">
+                <div className="container">
+                  <Breadcrumb
+                    pathname={location.pathname}
+                    isNotFoundPage={isNotFoundPage}
+                  />
+                  {children}
+                </div>
+              </main>
+              <Footer contact={contact ?? null} navRef={navRef} />
+            </AppThemeProvider>
+          </StyledComponentsThemeProvider>
+        </AppLanguageProvider>
+      </SSRProvider>
     </React.Fragment>
   );
 }
